@@ -13,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-your-default-secret-key-here')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.vercel.app', '.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://lfc-teens-kubwa.onrender.com/']
 
 # Application definition
 INSTALLED_APPS = [
