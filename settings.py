@@ -11,19 +11,19 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-!0sw%%n&&5d&9x*ih5x*pdl(+0=-%eh3&=5i07!lb4&9mcw$)^')
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-key-for-dev')
 
 DEBUG = config('DEBUG', default=True, cast=bool)  # Set to True for development
 
 ALLOWED_HOSTS = [
-    'lfc-teens-kubwa.onrender.com',
+    'naija-mall.onrender.com',
     'localhost',
     '127.0.0.1',
     '0.0.0.0',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://lfc-teens-kubwa.onrender.com',
+    'https://naija-mall.onrender.com',
     'https://*.onrender.com',
 ]
 
@@ -75,13 +75,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-# Data base
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database Configuration with Fallback
+try:
+    import dj_database_url
+    DATABASE_URL = config('DATABASE_URL', default='')
+    if DATABASE_URL:
+        DATABASES = {
+            'default': dj_database_url.config(
+                default=DATABASE_URL,
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+        }
+    else:
+        # Fallback to SQLite if no DATABASE_URL
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
+except ImportError:
+    # Fallback if dj_database_url is not available
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
