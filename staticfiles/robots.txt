@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lfcteensbyazhin.onrender.com/sitemap.xml

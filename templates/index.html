@@ -1,0 +1,1352 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFC Teens Byazhin | Home</title>
+    <script src="{% static 'tailwind.js' %}"></script>
+    <script defer src="{% static 'alpine.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #B91C1C;
+            --dark-red: #7F1D1D;
+            --light-red: #FECACA;
+            --off-white: #FEF2F2;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--off-white);
+        }
+        
+        .heading-font {
+            font-family: 'Merriweather', serif;
+        }
+        
+        .hero-slide {
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--off-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--light-red);
+            border-top: 5px solid var(--primary-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .side-nav {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .side-nav.open {
+            transform: translateX(0);
+        }
+        
+        .swipe-area {
+            touch-action: pan-y;
+        }
+        
+        .audio-controls {
+            position: fixed;
+            bottom: 100px;
+            right: 10px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: #25D366;
+            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        
+
+        {% if hero %}
+            {% for slide in hero %}
+                .hero-bg-{{forloop.counter}} {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{{slide.image.url}}") center/cover;
+        }
+        {% empty %}
+
+
+        {% endfor %}
+        {% endif %}
+
+
+
+
+
+        {% comment %} /* .hero-bg-1 {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'static/images/sample_img (1).jpeg' %}") center/cover;
+        }
+        
+        .hero-bg-2 {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'static/images/sample_img (1).jpeg' %}") center/cover;
+        }
+        
+        .hero-bg-3 {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'static/images/sample_img (1).jpeg' %}") center/cover;
+        }
+        
+        .hero-bg-4 {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'static/images/sample_img (1).jpeg' %}") center/cover;
+        }
+        
+        .hero-bg-5 {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'static/images/sample_img (1).jpeg' %}") center/cover;
+        }
+        
+        .hero-bg-6 {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'static/images/sample_img (1).jpeg' %}") center/cover;
+        } {% endcomment %} */
+
+
+
+        
+        {% comment %} {% if leaders %}
+            {% for leader in leaders %}
+                .pastor-img-{{forloop.counter}} {
+            background: url("{{leader.image.url}}") center/cover;
+        }
+            {% endfor %}
+        {% endif %} {% endcomment %}
+
+
+
+
+        
+        {% comment %} .pastor-img-2 {
+            background: url("{% static 'static/images/sample_img (1).jpeg' %}") center/cover;
+        }
+        
+        .pastor-img-3 {
+            background: url("{% static 'static/images/sample_img (1).jpeg' %}") center/cover;
+        } {% endcomment %}
+        
+        .bible-img-1 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+        
+        .bible-img-2 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+        
+        .bible-img-3 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+
+        .testimony-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/persons (3).jpg' %}") center/cover;
+        }
+
+        .join-unit-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/hero_img (2).jpg' %}") center/cover;
+        }
+
+        .about-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/hero_img (1).jpg' %}") center/cover;
+        }
+    </style>
+</head>
+<body class="bg-off-white text-gray-900 scroll-smooth" x-data="{ mobileMenuOpen: false }">
+    <!-- Loading Screen -->
+    <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 2000)" x-show="loading" class="loading-screen" x-cloak>
+        <div class="spinner"></div>
+        <h2 class="heading-font text-2xl text-red-900">LFC Teens Byazhin</h2>
+        <p class="mt-2 text-gray-700">Loading God's blessings...</p>
+    </div>
+
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <button id="playPause" class="w-8 h-8 flex items-center justify-center text-white">
+            <i class="fas fa-play"></i>
+        </button>
+        <button id="muteBtn" class="w-8 h-8 flex items-center justify-center text-white ml-2">
+            <i class="fas fa-volume-up"></i>
+        </button>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/2349013708170?text=Hello%20Divine%20Faith%20Fellowship%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-red-800 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-cover" alt="lfc-logo">
+                    </div>
+                    <span class="ml-3 heading-font text-xl font-semibold text-red-900">LFC Teens Byazhin</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="hover:text-red-700 font-medium hover:border-b-2 border-red-700 pb-1">Home</a>
+                    <a href="#about-us-page" class="text-gray-600 hover:text-red-700 transition-colors hover:border-b-2 border-red-700">About Us</a>
+                    <a href="#testimonies-page" class="text-gray-600 hover:text-red-700 transition-colors hover:border-b-2 border-red-700">Testimonies</a>
+                    <a href="#announcement-page" class="text-gray-600 hover:text-red-700 transition-colors hover:border-b-2 border-red-700" ">Announcements</a>
+                    <a href="#join-unit-page" class="text-gray-600 hover:text-red-700 transition-colors hover:border-b-2 border-red-700">Join a Unit</a>
+                    <a href="#contact-us" class="text-gray-600 hover:text-red-700 transition-colors hover:border-b-2 border-red-700">Contact Us</a>
+                </div>
+                
+                <div class="md:hidden ">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-600 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Side Navigation -->
+    <div x-show="mobileMenuOpen" class="fixed inset-0 z-50 md:hidden" x-cloak>
+        <div class="absolute inset-0 bg-black bg-opacity-50" @click="mobileMenuOpen = false"></div>
+        <div class="side-nav absolute top-0 left-0 w-64 h-full bg-white shadow-lg" :class="{ 'open': mobileMenuOpen }">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-red-800 rounded-full flex items-center justify-center text-white font-bold">
+                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-cover" alt="lfc-logo">
+                    </div>
+                    <span class="ml-2 heading-font font-semibold text-red-900">Divine Faith</span>
+                </div>
+                <button @click="mobileMenuOpen = false" class="text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="py-4">
+                <a href="#" class="block py-3 px-6 text-red-700 font-medium bg-red-50" @click="mobileMenuOpen = false">Home</a>
+                <a href="#about-us-page" class="block py-3 px-6 text-gray-600 hover:text-red-700 transition-colors" @click="mobileMenuOpen = false">About Us</a>
+                <a href="#testimonies-page" class="block py-3 px-6 text-gray-600 hover:text-red-700 transition-colors" @click="mobileMenuOpen = false">Testimonies</a>
+                <a href="#announcement-page" class="block py-3 px-6 text-gray-600 hover:text-red-700 transition-colors" @click="mobileMenuOpen = false">Announcements</a>
+                <a href="#join-unit-page" class="block py-3 px-6 text-gray-600 hover:text-red-700 transition-colors" @click="mobileMenuOpen = false">Join a Unit</a>
+                <a href="#contact-us" class="block py-3 px-6 text-gray-600 hover:text-red-700 transition-colors" @click="mobileMenuOpen = false">Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen overflow-hidden">
+        <div x-data="heroSlider()" class="h-full swipe-area" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
+            <!-- Slides -->
+            <template x-for="(slide, index) in slides" :key="index">
+                <div x-show="currentSlide === index" x-transition:enter="transition ease-out duration-1000" 
+                     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                     x-transition:leave="transition ease-in duration-1000" 
+                     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                     class="absolute inset-0 flex items-center justify-center text-white" :class="slide.bg">
+                    <div class="text-center px-4 max-w-3xl fade-in">
+                        <h1 class="heading-font text-4xl md:text-6xl font-bold mb-4" x-text="slide.title"></h1>
+                        <p class="text-xl md:text-2xl mb-8" x-text="slide.subtitle"></p>
+                        <a :href="slide.link" class="inline-block bg-white text-red-700 px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-gray-100 transition-colors" x-text="slide.buttonText"></a>
+                    </div>
+                </div>
+            </template>
+            
+            <!-- Slide Indicators -->
+            <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
+                <template x-for="(slide, index) in slides" :key="index">
+                    <button @click="currentSlide = index" class="w-3 h-3 rounded-full transition-colors" 
+                            :class="currentSlide === index ? 'bg-white' : 'bg-white/50'"></button>
+                </template>
+            </div>
+            
+            <!-- Navigation Arrows -->
+            <button @click="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button @click="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Pastors/Workers Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Spiritual Leaders</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Meet the dedicated servants of God who guide our congregation with wisdom and compassion.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+
+                <!-- Leader's Card -->
+                {% if leaders %}
+                    {% for leader in leaders %}
+                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                            <div class="h-64 pastor-img-{{forloop.counter}}">
+                            <img src="{{leader.image.url}}" class="object-fill w-full h-full" alt="Leaders image">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{leader.name}}</h3>
+                                <p class="text-gray-600 mb-4">{{leader.posision}}</p>
+                                <p class="text-gray-700">{{leader.description}}</p>
+                            </div>
+                            </div>
+                    {% empty %}
+
+                        <h2 class="text-2xl text-bg-red-500 shadow shadow-gray-900" >No leaders Available in the database</h2>
+
+                    {% endfor %}
+                {% endif %}
+
+                
+                
+                {% comment %} <!-- Pastor Card 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                    <div class="h-64 pastor-img-2"></div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Reverend Sarah Williams</h3>
+                        <p class="text-gray-600 mb-4">Associate Pastor</p>
+                        <p class="text-gray-700">Reverend Sarah focuses on youth ministry and community outreach, bringing fresh perspectives to our faith community.</p>
+                    </div>
+                </div>
+                
+                <!-- Pastor Card 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                    <div class="h-64 pastor-img-3"></div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Deacon James Peterson</h3>
+                        <p class="text-gray-600 mb-4">Head of Deacons</p>
+                        <p class="text-gray-700">Deacon James oversees our service ministries and ensures our church operations run smoothly to serve the congregation.</p>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Bible Blog Section -->
+    <section id="bible-blog-page" class="py-16 bg-red-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Daily Bread</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nourish your soul with these selected scriptures and reflections.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+
+
+
+
+
+
+
+
+                {% if bible_post %}
+
+                    {% for post in bible_post %}
+
+                    <!-- Bible Post Card -->
+                <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200 relative">
+                    <div class="h-48 overflow-hidden bible-img-1">
+                        <img src="{{post.image.url}}" class="object-fill w-full h-full object-center" alt="">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-4">{{post.scriptures}}</h3>
+                        <p class="text-gray-700 italic mb-4">"I can do all things through Christ who strengthens me."</p>
+                        <p class="text-gray-600">{{post.message}}</p>
+
+                        <div class="flex justify-between items-center mt-4 pt-2 border-t-2 border-gray-300">
+                            <a href="#" class="text-green-700 font-medium hover:text-green-800 transition-colors"> Drop a review </a>
+
+                            <form action="" method="POST">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="pk" value="{{post.id}}">
+
+                                <button type="submit" class="like-btn text-gray-400 hover:text-green-700 transition-colors">
+                                    <i class="far fa-heart"></i>
+                                    <span class="ml-1"> {{post.likes}} </span>
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                    {% empty %}
+
+                        <h2 class="text-2xl text-bg-red-500 shadow shadow-gray-900" >No Posts Available in the database</h2>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+
+
+
+
+
+
+
+
+                
+                {% comment %} <!-- Bible Card 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                    <div class="h-48 bible-img-2"></div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Jeremiah 29:11</h3>
+                        <p class="text-gray-700 italic mb-4">"For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future."</p>
+                        <p class="text-gray-600">Trust in God's perfect plan for your life, even when the path seems unclear. His purpose for you is always good.</p>
+                    </div>
+                </div>
+                
+                <!-- Bible Card 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                    <div class="h-48 bible-img-3"></div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Psalm 23:1</h3>
+                        <p class="text-gray-700 italic mb-4">"The Lord is my shepherd; I shall not want."</p>
+                        <p class="text-gray-600">In seasons of lack or abundance, remember that God provides everything we truly need. Rest in His provision today.</p>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Announcements Section -->
+    <section id="announcement-page" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Church Announcements</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Stay informed about upcoming events, prayer needs, and important updates.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+
+                <!-- Announcement Card -->
+                {% if announcement %}
+                    {% for item in announcement  %}
+                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                            <div class="p-6 border-l-4 border-red-600">
+                                <div class="flex items-center mb-4">
+                                    {% comment %} <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white mb-4">
+                                <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="image">
+                            {% comment %} <i class="fas fa-calender-alt"></i> </div> {% endcomment %}
+                        
+                                    <div class="ml-4">
+                                        <h3 class="heading-font text-xl font-bold text-red-900">{{item.topic}}</h3>
+                                        <p class="text-gray-600">{{item.date |date:'M d Y'}}</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700">{{item.announcement}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                {% comment %} <!-- Announcement Card 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                    <div class="p-6 border-l-4 border-red-600">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-700">
+                                <i class="fas fa-hands-praying"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="heading-font text-xl font-bold text-red-900">Prayer Request</h3>
+                                <p class="text-gray-600">For the Johnson Family</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">Please keep the Johnson family in your prayers as they navigate health challenges. May God's healing touch be upon them.</p>
+                    </div>
+                </div>
+                
+                <!-- Announcement Card 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                    <div class="p-6 border-l-4 border-red-600">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-700">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="heading-font text-xl font-bold text-red-900">Community Dinner</h3>
+                                <p class="text-gray-600">Friday, June 16 at 6:30 PM</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">All are welcome to our monthly community dinner. Come fellowship and enjoy a meal together.</p>
+                    </div>
+                </div>
+                
+                <!-- Announcement Card 4 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                    <div class="p-6 border-l-4 border-red-600">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-700">
+                                <i class="fas fa-bible"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="heading-font text-xl font-bold text-red-900">Bible Study</h3>
+                                <p class="text-gray-600">Wednesdays at 7:00 PM</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">Join our weekly Bible study as we explore the Book of Romans. All knowledge levels welcome.</p>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonies Page -->
+    <section id="testimonies-page" class="py-8">
+        <!-- Testimonies Hero Section -->
+        <section class="py-20 testimony-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Share Your Testimony</h1>
+                <p class="text-xl max-w-2xl mx-auto">Your story of God's faithfulness can inspire and encourage others in their walk with Christ.</p>
+            </div>
+        </section>
+
+        <!-- Testimonies Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Testimonies of Faith</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Hear how God is working in the lives of our congregation members.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+
+
+                    {% if testimony %}
+                        {% for item in testimony %}
+                            <!-- Testimony Card -->
+                            <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
+                                <div class="flex items-center mb-4">
+                                            <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white mb-4">
+                                        <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="image">
+                                    {% comment %} <i class="fas fa-user"></i> {% endcomment %}
+                                </div>
+                                    <div class="ml-4">
+                                        <h3 class="heading-font font-bold text-red-900">{{item.topic}}</h3>
+                                        <p class="text-gray-600 text-sm">{{item.date}}</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 italic">"{{item.testimony}}"</p>
+                                <p class="mt-4 text-red-700 font-medium"> Testifier - <span class="text-green-500">{{item.testifier}}</span></p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}    
+
+                    
+                    {% comment %} <!-- Testimony Card 2 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="heading-font font-bold text-red-900">Restored Relationship</h3>
+                                <p class="text-gray-600 text-sm">April 22, 2023</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Through applying biblical principles learned here, my marriage has been transformed. What was broken is now being restored by God's grace."</p>
+                        <p class="mt-4 text-red-700 font-medium">- David R.</p>
+                    </div>
+                    
+                    <!-- Testimony Card 3 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="heading-font font-bold text-red-900">Financial Breakthrough</h3>
+                                <p class="text-gray-600 text-sm">March 10, 2023</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"I trusted God for financial breakthrough. Through unexpected opportunities and the support of this church family, I'm now in a better position than before."</p>
+                        <p class="mt-4 text-red-700 font-medium">- James T.</p>
+                    </div>
+                    
+                    <!-- Testimony Card 4 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="heading-font font-bold text-red-900">Spiritual Renewal</h3>
+                                <p class="text-gray-600 text-sm">February 5, 2023</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"I was going through the motions of faith until I joined a small group here. Now I have a vibrant, personal relationship with Jesus that transforms every area of my life."</p>
+                        <p class="mt-4 text-red-700 font-medium">- Sarah M.</p>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimony Submission Form -->
+        <section class="py-16 bg-red-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Share Your Story</h2>
+                    
+                    <!-- In Testimony Submission Form -->
+<form x-data="{
+    testimonyForm: { name: '', title: '', testimony: '', date: '' },
+    submitTestimony() {
+        const today = new Date();
+        this.testimonyForm.date = today.toISOString().split('T')[0];
+        
+        const message = `🌟 NEW TESTIMONY SUBMISSION 🌟%0A%0A🙋‍♂️ Name: ${this.testimonyForm.name}%0A📖 Title: ${this.testimonyForm.title}%0A📅 Date: ${this.testimonyForm.date}%0A%0A📝 Testimony:%0A${this.testimonyForm.testimony}%0A%0A✨ To God Be All The Glory!`;
+        
+        window.open(`https://wa.me/{{ contact_info.whatsapp_number|default:'2349013708170' }}?text=${encodeURIComponent(message)}`, '_blank');
+        
+        this.testimonyForm = { name: '', title: '', testimony: '', date: '' };
+        
+        alert('Thank you for sharing your testimony! We will review it and may contact you for more details. God bless you!');
+    }
+}" @submit.prevent="submitTestimony">
+                        <div class="">
+                            <div>
+                                <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                                <input type="text" id="name" x-model="testimonyForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                            </div>
+                            <!-- <div>
+                                <label for="email" class="block text-gray-700 mb-2">Your Email</label>
+                                <input type="email" id="email" x-model="testimonyForm.email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                            </div> -->
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="title" class="block text-gray-700 mb-2">Testimony Title</label>
+                            <input type="text" id="title" x-model="testimonyForm.title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="testimony" class="block text-gray-700 mb-2">Your Testimony</label>
+                            <textarea id="testimony" x-model="testimonyForm.testimony" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Submit Testimony</button>
+                        </div>
+                    </form>
+                    
+                    <p class="text-gray-600 text-sm mt-6 text-center">
+                        By submitting your testimony, you agree that it may be shared on our website and social media to encourage others. We may contact you for more details.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+<!-- Join a Unit Page -->
+    <section id="join-unit-page" class="py-8 ">
+        <!-- Join a Unit Hero Section -->
+        <section class="py-20 join-unit-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Join a Ministry Unit</h1>
+                <p class="text-xl max-w-2xl mx-auto">Serve and grow with others in our church community. Find your place in God's work.</p>
+            </div>
+        </section>
+
+        <!-- Ministry Units Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Ministry Units</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Discover where your gifts and passions can be used to serve God and others.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+
+
+
+
+
+
+
+                    {% if unit %}
+                    {% for item in unit %}
+                        <!-- Unit Card -->
+                    <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                        
+                                <img src="{{item.image.url}}" class="w-full h-56 object-fill" alt="image">
+                            {% comment %} <i class="fas fa-music"></i> {% endcomment %}
+                        
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
+                            <p class="text-gray-600 mb-4">{{item.duty}}</p>
+                            <p class="text-gray-700">{{item.description}}</p>
+                            <div class="mt-4">
+                                <span class="text-red-700 font-medium">Leader: {{item.leader}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+
+
+
+
+
+
+
+                    {% comment %} <!-- Unit Card 1 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                        <div class="h-48 bg-red-700 flex items-center justify-center text-white">
+                            <i class="fas fa-music text-6xl opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Worship Team</h3>
+                            <p class="text-gray-600 mb-4">Lead the congregation in praise and worship</p>
+                            <p class="text-gray-700">If you have musical talent or a heart for worship, join us in creating an atmosphere where people can encounter God.</p>
+                            <div class="mt-4">
+                                <span class="text-red-700 font-medium">Leader: Sarah Williams</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unit Card 2 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                        <div class="h-48 bg-red-600 flex items-center justify-center text-white">
+                            <i class="fas fa-child text-6xl opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Children's Ministry</h3>
+                            <p class="text-gray-600 mb-4">Nurture the faith of our youngest members</p>
+                            <p class="text-gray-700">Help children discover God's love through stories, activities, and relationships in a safe, engaging environment.</p>
+                            <div class="mt-4">
+                                <span class="text-red-700 font-medium">Leader: Rebecca Johnson</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unit Card 3 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                        <div class="h-48 bg-red-800 flex items-center justify-center text-white">
+                            <i class="fas fa-utensils text-6xl opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Hospitality Team</h3>
+                            <p class="text-gray-600 mb-4">Create a welcoming environment for all</p>
+                            <p class="text-gray-700">Greet visitors, prepare fellowship meals, and help everyone feel at home in our church family.</p>
+                            <div class="mt-4">
+                                <span class="text-red-700 font-medium">Leader: James Peterson</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unit Card 4 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                        <div class="h-48 bg-red-700 flex items-center justify-center text-white">
+                            <i class="fas fa-hands-helping text-6xl opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Outreach Ministry</h3>
+                            <p class="text-gray-600 mb-4">Share God's love with our community</p>
+                            <p class="text-gray-700">Participate in local missions, community service projects, and evangelism efforts to spread the Gospel.</p>
+                            <div class="mt-4">
+                                <span class="text-red-700 font-medium">Leader: Michael Johnson</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unit Card 5 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                        <div class="h-48 bg-red-600 flex items-center justify-center text-white">
+                            <i class="fas fa-pray text-6xl opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Prayer Ministry</h3>
+                            <p class="text-gray-600 mb-4">Cover our church in prayer</p>
+                            <p class="text-gray-700">Join intercessory prayer teams, prayer walks, and special prayer events that undergird all our ministries.</p>
+                            <div class="mt-4">
+                                <span class="text-red-700 font-medium">Leader: Maria Gonzalez</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Unit Card 6 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                        <div class="h-48 bg-red-800 flex items-center justify-center text-white">
+                            <i class="fas fa-video text-6xl opacity-90"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Media & Tech Team</h3>
+                            <p class="text-gray-600 mb-4">Enhance our worship experience</p>
+                            <p class="text-gray-700">Use your technical skills in sound, lighting, video, or online streaming to support our services and outreach.</p>
+                            <div class="mt-4">
+                                <span class="text-red-700 font-medium">Leader: David Chen</span>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Unit Form -->
+        <!-- Join Unit Form with Dynamic WhatsApp -->
+<section class="py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
+            <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Join a Ministry Unit</h2>
+            
+            <form x-data="{
+                unitForm: { name: '', phone: '', unit: '', experience: '', message: '' },
+                submitUnitForm() {
+                    // Get unit leaders data from Django template
+                    const unitLeaders = {
+                        {% for unit_item in contex.unit %}
+                            '{{ unit_item.name }}': '{{ unit_item.leader_whatsapp|default:contact_info.whatsapp_number|default:"2349013708170" }}',
+                        {% endfor %}
+                    };
+                    
+                    // Create WhatsApp message
+                    const message = `🎯 MINISTRY UNIT JOIN REQUEST%0A%0A👤 Name: ${this.unitForm.name}%0A📞 Phone: ${this.unitForm.phone}%0A🏛️ Desired Unit: ${this.unitForm.unit}%0A%0A💪 Experience/Skills:%0A${this.unitForm.experience}%0A%0A❤️ Why Interested:%0A${this.unitForm.message}%0A%0A🙏 May God Guide This Decision`;
+                    
+                    // Get the appropriate WhatsApp number
+                    const phoneNumber = unitLeaders[this.unitForm.unit] || '2349013708170';
+                    
+                    // Open WhatsApp with pre-filled message
+                    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+                    
+                    // Reset form
+                    this.unitForm = { name: '', phone: '', unit: '', experience: '', message: '' };
+                    
+                    // Show success message
+                    alert('Thank you for your interest in serving! The unit leader will contact you soon. God bless your willing heart!');
+                }
+            }" @submit.prevent="submitUnitForm">
+                <div class="mb-6">
+                    <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                    <input type="text" id="name" x-model="unitForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                </div>
+
+                <div class="mb-6">
+                    <label for="phone" class="block text-gray-700 mb-2">Your Phone Number</label>
+                    <input type="tel" id="phone" x-model="unitForm.phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="unit" class="block text-gray-700 mb-2">Ministry Unit</label>
+                    <select id="unit" x-model="unitForm.unit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        <option value="">Select a Unit</option>
+                        {% for unit_item in unit %}
+                        <option value="{{ unit_item.name }}">{{ unit_item.name }} - Led by {{ unit_item.leader }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="experience" class="block text-gray-700 mb-2">Relevant Experience/Skills</label>
+                    <textarea id="experience" x-model="unitForm.experience" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share any talents, skills, or experience God has given you..."></textarea>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 mb-2">Why are you interested in this unit?</label>
+                    <textarea id="message" x-model="unitForm.message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share how God is leading you to serve in this area..." required></textarea>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Submit Application</button>
+                </div>
+            </form>
+            
+            <p class="text-gray-600 text-sm mt-6 text-center">
+                After submitting, the unit leader will contact you to discuss next steps and how you can get involved in God's work.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- About Us Page -->
+    <section id="about-us-page" class="py-8">
+        <!-- About Us Hero Section -->
+        <section class="py-20 about-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">About LFC Teens Byazhin</h1>
+                <p class="text-xl max-w-2xl mx-auto">A community growing in faith, hope, and love through Jesus Christ.</p>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-6 text-center">Our Story</h2>
+                    <div class="prose prose-lg max-w-none text-gray-700">
+                        <p class="mb-4">LFC Teens Byazhin is a sector of winners chapel which is dedicated to bringing Gods word to teenagers and preparing them for the future before time, Shearing the Good news of Christ to the world.</p>
+                        <p class="mb-4">What began as a small sunday school class has now grown into a vibrant community of teenagers dedicated to serving God and and the interest of His Kingdom. We've had diverse testimonies by the power of Christ.</p>
+                        <p class="mb-4">Our mission is to promote God's word among youths and teenagers and the world at large. We are aimed at raising teenagers in the fear of the Lord who love God passionately and serve others selflessly. </p>
+                        <p>We believe in the authority of Scripture, the power of prayer, and the importance of Divine Guidiance in the Christian walk.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Beliefs Section -->
+        <section class="py-16 bg-red-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Beliefs</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">The foundational truths that guide our church and ministries.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+
+                {% if belief %}
+                    {% for item in belief %}
+                        <!-- Belief Card -->
+                    <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white mb-4">
+                                <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="image">
+                            {% comment %} <i class="fas fa-bible"></i> {% endcomment %}
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
+                        <p class="text-gray-700">{{item.detail}}</p>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    {% comment %} <!-- Belief Card 1 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
+                            <i class="fas fa-bible"></i>
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">The Bible</h3>
+                        <p class="text-gray-700">We believe the Bible is the inspired, infallible Word of God and our final authority in all matters of faith and practice.</p>
+                    </div>
+                    
+                    <!-- Belief Card 2 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
+                            <i class="fas fa-cross"></i>
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Salvation</h3>
+                        <p class="text-gray-700">We believe salvation comes through faith in Jesus Christ alone, by God's grace, not by our works.</p>
+                    </div>
+                    
+                    <!-- Belief Card 3 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
+                            <i class="fas fa-church"></i>
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">The Church</h3>
+                        <p class="text-gray-700">We believe the Church is the body of Christ, called to worship God, make disciples, and serve the world.</p>
+                    </div>
+                    
+                    <!-- Belief Card 4 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
+                            <i class="fas fa-dove"></i>
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Holy Spirit</h3>
+                        <p class="text-gray-700">We believe the Holy Spirit empowers believers for life and ministry and gives spiritual gifts, guidiance and direction to the Church and to all Believers.</p>
+                    </div>
+                    
+                    <!-- Belief Card 5 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Baptism</h3>
+                        <p class="text-gray-700">We believe in water baptism by immersion as an outward expression of inward faith in Christ.</p>
+                    </div>
+                    
+                    <!-- Belief Card 6 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover border border-red-200">
+                        <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Second Coming</h3>
+                        <p class="text-gray-700">We believe in the personal, visible return of Jesus Christ to establish His eternal kingdom.</p>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Times Section -->
+        <section id="contact-us" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto bg-red-50 rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Service Times & Location</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Join Us for Worship</h3>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Sunday Service</span>
+                                    <span>7:00 AM, <br> 9:00 AM, <br> 11:00 AM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Mid-week service</span>
+                                    <span>Wed 5:00 PM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">House Fellowship</span>
+                                    <span>Sat 5:00 PM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Convernant Hour</span>
+                                    <span>6:00 AM - Daily</span>
+                                </li>
+                                {% comment %} <li class="flex justify-between">
+                                    <span class="font-medium">Prayer Meeting</span>
+                                    <span>Sat 9:00 AM</span>
+                                </li> {% endcomment %}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Location</h3>
+                            <div class="text-gray-700 mb-4">
+                                <p class="flex items-start mb-2">
+                                    <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-700"></i>
+                                    <span>Behind Police Station, Byazhin, Abuja, Nigeria</span>
+                                </p>
+                                <p class="flex items-start mb-2">
+                                    <i class="fas fa-phone mt-1 mr-3 text-red-700"></i>
+                                    <span>+234 9013-708-170</span>
+                                </p>
+                                <p class="flex items-start">
+                                    <i class="fas fa-envelope mt-1 mr-3 text-red-700"></i>
+                                    <span>lfcteens@gmail.com</span>
+                                </p>
+                            </div>
+                            <a href="https://wa.me/9013708170?text=Hello%20Divine%20Faith%20Fellowship%2C%20I%20would%20like%20to%20get%20help%20about%20your%20direction" target="_blank" class="inline-block bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-800 transition-colors">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center overflow-hidden text-white font-bold text-lg">
+                            <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-cover" alt="lfc-logo">
+                        </div>
+                        <span class="ml-3 heading-font text-xl font-semibold">LFC Teens Byazhin</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">A community of teenagers growing in faith, hope, and love through Jesus Christ.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="heading-font text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about-us-page" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#testimonies-page" class="text-gray-400 hover:text-white transition-colors">Testimonies</a></li>
+                        <li><a href="counseling.html" class="text-gray-400 hover:text-white transition-colors">Counseling</a></li>
+                        <li><a href="#join-unit-page" class="text-gray-400 hover:text-white transition-colors">Join a Unit</a></li>
+                        <li><a href="#contact-us" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#announcement-page" class="text-gray-400 hover:text-white transition-colors">Announcements</a></li>
+                    </ul>
+
+                </div>
+                
+                <div>
+                    <h3 class="heading-font text-lg font-bold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-500"></i>
+                            <span>Behind Police Station, Byazhin, Abuja, Nigeria.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-3 text-red-500"></i>
+                            <span>+234 9013-708-170</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-red-500"></i>
+                            <span>lfcteens@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="heading-font text-lg font-bold mb-4">Service Times</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex justify-between">
+                            <span>Sunday Worship</span>
+                            <span>7:00 AM, 9:00 AM, 11:00 AM</span><br>
+                            <!-- <span>7:00 AM - 1st Service</span><br>
+                            <span>9:00 AM - 2nd Service</span><br>
+                            <span>11:00 AM - 3rd Service</span> -->
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Mid-week service</span>
+                            <span>Wed 5:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>House Fellowship</span>
+                            <span>Sat 5:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Convernant Hour</span>
+                            <span>6: 00 AM - daily</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LFC Teens Byazhin. All Rights Reserved.</p>
+                <div class="text-gray-500 text-sm flex items-center">
+                    <span>Created with prayer by </span>
+                    <a href="#" class="text-red-400 hover:text-red-300 ml-1 transition-colors">Profirm Web Services</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Audio Element -->
+    <audio id="sermonAudio" loop>
+        <!-- Using a Gospel drill song sample -->
+        <source src="{% static 'audio/bg_music (1).mp3' %}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Hero Slider Functionality
+        function heroSlider() {
+            return {
+                currentSlide: 0,
+                touchStartX: 0,
+                touchEndX: 0,
+                slides: [
+
+                {% if hero %}
+                    {% for slide in hero %}
+                    { 
+                        bg: 'hero-bg-{{forloop.counter}}', 
+                        title: '{{slide.title}}', 
+                        subtitle: '{{slide.subtitle}}', 
+                        buttonText: '{{slide.btn_text}}', 
+                        link: '{{slide.btn_link}}' 
+                    },
+                    {% empty %}
+
+                        <h2 class="text-2xl text-bg-red-500 shadow shadow-gray-900" >No Images Available in the database</h2>
+
+                    {% endfor %}
+                {% endif %}
+
+
+                    /* {% comment %} { 
+                        bg: 'hero-bg-1', 
+                        title: 'Welcome to LFC Teens Byazhin', 
+                        subtitle: 'A community growing in faith, hope, and love', 
+                        buttonText: 'Learn More', 
+                        link: 'about.html' 
+                    },
+                    { 
+                        bg: 'hero-bg-2', 
+                        title: 'Experience God\'s Love', 
+                        subtitle: 'Join us for worship and fellowship', 
+                        buttonText: 'Our Services', 
+                        link: 'about.html#services' 
+                    },
+                    { 
+                        bg: 'hero-bg-3', 
+                        title: 'Find Peace in Christ', 
+                        subtitle: 'Discover the transformative power of faith', 
+                        buttonText: 'Get Counseling', 
+                        link: 'https://wa.me/9013708170?text=Hello%20Divine%20Faith%20Fellowship%2C%20I%20would%20like%20to%20get%20help%20with%20your%20Councelling' 
+                    },
+                    { 
+                        bg: 'hero-bg-4', 
+                        title: 'Share Your Testimony', 
+                        subtitle: 'Your story can inspire others in their faith journey', 
+                        buttonText: 'Share Now', 
+                        link: 'testimonies.html' 
+                    },
+                    { 
+                        bg: 'hero-bg-5', 
+                        title: 'Join a Ministry Unit', 
+                        subtitle: 'Serve and grow with others in our church community', 
+                        buttonText: 'Join Now', 
+                        link: 'join-unit.html' 
+                    },
+                    { 
+                        bg: 'hero-bg-6', 
+                        title: 'Return to Your First Love', 
+                        subtitle: 'Prayer and scriptures for those seeking restoration', 
+                        buttonText: 'Pray Now', 
+                        link: '#repentance' 
+                    } {% endcomment %} */
+                ],
+                nextSlide() {
+                    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                },
+                prevSlide() {
+                    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                },
+                handleTouchStart(event) {
+                    this.touchStartX = event.changedTouches[0].screenX;
+                },
+                handleTouchEnd(event) {
+                    this.touchEndX = event.changedTouches[0].screenX;
+                    this.handleSwipe();
+                },
+                handleSwipe() {
+                    const swipeThreshold = 50;
+                    const diff = this.touchStartX - this.touchEndX;
+                    
+                    if (Math.abs(diff) > swipeThreshold) {
+                        if (diff > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                    }
+                },
+                init() {
+                    setInterval(() => {
+                        this.nextSlide();
+                    }, 6000);
+                }
+            }
+        }
+
+        // Audio Controls
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('sermonAudio');
+            const playPauseBtn = document.getElementById('playPause');
+            const muteBtn = document.getElementById('muteBtn');
+            
+            // Auto-play with user interaction
+            document.body.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play().catch(e => console.log('Auto-play prevented:', e));
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+            }, { once: true });
+            
+            playPauseBtn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    audio.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+            
+            muteBtn.addEventListener('click', function() {
+                if (audio.muted) {
+                    audio.muted = false;
+                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                } else {
+                    audio.muted = true;
+                    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                }
+            });
+            
+            // Update button when audio ends
+            audio.addEventListener('ended', function() {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            });
+        });
+    </script>
+</body>
+</html>
