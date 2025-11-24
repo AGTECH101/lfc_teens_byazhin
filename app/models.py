@@ -1,6 +1,8 @@
 # lfc_teens/models.py
 from django.db import models
+from django.utils import timezone
 from cloudinary.models import CloudinaryField
+import uuid
 
 class HeroSlide(models.Model):
     title = models.CharField(max_length=200)
@@ -35,11 +37,20 @@ class BiblePost(models.Model):
     message = models.TextField()
     image = CloudinaryField('bible_image', folder='lfc_teens/bible')
     likes = models.IntegerField(default=0)
+    reviews = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.scriptures
+
+class Review(models.Model):
+    bible_post = models.ForeignKey(BiblePost, on_delete=models.CASCADE, related_name='post_reviews')
+    reviewer_id = models.CharField(max_length=100)  # Simple identifier for preventing duplicates
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ['bible_post', 'reviewer_id']
 
 class Announcement(models.Model):
     topic = models.CharField(max_length=200)

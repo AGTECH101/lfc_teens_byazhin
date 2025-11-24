@@ -6,12 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LFC Teens Byazhin | Home</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" class="rounded-full">
     <script src="{% static 'tailwind.js' %}"></script>
     <script defer src="{% static 'alpine.js' %}"></script>
+    <script src="{% static 'htmx.min.js' %}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary-red: #B91C1C;
@@ -204,7 +207,7 @@
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
                     <div class="w-10 h-10 bg-red-800 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-cover" alt="lfc-logo">
+                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
                     </div>
                     <span class="ml-3 heading-font text-xl font-semibold text-red-900">LFC Teens Byazhin</span>
                 </div>
@@ -235,7 +238,7 @@
             <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                 <div class="flex items-center">
                     <div class="w-8 h-8 bg-red-800 rounded-full flex items-center justify-center text-white font-bold">
-                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-cover" alt="lfc-logo">
+                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill alt="lfc-logo">
                     </div>
                     <span class="ml-2 heading-font font-semibold text-red-900">LFC Teens</span>
                 </div>
@@ -304,7 +307,7 @@
                     {% for leader in leaders %}
                         <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
                             <div class="h-64">
-                                <img src="{{leader.image.url}}" class="object-cover w-full h-full" alt="{{leader.name}}">
+                                <img src="{{leader.image.url}}" class="object-fill w-full h-full" alt="{{leader.name}}">
                             </div>
                             <div class="p-6">
                                 <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{leader.name}}</h3>
@@ -321,45 +324,56 @@
     </section>
 
     <!-- Bible Blog Section -->
-    <section id="bible-blog-page" class="py-16 bg-red-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Daily Bread</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Nourish your soul with these selected scriptures and reflections.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% if bible_post %}
-                    {% for post in bible_post %}
-                    <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200 relative">
-                        <div class="h-48 overflow-hidden">
-                            <img src="{{post.image.url}}" class="object-cover w-full h-full object-center" alt="Bible post image">
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">{{post.scriptures}}</h3>
-                            <p class="text-gray-700 mb-4">{{post.message}}</p>
+<!-- Bible Blog Section - Simple Like System -->
+<section id="bible-blog-page" class="py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Daily Bread</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Nourish your soul with these selected scriptures and reflections.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% if bible_post %}
+                {% for post in bible_post %}
+                <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200 relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="{{post.image.url}}" class="object-cover w-full h-full object-center" alt="Bible post image">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-4">{{post.scriptures}}</h3>
+                        <p class="text-gray-700 mb-16">{{post.message}}</p>
 
-                            <div class="flex justify-between items-center mt-4 pt-2 border-t-2 border-gray-300">
-                                <a href="#" class="text-green-700 font-medium hover:text-green-800 transition-colors">Drop a review</a>
-
-                                <form action="{% url 'like_post' %}" method="POST">
+                        <div class="flex justify-between absolute bottom-4 w-[88%] items-center mt-4 pt-2 border-t-2 border-gray-300">
+                            <!-- Simple Like System -->
+                            <div id="like-section-{{post.id}}">
+                                <form hx-post="{% url 'add_like' %}" 
+                                      hx-target="#like-section-{{post.id}}"
+                                      hx-swap="innerHTML"
+                                      class="m-0">
                                     {% csrf_token %}
-                                    <input type="hidden" name="pk" value="{{post.id}}">
-                                    <button type="submit" class="like-btn text-gray-400 hover:text-green-700 transition-colors">
+                                    <input type="hidden" name="post_id" value="{{post.id}}">
+                                    <button type="submit" class="like-btn text-gray-400 hover:text-green-700 transition-colors flex items-center space-x-1">
                                         <i class="far fa-heart"></i>
-                                        <span class="ml-1">{{post.likes}}</span>
+                                        <span>{{post.reviews}}</span>
                                     </button>
                                 </form>
                             </div>
+
+                            <!-- Timestamp -->
+                            <div class="text-gray-500 text-sm">
+                                <i class="far fa-clock"></i>
+                                <span>{{post.created_at|date:'M d, Y'}}</span>
+                            </div>
                         </div>
                     </div>
-                    {% empty %}
-                        <h2 class="text-2xl text-red-500">No Posts Available in the database</h2>
-                    {% endfor %}
-                {% endif %}
-            </div>
+                </div>
+                {% empty %}
+                    <h2 class="text-2xl text-red-500">No Posts Available in the database</h2>
+                {% endfor %}
+            {% endif %}
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Important Announcements Section -->
     <section id="announcement-page" class="py-16 bg-white">
@@ -377,7 +391,7 @@
                                 <div class="flex items-center mb-4">
                                     {% if item.image %}
                                     <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white">
-                                        <img src="{{item.image.url}}" class="w-12 h-12 object-cover" alt="Announcement image">
+                                        <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="Announcement image">
                                     </div>
                                     {% else %}
                                     <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-700">
@@ -423,7 +437,7 @@
                                 <div class="flex items-center mb-4">
                                     {% if item.image %}
                                     <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white">
-                                        <img src="{{item.image.url}}" class="w-12 h-12 object-cover" alt="{{item.testifier}}">
+                                        <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="{{item.testifier}}">
                                     </div>
                                     {% else %}
                                     <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center text-white">
@@ -643,7 +657,7 @@ ${this.counselingForm.details}
                     {% if unit %}
                     {% for item in unit %}
                         <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
-                            <img src="{{item.image.url}}" class="w-full h-56 object-cover" alt="{{item.name}}">
+                            <img src="{{item.image.url}}" class="w-full h-56 object-fill" alt="{{item.name}}">
                             <div class="p-6">
                                 <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
                                 <p class="text-gray-600 mb-4">{{item.duty}}</p>
@@ -778,7 +792,7 @@ ${this.counselingForm.details}
                         <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
                             {% if item.image %}
                             <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white mb-4">
-                                <img src="{{item.image.url}}" class="w-12 h-12 object-cover" alt="{{item.name}}">
+                                <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="{{item.name}}">
                             </div>
                             {% else %}
                             <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
@@ -854,7 +868,7 @@ ${this.counselingForm.details}
                 <div>
                     <div class="flex items-center mb-4">
                         <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center overflow-hidden text-white font-bold text-lg">
-                            <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-cover" alt="lfc-logo">
+                            <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
                         </div>
                         <span class="ml-3 heading-font text-xl font-semibold">LFC Teens Byazhin</span>
                     </div>
@@ -1060,5 +1074,115 @@ ${this.counselingForm.details}
             Alpine.store('activeSection', 'home');
         });
     </script>
+
+
+<!-- Add some smooth animations for HTMX -->
+<style>
+    .htmx-request {
+        opacity: 0.7;
+    }
+    
+    .htmx-indicator {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    
+    .htmx-request .htmx-indicator {
+        opacity: 1;
+    }
+    
+    .htmx-request.htmx-indicator {
+        opacity: 1;
+    }
+</style>
+
+<script>
+    // Add some visual feedback for HTMX requests
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add loading states to HTMX buttons
+        document.body.addEventListener('htmx:beforeRequest', function(evt) {
+            const button = evt.target.querySelector('button') || evt.target;
+            if (button) {
+                button.classList.add('htmx-request');
+            }
+        });
+        
+        document.body.addEventListener('htmx:afterRequest', function(evt) {
+            const button = evt.target.querySelector('button') || evt.target;
+            if (button) {
+                button.classList.remove('htmx-request');
+            }
+        });
+        
+        // Handle HTMX errors gracefully
+        document.body.addEventListener('htmx:responseError', function(evt) {
+            console.error('HTMX Error:', evt.detail);
+            const target = evt.detail.target;
+            if (target) {
+                target.innerHTML = '<span class="text-red-500">Error occurred. Please try again.</span>';
+            }
+        });
+    });
+</script>
+
+
+<script>
+    // Simple like functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle like form submissions
+        document.body.addEventListener('submit', function(e) {
+            if (e.target.matches('form[hx-post]')) {
+                e.preventDefault();
+                
+                const form = e.target;
+                const button = form.querySelector('button[type="submit"]');
+                
+                if (button) {
+                    // Add loading state
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    button.disabled = true;
+                }
+            }
+        });
+    });
+    
+    // Initialize HTMX with CSRF token
+    document.addEventListener('htmx:configRequest', function(e) {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+        if (csrfToken) {
+            e.detail.headers['X-CSRFToken'] = csrfToken.value;
+        }
+    });
+</script>
+
+<style>
+    /* Smooth like animation */
+    .like-btn {
+        transition: all 0.3s ease;
+    }
+    
+    .like-btn:hover:not(:disabled) {
+        transform: scale(1.1);
+    }
+    
+    /* Heart beat animation when liked */
+    @keyframes heartBeat {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.3); }
+        50% { transform: scale(1); }
+        75% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    
+    .like-btn .fas.fa-heart {
+        animation: heartBeat 0.6s ease;
+    }
+    
+    /* Disabled state */
+    .like-btn:disabled {
+        cursor: default;
+        opacity: 1;
+    }
+</style>
 </body>
 </html>
