@@ -18,6 +18,7 @@ def home(request):
         'testimony': Testimony.objects.filter(is_approved=True),
         'unit': MinistryUnit.objects.filter(is_active=True),
         'belief': Belief.objects.filter(is_active=True),
+        'counselors': Leader.objects.filter(is_active=True, is_counselor=True),
         'contact_info': contact_info,
     }
     return render(request, 'index.html', context)

@@ -19,7 +19,8 @@ class Leader(models.Model):
     position = models.CharField(max_length=100)
     description = models.TextField()
     image = CloudinaryField('leader_image', folder='lfc_teens/leaders')
-    # whatsapp_number = models.CharField(max_length=20, blank=True, null=True)
+    whatsapp_number = models.CharField(max_length=20, blank=True, null=True)
+    is_counselor = models.BooleanField(default=False)
     order = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
