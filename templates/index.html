@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christmas Party 2024 | LFC Teens Byazhin</title>
+    <title>LFC Teens Byazhin | Home</title>
     <link rel="icon" href="{% static 'favicon.ico' %}" class="rounded-full">
     <script src="{% static 'tailwind.js' %}"></script>
     <script defer src="{% static 'alpine.js' %}"></script>
@@ -13,339 +13,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --christmas-red: #B91C1C;
-            --christmas-green: #0A5C36;
-            --christmas-gold: #D4AF37;
-            --christmas-cream: #FFF9F2;
-            --light-snow: #F0F8FF;
+            --primary-red: #B91C1C;
+            --dark-red: #7F1D1D;
+            --light-red: #FECACA;
+            --off-white: #FEF2F2;
         }
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--christmas-cream);
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
-                radial-gradient(circle at 90% 40%, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
-            z-index: 1;
+            background-color: var(--off-white);
         }
         
         .heading-font {
-            font-family: 'Mountains of Christmas', cursive;
-        }
-        
-        .serif-font {
             font-family: 'Merriweather', serif;
         }
         
-        /* Snow Animation */
-        .snowflake {
-            position: fixed;
-            top: -10px;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.8;
-            z-index: 9999;
-            filter: blur(0.5px);
+        .hero-slide {
+            transition: opacity 1s ease-in-out;
         }
         
-        /* Christmas Border */
-        .christmas-border {
-            position: relative;
-            padding: 4px;
-            background: linear-gradient(45deg, var(--christmas-green), var(--christmas-red), var(--christmas-gold), var(--christmas-green));
-            background-size: 300% 300%;
-            animation: gradientBorder 3s ease infinite;
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        @keyframes gradientBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
         
-        .christmas-border-inner {
-            background: white;
-            padding: 20px;
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
         }
         
-        /* Santa Corner */
-        .santa-corner {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 100px;
-            height: 150px;
-            z-index: 100;
-            pointer-events: none;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        .santa-corner img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.3));
-        }
-        
-        /* Floating Elements */
-        .floating-element {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        /* Gift Box Animation */
-        .gift-box {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gift-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .gift-box:hover::before {
-            left: 100%;
-        }
-        
-        .gift-box:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(185, 28, 28, 0.2);
-        }
-        
-        /* Christmas Card */
-        .christmas-card {
-            background: linear-gradient(135deg, #ffffff 0%, #fff9f2 100%);
-            border: 3px solid transparent;
-            border-image: linear-gradient(45deg, var(--christmas-green), var(--christmas-red)) 1;
-            position: relative;
-        }
-        
-        .christmas-card::after {
-            content: '🎄';
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            font-size: 24px;
-            background: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        /* Snow Accumulation */
-        .snow-accumulation {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to top, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
-            pointer-events: none;
-            z-index: 998;
-        }
-        
-        /* Popup Styles */
-        .christmas-popup {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 320px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            overflow: hidden;
-            border: 3px solid var(--christmas-red);
-            animation: slideInUp 0.5s ease-out;
-        }
-        
-        @keyframes slideInUp {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .popup-header {
-            background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
-            color: white;
-            padding: 15px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .popup-header::before {
-            content: '🎅';
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        .popup-header::after {
-            content: '🎄';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        /* Ticket Styling */
-        .christmas-ticket {
-            background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-gold) 100%);
-            color: white;
-            border-radius: 10px;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-            border: 2px dashed white;
-        }
-        
-        .christmas-ticket::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--christmas-green),
-                var(--christmas-green) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-        }
-        
-        .christmas-ticket::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--christmas-green),
-                var(--christmas-green) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-        }
-        
-        .price-tag {
-            background: var(--christmas-gold);
-            color: var(--christmas-green);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            display: inline-block;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        /* Jingle Bell Audio Control */
-        .bell-control {
-            background: linear-gradient(135deg, var(--christmas-red), var(--christmas-gold));
-            color: white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(185, 28, 28, 0.3);
-            transition: all 0.3s ease;
-            animation: ringBell 2s ease-in-out infinite;
-        }
-        
-        @keyframes ringBell {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            75% { transform: rotate(-10deg); }
-        }
-        
-        .bell-control:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(185, 28, 28, 0.4);
-        }
-        
-        /* Updated hero backgrounds for Christmas */
-        {% if hero %}
-            {% for slide in hero %}
-                .hero-bg-{{forloop.counter}} {
-                    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{{slide.image.url}}") center/cover;
-                }
-            {% endfor %}
-        {% endif %}
-        
-        .testimony-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'images/persons (3).jpg' %}") center/cover;
-        }
-
-        .join-unit-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'images/hero_img (2).jpg' %}") center/cover;
-        }
-
-        .about-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'images/hero_img (1).jpg' %}") center/cover;
-        }
-
-        .counseling-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'images/persons (1).jpg' %}") center/cover;
-        }
-        
-        /* Loading Screen */
         .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--christmas-green) 0%, var(--christmas-red) 100%);
+            background-color: var(--off-white);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -354,17 +69,14 @@
             transition: opacity 0.5s ease-out;
         }
         
-        .christmas-spinner {
-            width: 60px;
-            height: 60px;
-            position: relative;
-        }
-        
-        .christmas-spinner::before {
-            content: '🎄';
-            position: absolute;
-            font-size: 30px;
-            animation: spin 2s linear infinite;
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--light-red);
+            border-top: 5px solid var(--primary-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
         
         @keyframes spin {
@@ -372,120 +84,653 @@
             100% { transform: rotate(360deg); }
         }
         
-        .active-nav {
-            color: var(--christmas-red);
-            border-bottom: 2px solid var(--christmas-red);
-            position: relative;
+        .side-nav {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
         }
         
-        .active-nav::after {
-            content: '🎁';
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
+        .side-nav.open {
+            transform: translateX(0);
         }
         
-        /* WhatsApp Float */
+        .swipe-area {
+            touch-action: pan-y;
+        }
+        
+        .audio-controls {
+            position: fixed;
+            bottom: 100px;
+            right: 10px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
         .whatsapp-float {
-            background: linear-gradient(135deg, #25D366, #128C7E);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: #25D366;
+            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
         }
         
-        /* Section Headers */
-        .section-header {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
+        .whatsapp-float:hover {
+            transform: scale(1.1);
         }
         
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--christmas-green), var(--christmas-red), var(--christmas-gold));
-            border-radius: 2px;
+        .active-nav {
+            color: var(--primary-red);
+            border-bottom: 2px solid var(--primary-red);
+        }
+
+        {% if hero %}
+            {% for slide in hero %}
+                .hero-bg-{{forloop.counter}} {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{{slide.image.url}}") center/cover;
+        }
+        {% empty %}
+
+
+        {% endfor %}
+        {% endif %}
+
+        
+        .bible-img-1 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+        
+        .bible-img-2 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+        
+        .bible-img-3 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+
+        .testimony-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/persons (3).jpg' %}") center/cover;
+        }
+
+        .join-unit-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/hero_img (2).jpg' %}") center/cover;
+        }
+
+        .about-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/hero_img (1).jpg' %}") center/cover;
+        }
+
+        .counseling-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/persons (1).jpg' %}") center/cover;
         }
     </style>
 </head>
-<body class="bg-christmas-cream text-gray-900 scroll-smooth" x-data="{ mobileMenuOpen: false, activeSection: 'home', showTicketPopup: false, showShilohPopup: false, showRandomPopup: false }">
-    <!-- Snow Accumulation at Bottom -->
-    <div class="snow-accumulation"></div>
+<body class="bg-off-white text-gray-900 scroll-smooth" x-data="{ mobileMenuOpen: false, activeSection: 'home' }">
+    <!-- Loading Screen -->
+    <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 2000)" x-show="loading" class="loading-screen" x-cloak>
+        <div class="spinner"></div>
+        <h2 class="heading-font text-2xl text-red-900">LFC Teens Byazhin</h2>
+        <p class="mt-2 text-gray-700">Loading God's blessings...</p>
+    </div>
+
+
+    <!-- Add these Christmas decorations at the beginning of the body, right after the loading screen -->
+<div class="christmas-snowflakes"></div>
+<div class="christmas-lights"></div>
+
+<!-- Add this to the audio controls section for Christmas music -->
+<audio id="christmasMusic" loop>
+    <source src="{% static 'audio/christmas_carols.mp3' %}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<!-- Add Christmas header banner -->
+<div class="christmas-banner">
+    <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+        <div class="flex items-center">
+            <i class="fas fa-star text-yellow-300 mr-2"></i>
+            <span class="text-white font-semibold">🎄 TEENS LIKE CHRISTMAS PARTY 🎄</span>
+            <i class="fas fa-star text-yellow-300 ml-2"></i>
+        </div>
+        <div class="text-white">
+            <span class="text-sm">🎅 Dec 25, 2024 | 🕔 5:00 PM</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Christmas Theme Variables */
+    :root {
+        --christmas-red: #C41E3A;
+        --christmas-green: #0B6623;
+        --christmas-gold: #FFD700;
+        --christmas-silver: #C0C0C0;
+    }
     
-    <!-- Santa Corner (Placeholder - you can add actual Santa image) -->
-    <div class="santa-corner">
-        <div class="bg-red-600 rounded-lg p-2 shadow-lg">
-            <div class="bg-white p-4 rounded">
-                <div class="text-center">
-                    <div class="text-red-600 text-3xl mb-2">🎅</div>
-                    <p class="text-xs font-bold text-red-600">Merry Christmas!</p>
+    /* Christmas Banner */
+    .christmas-banner {
+        background: linear-gradient(90deg, var(--christmas-red), var(--christmas-green), var(--christmas-red));
+        background-size: 200% 200%;
+        animation: gradient-shift 3s ease infinite;
+        border-bottom: 3px solid var(--christmas-gold);
+    }
+    
+    @keyframes gradient-shift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* Christmas Snowflakes */
+    .christmas-snowflakes {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1000;
+    }
+    
+    .christmas-snowflakes:before,
+    .christmas-snowflakes:after {
+        content: "";
+        position: absolute;
+        top: -100px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(4px 4px at 100px 50px, #fff, transparent),
+            radial-gradient(6px 6px at 200px 150px, #fff, transparent),
+            radial-gradient(3px 3px at 300px 250px, #fff, transparent),
+            radial-gradient(4px 4px at 400px 350px, #fff, transparent),
+            radial-gradient(6px 6px at 500px 100px, #fff, transparent),
+            radial-gradient(3px 3px at 50px 200px, #fff, transparent),
+            radial-gradient(4px 4px at 150px 300px, #fff, transparent),
+            radial-gradient(6px 6px at 250px 400px, #fff, transparent),
+            radial-gradient(3px 3px at 350px 500px, #fff, transparent);
+        background-size: 650px 650px;
+        animation: snow 15s linear infinite;
+    }
+    
+    .christmas-snowflakes:after {
+        margin-left: -250px;
+        opacity: 0.5;
+        filter: blur(1px);
+        animation-duration: 20s;
+        animation-direction: reverse;
+    }
+    
+    @keyframes snow {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(1000px) rotate(360deg); }
+    }
+    
+    /* Christmas Lights */
+    .christmas-lights {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: linear-gradient(90deg,
+            #ff0000 0%, #ff0000 10%,
+            #00ff00 10%, #00ff00 20%,
+            #0000ff 20%, #0000ff 30%,
+            #ffff00 30%, #ffff00 40%,
+            #ff00ff 40%, #ff00ff 50%,
+            #00ffff 50%, #00ffff 60%,
+            #ff8800 60%, #ff8800 70%,
+            #8800ff 70%, #8800ff 80%,
+            #ff0088 80%, #ff0088 90%,
+            #88ff00 90%, #88ff00 100%
+        );
+        animation: lights 1s linear infinite;
+        z-index: 999;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+    
+    @keyframes lights {
+        0% { background-position: 0 0; }
+        100% { background-position: 100px 0; }
+    }
+    
+    /* Christmas Card Styles */
+    .christmas-card {
+        border: 3px solid var(--christmas-red);
+        border-radius: 15px;
+        background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .christmas-card:before {
+        content: "🎄";
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        font-size: 24px;
+    }
+    
+    .christmas-header {
+        background: linear-gradient(90deg, var(--christmas-red), var(--christmas-green));
+        color: white;
+        padding: 1rem;
+        border-radius: 10px 10px 0 0;
+        position: relative;
+    }
+    
+    .christmas-header:after {
+        content: "✨";
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    /* Gift Box Animation */
+    .gift-box {
+        width: 60px;
+        height: 60px;
+        background: var(--christmas-red);
+        position: relative;
+        border-radius: 5px;
+        cursor: pointer;
+        animation: bounce 2s infinite;
+    }
+    
+    .gift-box:before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 20px;
+        background: var(--christmas-gold);
+        border-radius: 50%;
+    }
+    
+    .gift-box:after {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 10px;
+        background: var(--christmas-gold);
+        border-radius: 5px;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    /* Christmas Tree */
+    .christmas-tree {
+        position: relative;
+        width: 100px;
+        height: 150px;
+        margin: 0 auto;
+    }
+    
+    .christmas-tree:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 40px;
+        width: 20px;
+        height: 30px;
+        background: #8B4513;
+    }
+    
+    .christmas-tree:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 25px;
+        width: 50px;
+        height: 50px;
+        background: var(--christmas-green);
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+    
+    /* Update existing styles for Christmas */
+    body {
+        background: linear-gradient(180deg, #0B6623 0%, #FEF2F2 100%);
+        background-attachment: fixed;
+    }
+    
+    .hero-slide {
+        position: relative;
+    }
+    
+    .hero-slide:before {
+        content: "🎄✨🎁";
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 2rem;
+        z-index: 1;
+    }
+    
+    /* Christmas navigation */
+    nav {
+        border-bottom: 3px solid var(--christmas-gold);
+    }
+    
+    .active-nav {
+        color: var(--christmas-red);
+        border-bottom: 2px solid var(--christmas-gold);
+    }
+    
+    /* Christmas buttons */
+    .christmas-btn {
+        background: linear-gradient(45deg, var(--christmas-red), var(--christmas-green));
+        color: white;
+        border: 2px solid var(--christmas-gold);
+        transition: all 0.3s ease;
+    }
+    
+    .christmas-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+    }
+    
+    /* Christmas countdown */
+    .countdown-container {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        border: 3px solid var(--christmas-red);
+        padding: 1.5rem;
+        margin: 2rem auto;
+        max-width: 600px;
+    }
+    
+    .countdown-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--christmas-red);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .countdown-label {
+        font-size: 0.9rem;
+        color: var(--christmas-green);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+
+<!-- Add Christmas Party Countdown Section -->
+<section class="py-12 bg-gradient-to-b from-green-50 to-white">
+    <div class="container mx-auto px-4">
+        <div class="countdown-container text-center">
+            <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-2">🎅 Christmas Party Countdown 🎄</h2>
+            <p class="text-gray-600 mb-6">Join us for the biggest Teens Like Christmas celebration!</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="text-center p-4 rounded-lg bg-red-50 border-2 border-red-200">
+                    <div id="days" class="countdown-number">00</div>
+                    <div class="countdown-label">Days</div>
                 </div>
+                <div class="text-center p-4 rounded-lg bg-green-50 border-2 border-green-200">
+                    <div id="hours" class="countdown-number">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="text-center p-4 rounded-lg bg-yellow-50 border-2 border-yellow-200">
+                    <div id="minutes" class="countdown-number">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="text-center p-4 rounded-lg bg-blue-50 border-2 border-blue-200">
+                    <div id="seconds" class="countdown-number">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+            
+            <div class="space-y-3 text-left max-w-md mx-auto">
+                <div class="flex items-center">
+                    <i class="fas fa-calendar-alt text-red-600 mr-3"></i>
+                    <span><strong>Date:</strong> December 25, 2024</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-green-600 mr-3"></i>
+                    <span><strong>Time:</strong> 5:00 PM - 9:00 PM</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
+                    <span><strong>Venue:</strong> LFC Teens Byazhin Church Premises</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-gift text-yellow-600 mr-3"></i>
+                    <span><strong>Special:</strong> Gift Exchange & Surprise Packages!</span>
+                </div>
+            </div>
+            
+            <button class="mt-8 christmas-btn px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                <i class="fas fa-snowflake mr-2"></i>RSVP Now!
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Add Christmas Party Highlights Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">🎁 Party Highlights</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Get ready for an unforgettable Christmas celebration!</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Highlight 1 -->
+            <div class="christmas-card p-6 text-center">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+                    <i class="fas fa-music text-2xl text-red-600"></i>
+                </div>
+                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Worship & Carols</h3>
+                <p class="text-gray-700">Special Christmas worship session with your favorite carols</p>
+            </div>
+            
+            <!-- Highlight 2 -->
+            <div class="christmas-card p-6 text-center">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+                    <i class="fas fa-utensils text-2xl text-green-600"></i>
+                </div>
+                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Christmas Feast</h3>
+                <p class="text-gray-700">Delicious food, drinks, and Christmas treats for everyone</p>
+            </div>
+            
+            <!-- Highlight 3 -->
+            <div class="christmas-card p-6 text-center">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <i class="fas fa-gifts text-2xl text-yellow-600"></i>
+                </div>
+                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">Gift Exchange</h3>
+                <p class="text-gray-700">Bring a wrapped gift (₦2,000 max) for our gift exchange game</p>
             </div>
         </div>
     </div>
-    
-    <!-- Loading Screen -->
-    <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 2000)" x-show="loading" class="loading-screen" x-cloak>
-        <div class="christmas-spinner"></div>
-        <h2 class="heading-font text-3xl text-white mt-8">Christmas Party 2024</h2>
-        <p class="mt-2 text-white/80 serif-font">Loading festive blessings...</p>
-    </div>
+</section>
 
-    <!-- Jingle Bell Audio Control -->
-    <div class="fixed bottom-150px right-20px z-100 floating-element">
-        <button id="playPause" class="bell-control">
-            <i class="fas fa-bell"></i>
+<!-- Add Christmas Theme to Hero Section -->
+<script>
+    // Update hero slides for Christmas
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add Christmas music control
+        const christmasAudio = document.getElementById('christmasMusic');
+        const playPauseBtn = document.getElementById('playPause');
+        
+        // Update play button to handle both audios
+        playPauseBtn.addEventListener('click', function() {
+            if (christmasAudio.paused) {
+                christmasAudio.play();
+                document.getElementById('sermonAudio').pause();
+            } else {
+                christmasAudio.pause();
+            }
+        });
+        
+        // Christmas Countdown
+        function updateCountdown() {
+            const christmasDate = new Date('December 25, 2024 17:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = christmasDate - now;
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // Add Christmas emojis to page titles
+        const titles = document.querySelectorAll('h2, h3');
+        titles.forEach(title => {
+            if (title.textContent.includes('Home') || 
+                title.textContent.includes('About') || 
+                title.textContent.includes('Testimonies') ||
+                title.textContent.includes('Announcements')) {
+                title.innerHTML = '🎄 ' + title.innerHTML + ' 🎅';
+            }
+        });
+        
+        // Add floating gift boxes
+        function createFloatingGift() {
+            const gift = document.createElement('div');
+            gift.className = 'gift-box';
+            gift.style.position = 'fixed';
+            gift.style.left = Math.random() * 90 + 'vw';
+            gift.style.top = '-100px';
+            gift.style.zIndex = '9999';
+            gift.style.cursor = 'pointer';
+            
+            gift.addEventListener('click', function() {
+                this.style.transition = 'transform 0.5s ease';
+                this.style.transform = 'scale(0) rotate(360deg)';
+                setTimeout(() => this.remove(), 500);
+                
+                // Show Christmas message
+                const message = document.createElement('div');
+                message.textContent = '🎁 Merry Christmas! 🎁';
+                message.style.position = 'fixed';
+                message.style.top = '50%';
+                message.style.left = '50%';
+                message.style.transform = 'translate(-50%, -50%)';
+                message.style.background = 'linear-gradient(45deg, #C41E3A, #0B6623)';
+                message.style.color = 'white';
+                message.style.padding = '20px 40px';
+                message.style.borderRadius = '10px';
+                message.style.fontSize = '24px';
+                message.style.fontWeight = 'bold';
+                message.style.zIndex = '10000';
+                message.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    message.style.transition = 'opacity 0.5s ease';
+                    message.style.opacity = '0';
+                    setTimeout(() => message.remove(), 500);
+                }, 2000);
+            });
+            
+            document.body.appendChild(gift);
+            
+            // Animate gift falling
+            const fallDuration = Math.random() * 5 + 5;
+            gift.style.transition = `top ${fallDuration}s linear, transform 0.3s ease`;
+            setTimeout(() => {
+                gift.style.top = '100vh';
+            }, 10);
+            
+            // Remove gift after falling
+            setTimeout(() => {
+                if (gift.parentNode) {
+                    gift.remove();
+                }
+            }, fallDuration * 1000 + 1000);
+        }
+        
+        // Create floating gifts periodically
+        setInterval(createFloatingGift, 3000);
+        
+        // Create first few gifts
+        for (let i = 0; i < 3; i++) {
+            setTimeout(createFloatingGift, i * 1000);
+        }
+    });
+</script>
+
+<!-- Add Christmas-themed footer note -->
+<div class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-red-600 to-green-600 text-white text-center py-2 text-sm z-50">
+    <i class="fas fa-candy-cane mr-2"></i> 
+    <strong>Merry Christmas from LFC Teens Byazhin!</strong> 
+    <i class="fas fa-candy-cane ml-2"></i>
+</div>
+
+    <!-- Audio Controls -->
+    <div class="audio-controls">
+        <button id="playPause" class="w-8 h-8 flex items-center justify-center text-white">
+            <i class="fas fa-play"></i>
+        </button>
+        <button id="muteBtn" class="w-8 h-8 flex items-center justify-center text-white ml-2">
+            <i class="fas fa-volume-up"></i>
         </button>
     </div>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/2349013708170?text=Hello%20LFC%20Teens%20Christmas%20Party%2C%20I%20would%20like%20to%20get%20tickets" class="whatsapp-float" target="_blank" style="position: fixed; bottom: 20px; right: 20px; z-index: 100; background: #25D366; border-radius: 50px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease;">
+    <a href="https://wa.me/2349013708170?text=Hello%20LFC%20Teens%20Byazhin%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Navigation -->
-    <nav class="christmas-border sticky top-0 z-50">
-        <div class="christmas-border-inner">
-            <div class="container mx-auto px-4">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-gradient-to-br from-christmas-red to-christmas-gold rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                            <i class="fas fa-tree"></i>
-                        </div>
-                        <span class="ml-3 heading-font text-xl font-semibold text-christmas-green">LFC Teens Christmas</span>
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-red-800 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
                     </div>
-                    
-                    <div class="hidden md:flex space-x-8">
-                        <a href="#" class="font-medium pb-1 transition-colors flex items-center" :class="activeSection === 'home' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">
-                            <i class="fas fa-home mr-2"></i>Home
-                        </a>
-                        <a href="#about-us-page" class="transition-colors pb-1 flex items-center" :class="activeSection === 'about' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">
-                            <i class="fas fa-info-circle mr-2"></i>About
-                        </a>
-                        <a href="#testimonies-page" class="transition-colors pb-1 flex items-center" :class="activeSection === 'testimonies' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">
-                            <i class="fas fa-star mr-2"></i>Testimonies
-                        </a>
-                        <a href="#announcement-page" class="transition-colors pb-1 flex items-center" :class="activeSection === 'announcements' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">
-                            <i class="fas fa-bullhorn mr-2"></i>Announcements
-                        </a>
-                        <a href="#counseling-page" class="transition-colors pb-1 flex items-center" :class="activeSection === 'counseling' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">
-                            <i class="fas fa-hands-praying mr-2"></i>Counseling
-                        </a>
-                        <a href="#join-unit-page" class="transition-colors pb-1 flex items-center" :class="activeSection === 'units' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">
-                            <i class="fas fa-users mr-2"></i>Ministry
-                        </a>
-                        <button @click="showTicketPopup = true" class="bg-gradient-to-r from-christmas-red to-christmas-gold text-white px-6 py-2 rounded-full font-bold hover:scale-105 transition-transform shadow-lg">
-                            <i class="fas fa-ticket-alt mr-2"></i>Get Ticket ₦4,000
-                        </button>
-                    </div>
-                    
-                    <div class="md:hidden">
-                        <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-christmas-red focus:outline-none">
-                            <i class="fas fa-bars text-xl"></i>
-                        </button>
-                    </div>
+                    <span class="ml-3 heading-font text-xl font-semibold text-red-900">LFC Teens Byazhin</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="font-medium pb-1 transition-colors" :class="activeSection === 'home' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Home</a>
+                    <a href="#about-us-page" class="transition-colors pb-1" :class="activeSection === 'about' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">About Us</a>
+                    <a href="#testimonies-page" class="transition-colors pb-1" :class="activeSection === 'testimonies' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Testimonies</a>
+                    <a href="#announcement-page" class="transition-colors pb-1" :class="activeSection === 'announcements' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Announcements</a>
+                    <a href="#counseling-page" class="transition-colors pb-1" :class="activeSection === 'counseling' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Counseling</a>
+                    <a href="#join-unit-page" class="transition-colors pb-1" :class="activeSection === 'units' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Join a Unit</a>
+                    <a href="#contact-us" class="transition-colors pb-1" :class="activeSection === 'contact' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Contact Us</a>
+                </div>
+                
+                <div class="md:hidden ">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-600 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -497,37 +742,23 @@
         <div class="side-nav absolute top-0 left-0 w-64 h-full bg-white shadow-lg" :class="{ 'open': mobileMenuOpen }">
             <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                 <div class="flex items-center">
-                    <div class="w-8 h-8 bg-gradient-to-br from-christmas-red to-christmas-gold rounded-full flex items-center justify-center text-white font-bold">
-                        <i class="fas fa-tree"></i>
+                    <div class="w-8 h-8 bg-red-800 rounded-full flex items-center justify-center text-white font-bold">
+                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill alt="lfc-logo">
                     </div>
-                    <span class="ml-2 heading-font font-semibold text-christmas-green">Christmas Party</span>
+                    <span class="ml-2 heading-font font-semibold text-red-900">LFC Teens</span>
                 </div>
                 <button @click="mobileMenuOpen = false" class="text-gray-500">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="py-4">
-                <a href="#" class="block py-3 px-6 font-medium transition-colors flex items-center" :class="activeSection === 'home' ? 'text-christmas-red bg-red-50' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">
-                    <i class="fas fa-home mr-3"></i>Home
-                </a>
-                <a href="#about-us-page" class="block py-3 px-6 transition-colors flex items-center" :class="activeSection === 'about' ? 'text-christmas-red bg-red-50' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">
-                    <i class="fas fa-info-circle mr-3"></i>About Us
-                </a>
-                <a href="#testimonies-page" class="block py-3 px-6 transition-colors flex items-center" :class="activeSection === 'testimonies' ? 'text-christmas-red bg-red-50' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">
-                    <i class="fas fa-star mr-3"></i>Testimonies
-                </a>
-                <a href="#announcement-page" class="block py-3 px-6 transition-colors flex items-center" :class="activeSection === 'announcements' ? 'text-christmas-red bg-red-50' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">
-                    <i class="fas fa-bullhorn mr-3"></i>Announcements
-                </a>
-                <a href="#counseling-page" class="block py-3 px-6 transition-colors flex items-center" :class="activeSection === 'counseling' ? 'text-christmas-red bg-red-50' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">
-                    <i class="fas fa-hands-praying mr-3"></i>Counseling
-                </a>
-                <a href="#join-unit-page" class="block py-3 px-6 transition-colors flex items-center" :class="activeSection === 'units' ? 'text-christmas-red bg-red-50' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">
-                    <i class="fas fa-users mr-3"></i>Join a Unit
-                </a>
-                <button @click="showTicketPopup = true; mobileMenuOpen = false" class="w-full mt-4 mx-6 bg-gradient-to-r from-christmas-red to-christmas-gold text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform">
-                    <i class="fas fa-ticket-alt mr-2"></i>Get Ticket ₦4,000
-                </button>
+                <a href="#" class="block py-3 px-6 font-medium transition-colors" :class="activeSection === 'home' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Home</a>
+                <a href="#about-us-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'about' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">About Us</a>
+                <a href="#testimonies-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'testimonies' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Testimonies</a>
+                <a href="#announcement-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'announcements' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Announcements</a>
+                <a href="#counseling-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'counseling' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Counseling</a>
+                <a href="#join-unit-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'units' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Join a Unit</a>
+                <a href="#contact-us" class="block py-3 px-6 transition-colors" :class="activeSection === 'contact' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Contact Us</a>
             </div>
         </div>
     </div>
@@ -542,29 +773,10 @@
                      x-transition:leave="transition ease-in duration-1000" 
                      x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
                      class="absolute inset-0 flex items-center justify-center text-white" :class="slide.bg">
-                    <div class="text-center px-4 max-w-4xl fade-in">
-                        <div class="mb-6">
-                            <span class="text-4xl">🎄</span>
-                            <span class="text-4xl mx-4">🎁</span>
-                            <span class="text-4xl">🌟</span>
-                        </div>
+                    <div class="text-center px-4 max-w-3xl fade-in">
                         <h1 class="heading-font text-4xl md:text-6xl font-bold mb-4" x-text="slide.title"></h1>
-                        <p class="text-xl md:text-2xl mb-8 serif-font" x-text="slide.subtitle"></p>
-                        <div class="flex flex-col md:flex-row gap-4 justify-center">
-                            <a :href="slide.link" class="inline-block bg-white text-christmas-red px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-gray-100 transition-colors transform hover:scale-105" x-text="slide.buttonText"></a>
-                            <button @click="showTicketPopup = true" class="inline-block bg-gradient-to-r from-christmas-gold to-christmas-red text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:scale-105 transition-transform">
-                                <i class="fas fa-gift mr-2"></i>Get Christmas Ticket
-                            </button>
-                        </div>
-                        <div class="mt-8">
-                            <div class="christmas-ticket inline-block">
-                                <div class="text-center">
-                                    <p class="text-lg font-bold">🎫 Special Christmas Ticket</p>
-                                    <p class="text-3xl font-bold mt-2">₦4,000</p>
-                                    <p class="text-sm mt-1">Only</p>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="text-xl md:text-2xl mb-8" x-text="slide.subtitle"></p>
+                        <a :href="slide.link" class="inline-block bg-white text-red-700 px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-gray-100 transition-colors" x-text="slide.buttonText"></a>
                     </div>
                 </div>
             </template>
@@ -573,250 +785,43 @@
             <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
                 <template x-for="(slide, index) in slides" :key="index">
                     <button @click="currentSlide = index" class="w-3 h-3 rounded-full transition-colors" 
-                            :class="currentSlide === index ? 'bg-christmas-gold' : 'bg-white/50'"></button>
+                            :class="currentSlide === index ? 'bg-white' : 'bg-white/50'"></button>
                 </template>
             </div>
             
             <!-- Navigation Arrows -->
-            <button @click="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/50 transition-colors">
+            <button @click="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <button @click="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/50 transition-colors">
+            <button @click="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
     </section>
 
-    <!-- Ticket Popup Ad -->
-    <div x-show="showTicketPopup" x-transition class="fixed inset-0 z-[9999]">
-        <div class="absolute inset-0 bg-black/70" @click="showTicketPopup = false"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-            <div class="christmas-card rounded-2xl overflow-hidden shadow-2xl m-4">
-                <div class="popup-header">
-                    <h3 class="heading-font text-2xl">🎅 Christmas Special Offer! 🎄</h3>
-                </div>
-                
-                <div class="p-6">
-                    <div class="text-center mb-6">
-                        <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-christmas-red to-christmas-gold flex items-center justify-center text-white text-5xl">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <h4 class="text-2xl font-bold text-christmas-green">Get Your Christmas Party Ticket!</h4>
-                        <p class="text-gray-600 mt-2">Join us for the most amazing Christmas celebration!</p>
-                    </div>
-                    
-                    <div class="text-center mb-6">
-                        <div class="price-tag">
-                            <span class="text-2xl">₦4,000</span>
-                            <span class="text-sm ml-2">Only</span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span>Christmas dinner buffet</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span>Live music & performances</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span>Free gift pack for everyone</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span>Christmas photo booth</span>
-                        </div>
-                    </div>
-                    
-                    <a href="#tickets-section" @click="showTicketPopup = false" class="block w-full bg-gradient-to-r from-christmas-green to-christmas-red text-white py-3 rounded-lg font-bold text-center hover:scale-105 transition-transform">
-                        <i class="fas fa-ticket-alt mr-2"></i>Buy Ticket Now
-                    </a>
-                    
-                    <p class="text-center text-sm text-gray-500 mt-4">
-                        Limited tickets available! Prices may increase soon
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Shiloh Preparation Popup -->
-    <div x-show="showShilohPopup" x-transition class="fixed inset-0 z-[9999]">
-        <div class="absolute inset-0 bg-black/70" @click="showShilohPopup = false"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md">
-            <div class="bg-gradient-to-b from-christmas-green to-christmas-red rounded-2xl overflow-hidden shadow-2xl m-4">
-                <div class="bg-white/10 backdrop-blur-sm p-6 text-white">
-                    <button @click="showShilohPopup = false" class="absolute right-4 top-4 text-white hover:text-christmas-gold">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                    
-                    <div class="text-center mb-6">
-                        <div class="w-16 h-16 mx-auto mb-3 bg-white/20 rounded-full flex items-center justify-center">
-                            <i class="fas fa-pray text-3xl text-christmas-gold"></i>
-                        </div>
-                        <h3 class="heading-font text-2xl">Prepare for Shiloh</h3>
-                        <p class="text-sm mt-1 opacity-80">7 Steps to Spiritual Preparation</p>
-                    </div>
-                    
-                    <div class="space-y-3 max-h-60 overflow-y-auto pr-2">
-                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
-                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">1</span>
-                            <span>Pray daily for guidance and divine direction</span>
-                        </div>
-                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
-                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">2</span>
-                            <span>Fast regularly to strengthen your spiritual connection</span>
-                        </div>
-                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
-                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">3</span>
-                            <span>Study the Word of God daily for wisdom</span>
-                        </div>
-                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
-                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">4</span>
-                            <span>Attend all preparatory meetings and services</span>
-                        </div>
-                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
-                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">5</span>
-                            <span>Invite friends and family to join the celebration</span>
-                        </div>
-                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
-                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">6</span>
-                            <span>Prepare your heart through worship and praise</span>
-                        </div>
-                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
-                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">7</span>
-                            <span>Expect miracles and divine encounters this season</span>
-                        </div>
-                    </div>
-                    
-                    <button class="w-full bg-christmas-gold text-christmas-green py-3 rounded-lg font-bold mt-6 hover:scale-105 transition-transform">
-                        <i class="fas fa-book-bible mr-2"></i>Learn More About Shiloh
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Random Popup Ad -->
-    <div x-show="showRandomPopup" x-transition class="christmas-popup" style="display: none;">
-        <div class="popup-header">
-            <h3 class="heading-font text-xl">🎁 Christmas Special! 🎄</h3>
-        </div>
-        <div class="p-4">
-            <div class="h-40 bg-gradient-to-br from-red-50 to-green-50 rounded-lg mb-3 flex items-center justify-center">
-                <div class="text-center">
-                    <i class="fas fa-tree text-5xl text-christmas-green mb-2"></i>
-                    <p class="text-christmas-red font-bold">Christmas Party 2024</p>
-                </div>
-            </div>
-            <p class="text-center text-gray-700 mb-3 font-semibold">Don't miss the Christmas party of the year!</p>
-            <p class="text-center text-sm text-gray-600 mb-4">Food, Music, Gifts & Great Company!</p>
-            <button @click="showTicketPopup = true; showRandomPopup = false" class="w-full bg-gradient-to-r from-christmas-red to-christmas-green text-white py-2 rounded-lg font-bold hover:scale-105 transition-transform">
-                Book Now - ₦4,000 Only
-            </button>
-            <button @click="showRandomPopup = false" class="w-full mt-2 text-gray-500 hover:text-gray-700 text-sm">
-                Maybe Later
-            </button>
-        </div>
-    </div>
-
-    <!-- Ticket Section (Added to template) -->
-    <section id="tickets-section" class="py-16 bg-gradient-to-b from-christmas-cream to-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="section-header heading-font text-3xl md:text-4xl font-bold text-christmas-green">Christmas Party Tickets</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Secure your spot for the most memorable Christmas celebration!</p>
-            </div>
-            
-            <div class="max-w-lg mx-auto">
-                <div class="gift-box bg-white rounded-2xl shadow-xl p-8">
-                    <div class="text-center mb-6">
-                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-christmas-red to-christmas-gold flex items-center justify-center text-white text-3xl">
-                            <i class="fas fa-crown"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-christmas-green">VIP Christmas Experience</h3>
-                    </div>
-                    
-                    <div class="text-center mb-6">
-                        <p class="text-5xl font-bold text-christmas-red mb-2">₦4,000</p>
-                        <p class="text-gray-600">One ticket, unlimited fun!</p>
-                    </div>
-                    
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-check text-green-600"></i>
-                            </div>
-                            <span>Full access to all party zones</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-check text-green-600"></i>
-                            </div>
-                            <span>Christmas buffet dinner</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-check text-green-600"></i>
-                            </div>
-                            <span>Free Christmas gift pack</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                                <i class="fas fa-check text-green-600"></i>
-                            </div>
-                            <span>Live performances & music</span>
-                        </div>
-                    </div>
-                    
-                    <button @click="showTicketPopup = true" class="w-full bg-gradient-to-r from-christmas-green to-christmas-red text-white py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-lg">
-                        <i class="fas fa-shopping-cart mr-2"></i>Get Your Ticket Now
-                    </button>
-                    
-                    <p class="text-center text-sm text-gray-500 mt-4">
-                        <i class="fas fa-shield-alt mr-1"></i> Secure payment • Instant e-ticket • 24/7 support
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rest of your template sections remain with Christmas styling -->
     <!-- Pastors/Workers Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="section-header heading-font text-3xl md:text-4xl font-bold text-christmas-green">Our Christmas Hosts</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Meet the wonderful people making this Christmas celebration special.</p>
+                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Spiritual Leaders</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Meet the dedicated servants of God who guide our congregation with wisdom and compassion.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% if leaders %}
                     {% for leader in leaders %}
-                        <div class="gift-box bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                            <div class="h-64 relative">
-                                <img src="{{leader.image.url}}" class="object-cover w-full h-full" alt="{{leader.name}}">
-                                <div class="absolute top-4 right-4 bg-christmas-red text-white px-3 py-1 rounded-full text-sm">
-                                    🎄 Host
-                                </div>
+                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                            <div class="h-64">
+                                <img src="{{leader.image.url}}" class="object-fill w-full h-full" alt="{{leader.name}}">
                             </div>
                             <div class="p-6">
-                                <h3 class="serif-font text-xl font-bold text-christmas-green mb-2">{{leader.name}}</h3>
-                                <p class="text-christmas-red mb-4">{{leader.position}}</p>
+                                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{leader.name}}</h3>
+                                <p class="text-gray-600 mb-4">{{leader.position}}</p>
                                 <p class="text-gray-700">{{leader.description}}</p>
                             </div>
                         </div>
                     {% empty %}
-                        <div class="col-span-full text-center">
-                            <div class="inline-block p-8 bg-gradient-to-br from-red-50 to-green-50 rounded-2xl">
-                                <i class="fas fa-users text-4xl text-christmas-red mb-4"></i>
-                                <h2 class="text-2xl text-christmas-green">Our Christmas Team</h2>
-                                <p class="text-gray-600 mt-2">Preparing an amazing celebration for you!</p>
-                            </div>
-                        </div>
+                        <h2 class="text-2xl text-red-500">No leaders Available in the database</h2>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -824,90 +829,82 @@
     </section>
 
     <!-- Bible Blog Section -->
-    <section id="bible-blog-page" class="py-16 bg-gradient-to-b from-red-50 to-green-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="section-header heading-font text-3xl md:text-4xl font-bold text-christmas-green">Christmas Reflections</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Nourish your soul with Christmas scriptures and reflections.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% if bible_post %}
-                    {% for post in bible_post %}
-                    <div class="gift-box bg-white rounded-xl shadow-md overflow-hidden border border-red-200 relative">
-                        <div class="h-48 overflow-hidden">
-                            <img src="{{post.image.url}}" class="object-cover w-full h-full object-center" alt="Bible post image">
-                            <div class="absolute top-4 left-4 bg-christmas-red text-white px-3 py-1 rounded-full text-sm">
-                                ✨ Christmas Verse
+<!-- Bible Blog Section - Simple Like System -->
+<section id="bible-blog-page" class="py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Daily Bread</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Nourish your soul with these selected scriptures and reflections.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% if bible_post %}
+                {% for post in bible_post %}
+                <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200 relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="{{post.image.url}}" class="object-cover w-full h-full object-center" alt="Bible post image">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-4">{{post.scriptures}}</h3>
+                        <p class="text-gray-700 mb-16">{{post.message}}</p>
+
+                        <div class="flex justify-between absolute bottom-4 w-[88%] items-center mt-4 pt-2 border-t-2 border-gray-300">
+                            <!-- Simple Like System -->
+                            <div id="like-section-{{post.id}}">
+                                <form hx-post="{% url 'add_like' %}" 
+                                      hx-target="#like-section-{{post.id}}"
+                                      hx-swap="innerHTML"
+                                      class="m-0">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{post.id}}">
+                                    <button type="submit" class="like-btn text-gray-400 hover:text-green-700 transition-colors flex items-center space-x-1">
+                                        <i class="far fa-heart"></i>
+                                        <span>{{post.reviews}}</span>
+                                    </button>
+                                </form>
                             </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="serif-font text-xl font-bold text-christmas-green mb-4">{{post.scriptures}}</h3>
-                            <p class="text-gray-700 mb-16">{{post.message}}</p>
 
-                            <div class="flex justify-between absolute bottom-4 w-[88%] items-center mt-4 pt-2 border-t-2 border-gray-300">
-                                <!-- Simple Like System -->
-                                <div id="like-section-{{post.id}}">
-                                    <form hx-post="{% url 'add_like' %}" 
-                                          hx-target="#like-section-{{post.id}}"
-                                          hx-swap="innerHTML"
-                                          class="m-0">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="post_id" value="{{post.id}}">
-                                        <button type="submit" class="like-btn text-gray-400 hover:text-green-700 transition-colors flex items-center space-x-1">
-                                            <i class="far fa-heart"></i>
-                                            <span>{{post.reviews}}</span>
-                                        </button>
-                                    </form>
-                                </div>
-
-                                <!-- Timestamp -->
-                                <div class="text-gray-500 text-sm">
-                                    <i class="far fa-clock"></i>
-                                    <span>{{post.created_at|date:'M d, Y'}}</span>
-                                </div>
+                            <!-- Timestamp -->
+                            <div class="text-gray-500 text-sm">
+                                <i class="far fa-clock"></i>
+                                <span>{{post.created_at|date:'M d, Y'}}</span>
                             </div>
                         </div>
                     </div>
-                    {% empty %}
-                        <div class="col-span-full text-center">
-                            <div class="inline-block p-8 bg-white rounded-2xl shadow-md">
-                                <i class="fas fa-book-bible text-4xl text-christmas-red mb-4"></i>
-                                <h2 class="text-2xl text-christmas-green">Christmas Scriptures</h2>
-                                <p class="text-gray-600 mt-2">Reflections coming soon!</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
+                </div>
+                {% empty %}
+                    <h2 class="text-2xl text-red-500">No Posts Available in the database</h2>
+                {% endfor %}
+            {% endif %}
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Important Announcements Section -->
     <section id="announcement-page" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="section-header heading-font text-3xl md:text-4xl font-bold text-christmas-green">Christmas Announcements</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Stay informed about our Christmas events and celebrations.</p>
+                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Church Announcements</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Stay informed about upcoming events, prayer needs, and important updates.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {% if announcement %}
                     {% for item in announcement %}
-                        <div class="gift-box bg-white rounded-xl shadow-md overflow-hidden border border-gray-200">
-                            <div class="p-6 border-l-4 border-christmas-red">
+                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                            <div class="p-6 border-l-4 border-red-600">
                                 <div class="flex items-center mb-4">
                                     {% if item.image %}
-                                    <div class="w-12 h-12 bg-gradient-to-br from-christmas-red to-christmas-gold overflow-hidden rounded-full flex items-center justify-center text-white">
-                                        <img src="{{item.image.url}}" class="w-12 h-12 object-cover" alt="Announcement image">
+                                    <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white">
+                                        <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="Announcement image">
                                     </div>
                                     {% else %}
-                                    <div class="w-12 h-12 bg-gradient-to-br from-christmas-red to-christmas-gold rounded-full flex items-center justify-center text-white">
+                                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-700">
                                         <i class="fas fa-bullhorn"></i>
                                     </div>
                                     {% endif %}
                                     <div class="ml-4">
-                                        <h3 class="serif-font text-xl font-bold text-christmas-green">{{item.topic}}</h3>
+                                        <h3 class="heading-font text-xl font-bold text-red-900">{{item.topic}}</h3>
                                         <p class="text-gray-600">{{item.date|date:'M d, Y'}}</p>
                                     </div>
                                 </div>
@@ -920,50 +917,546 @@
         </div>
     </section>
 
-    <!-- Continue with the rest of your template sections, maintaining the Christmas styling -->
+    <!-- Testimonies Page -->
+    <section id="testimonies-page" class="py-8">
+        <!-- Testimonies Hero Section -->
+        <section class="py-20 testimony-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Share Your Testimony</h1>
+                <p class="text-xl max-w-2xl mx-auto">Your story of God's faithfulness can inspire and encourage others in their walk with Christ.</p>
+            </div>
+        </section>
+
+        <!-- Testimonies Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Testimonies of Faith</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Hear how God is working in the lives of our congregation members.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    {% if testimony %}
+                        {% for item in testimony %}
+                            <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
+                                <div class="flex items-center mb-4">
+                                    {% if item.image %}
+                                    <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white">
+                                        <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="{{item.testifier}}">
+                                    </div>
+                                    {% else %}
+                                    <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center text-white">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    {% endif %}
+                                    <div class="ml-4">
+                                        <h3 class="heading-font font-bold text-red-900">{{item.topic}}</h3>
+                                        <p class="text-gray-600 text-sm">{{item.date|date:'M d, Y'}}</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 italic">"{{item.testimony}}"</p>
+                                <p class="mt-4 text-red-700 font-medium">Testifier - <span class="text-green-500">{{item.testifier}}</span></p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimony Submission Form -->
+        <section class="py-16 bg-red-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Share Your Story</h2>
+                    
+                    <form x-data="{
+                        testimonyForm: { name: '', title: '', testimony: '' },
+                        submitTestimony() {
+                            const message = `🙏 *TESTIMONY SUBMISSION - LFC Teens Byazhin* 🙏
+
+👤 *Name:* ${this.testimonyForm.name}
+📝 *Title:* ${this.testimonyForm.title}
+
+✨ *Testimony:*
+${this.testimonyForm.testimony}
+
+🕊️ *To God Be All The Glory!* 🕊️`;
+
+                            const whatsappNumber = '{{ contact_info.whatsapp_number|default:"2349013708170" }}';
+                            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                            
+                            this.testimonyForm = { name: '', title: '', testimony: '' };
+                            
+                            alert('Thank you for sharing your testimony! We will review it and may contact you for more details. God bless you!');
+                        }
+                    }" @submit.prevent="submitTestimony">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="name" x-model="testimonyForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="title" class="block text-gray-700 mb-2">Testimony Title</label>
+                            <input type="text" id="title" x-model="testimonyForm.title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="testimony" class="block text-gray-700 mb-2">Your Testimony</label>
+                            <textarea id="testimony" x-model="testimonyForm.testimony" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share how God has worked in your life..." required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Submit Testimony</button>
+                        </div>
+                    </form>
+                    
+                    <p class="text-gray-600 text-sm mt-6 text-center">
+                        By submitting your testimony, you agree that it may be shared on our website and social media to encourage others. We may contact you for more details.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Counseling Section -->
+    <section id="counseling-page" class="py-8">
+        <!-- Counseling Hero Section -->
+        <section class="py-20 counseling-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Spiritual Counseling</h1>
+                <p class="text-xl max-w-2xl mx-auto">Find guidance, support, and prayer for life's challenges through our caring counselors.</p>
+            </div>
+        </section>
+
+        <!-- Counseling Form Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Request Counseling</h2>
+                    <p class="text-gray-600 text-center mb-8">Our trained counselors are here to provide biblical guidance and prayer support for whatever you're facing.</p>
+                    
+                    <form x-data="{
+                        counselingForm: { name: '', phone: '', counselor: '', issue: '', urgency: 'medium', details: '' },
+                        submitCounseling() {
+                            const counselorData = {
+                                {% for counselor in counselors %}
+                                    '{{ counselor.name }}': '{{ counselor.whatsapp_number|default:contact_info.whatsapp_number|default:"2349013708170" }}',
+                                {% endfor %}
+                            };
+                            
+                            const urgencyText = {
+                                'low': 'Low',
+                                'medium': 'Medium', 
+                                'high': 'High',
+                                'urgent': 'Urgent'
+                            };
+                            
+                            const message = `🕊️ *COUNSELING REQUEST - LFC Teens Byazhin* 🕊️
+
+👤 *Name:* ${this.counselingForm.name}
+📞 *Phone:* ${this.counselingForm.phone}
+🙏 *Preferred Counselor:* ${this.counselingForm.counselor}
+⚡ *Urgency Level:* ${urgencyText[this.counselingForm.urgency]}
+
+📋 *Issue Category:*
+• ${this.counselingForm.issue}
+
+💬 *Details:*
+${this.counselingForm.details}
+
+🕯️ *May God's wisdom guide our conversation* 🕯️`;
+
+                            const phoneNumber = counselorData[this.counselingForm.counselor] || '2349013708170';
+                            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                            
+                            this.counselingForm = { name: '', phone: '', counselor: '', issue: '', urgency: 'medium', details: '' };
+                            
+                            alert('Your counseling request has been sent! The counselor will contact you soon. God bless you!');
+                        }
+                    }" @submit.prevent="submitCounseling">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="counseling-name" class="block text-gray-700 mb-2">Your Name</label>
+                                <input type="text" id="counseling-name" x-model="counselingForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                            </div>
+                            <div>
+                                <label for="counseling-phone" class="block text-gray-700 mb-2">Your Phone Number</label>
+                                <input type="tel" id="counseling-phone" x-model="counselingForm.phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="counselor" class="block text-gray-700 mb-2">Preferred Counselor</label>
+                                <select id="counselor" x-model="counselingForm.counselor" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                    <option value="">Select a Counselor</option>
+                                    {% for counselor in counselors %}
+                                    <option value="{{ counselor.name }}">{{ counselor.name }} - {{ counselor.position }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <label for="urgency" class="block text-gray-700 mb-2">Urgency Level</label>
+                                <select id="urgency" x-model="counselingForm.urgency" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                                    <option value="low">Low - General guidance</option>
+                                    <option value="medium">Medium - Need support soon</option>
+                                    <option value="high">High - Need timely support</option>
+                                    <option value="urgent">Urgent - Need immediate attention</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="issue" class="block text-gray-700 mb-2">What would you like to discuss?</label>
+                            <select id="issue" x-model="counselingForm.issue" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                <option value="">Select an issue category</option>
+                                <option value="Spiritual Growth & Questions">Spiritual Growth & Questions</option>
+                                <option value="Relationships & Family">Relationships & Family</option>
+                                <option value="Emotional Challenges">Emotional Challenges</option>
+                                <option value="Life Decisions & Direction">Life Decisions & Direction</option>
+                                <option value="Addiction & Recovery">Addiction & Recovery</option>
+                                <option value="Grief & Loss">Grief & Loss</option>
+                                <option value="Marriage & Dating">Marriage & Dating</option>
+                                <option value="Other Personal Challenge">Other Personal Challenge</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="counseling-details" class="block text-gray-700 mb-2">Please share more details</label>
+                            <textarea id="counseling-details" x-model="counselingForm.details" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share what you're comfortable sharing about your situation..." required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Request Counseling</button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-8 p-4 bg-red-50 rounded-lg border border-red-200">
+                        <h3 class="heading-font text-lg font-bold text-red-900 mb-2">Confidentiality Notice</h3>
+                        <p class="text-gray-600 text-sm">All counseling conversations are kept strictly confidential. Our counselors provide biblically-based guidance and prayer support. In cases requiring professional help, we may refer you to appropriate Christian professionals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Join a Unit Page -->
+    <section id="join-unit-page" class="py-8">
+        <!-- Join a Unit Hero Section -->
+        <section class="py-20 join-unit-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Join a Ministry Unit</h1>
+                <p class="text-xl max-w-2xl mx-auto">Serve and grow with others in our church community. Find your place in God's work.</p>
+            </div>
+        </section>
+
+        <!-- Ministry Units Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Ministry Units</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Discover where your gifts and passions can be used to serve God and others.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    {% if unit %}
+                    {% for item in unit %}
+                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                            <img src="{{item.image.url}}" class="w-full h-56 object-fill" alt="{{item.name}}">
+                            <div class="p-6">
+                                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
+                                <p class="text-gray-600 mb-4">{{item.duty}}</p>
+                                <p class="text-gray-700">{{item.description}}</p>
+                                <div class="mt-4">
+                                    <span class="text-red-700 font-medium">Leader: {{item.leader}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Unit Form -->
+        <section class="py-16 bg-red-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Join a Ministry Unit</h2>
+                    
+                    <form x-data="{
+                        unitForm: { name: '', phone: '', unit: '', experience: '', message: '' },
+                        submitUnitForm() {
+                            const unitLeaders = {
+                                {% for unit_item in unit %}
+                                    '{{ unit_item.name }}': '{{ unit_item.leader_whatsapp|default:contact_info.whatsapp_number|default:"2349013708170" }}',
+                                {% endfor %}
+                            };
+                            
+                            const message = `🎯 *MINISTRY UNIT APPLICATION - LFC Teens Byazhin* 🎯
+
+👤 *Name:* ${this.unitForm.name}
+📞 *Phone:* ${this.unitForm.phone}
+🏛️ *Desired Unit:* ${this.unitForm.unit}
+
+💪 *Experience & Skills:*
+• ${this.unitForm.experience}
+
+❤️ *Why Interested:*
+• ${this.unitForm.message}
+
+🙏 *May God Guide This Decision* 🙏`;
+
+                            const phoneNumber = unitLeaders[this.unitForm.unit] || '2349013708170';
+                            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                            
+                            this.unitForm = { name: '', phone: '', unit: '', experience: '', message: '' };
+                            
+                            alert('Thank you for your interest in serving! The unit leader will contact you soon. God bless your willing heart!');
+                        }
+                    }" @submit.prevent="submitUnitForm">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="name" x-model="unitForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="phone" class="block text-gray-700 mb-2">Your Phone Number</label>
+                            <input type="tel" id="phone" x-model="unitForm.phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="unit" class="block text-gray-700 mb-2">Ministry Unit</label>
+                            <select id="unit" x-model="unitForm.unit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                <option value="">Select a Unit</option>
+                                {% for unit_item in unit %}
+                                <option value="{{ unit_item.name }}">{{ unit_item.name }} - Led by {{ unit_item.leader }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="experience" class="block text-gray-700 mb-2">Relevant Experience/Skills</label>
+                            <textarea id="experience" x-model="unitForm.experience" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share any talents, skills, or experience God has given you..."></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 mb-2">Why are you interested in this unit?</label>
+                            <textarea id="message" x-model="unitForm.message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share how God is leading you to serve in this area..." required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Submit Application</button>
+                        </div>
+                    </form>
+                    
+                    <p class="text-gray-600 text-sm mt-6 text-center">
+                        After submitting, the unit leader will contact you to discuss next steps and how you can get involved in God's work.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Us Page -->
+    <section id="about-us-page" class="py-8">
+        <!-- About Us Hero Section -->
+        <section class="py-20 about-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">About LFC Teens Byazhin</h1>
+                <p class="text-xl max-w-2xl mx-auto">A community growing in faith, hope, and love through Jesus Christ.</p>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-6 text-center">Our Story</h2>
+                    <div class="prose prose-lg max-w-none text-gray-700">
+                        <p class="mb-4">LFC Teens Byazhin is a sector of winners chapel which is dedicated to bringing Gods word to teenagers and preparing them for the future before time, Shearing the Good news of Christ to the world.</p>
+                        <p class="mb-4">What began as a small sunday school class has now grown into a vibrant community of teenagers dedicated to serving God and and the interest of His Kingdom. We've had diverse testimonies by the power of Christ.</p>
+                        <p class="mb-4">Our mission is to promote God's word among youths and teenagers and the world at large. We are aimed at raising teenagers in the fear of the Lord who love God passionately and serve others selflessly. </p>
+                        <p>We believe in the authority of Scripture, the power of prayer, and the importance of Divine Guidiance in the Christian walk.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Beliefs Section -->
+        <section class="py-16 bg-red-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Beliefs</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">The foundational truths that guide our church and ministries.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% if belief %}
+                    {% for item in belief %}
+                        <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
+                            {% if item.image %}
+                            <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white mb-4">
+                                <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="{{item.name}}">
+                            </div>
+                            {% else %}
+                            <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
+                                <i class="fas fa-cross"></i>
+                            </div>
+                            {% endif %}
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
+                            <p class="text-gray-700">{{item.detail}}</p>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Times Section -->
+        <section id="contact-us" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto bg-red-50 rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Service Times & Location</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Join Us for Worship</h3>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Sunday Service</span>
+                                    <span>7:00 AM, <br> 9:00 AM, <br> 11:00 AM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Mid-week service</span>
+                                    <span>Wed 5:00 PM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">House Fellowship</span>
+                                    <span>Sat 5:00 PM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Convernant Hour</span>
+                                    <span>6:00 AM - Daily</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Location</h3>
+                            <div class="text-gray-700 mb-4">
+                                <p class="flex items-start mb-2">
+                                    <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-700"></i>
+                                    <span>Behind Police Station, Byazhin, Abuja, Nigeria</span>
+                                </p>
+                                <p class="flex items-start mb-2">
+                                    <i class="fas fa-phone mt-1 mr-3 text-red-700"></i>
+                                    <span>+234 9013-708-170</span>
+                                </p>
+                                <p class="flex items-start">
+                                    <i class="fas fa-envelope mt-1 mr-3 text-red-700"></i>
+                                    <span>lfcteens@gmail.com</span>
+                                </p>
+                            </div>
+                            <a href="https://wa.me/9013708170?text=Hello%20LFC%20Teens%20Byazhin%2C%20I%20would%20like%20to%20get%20help%20about%20your%20direction" target="_blank" class="inline-block bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-800 transition-colors">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center overflow-hidden text-white font-bold text-lg">
+                            <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
+                        </div>
+                        <span class="ml-3 heading-font text-xl font-semibold">LFC Teens Byazhin</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">A community of teenagers growing in faith, hope, and love through Jesus Christ.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="heading-font text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about-us-page" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#testimonies-page" class="text-gray-400 hover:text-white transition-colors">Testimonies</a></li>
+                        <li><a href="#counseling-page" class="text-gray-400 hover:text-white transition-colors">Counseling</a></li>
+                        <li><a href="#join-unit-page" class="text-gray-400 hover:text-white transition-colors">Join a Unit</a></li>
+                        <li><a href="#contact-us" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#announcement-page" class="text-gray-400 hover:text-white transition-colors">Announcements</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="heading-font text-lg font-bold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-500"></i>
+                            <span>Behind Police Station, Byazhin, Abuja, Nigeria.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-3 text-red-500"></i>
+                            <span>+234 9013-708-170</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-red-500"></i>
+                            <span>lfcteens@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="heading-font text-lg font-bold mb-4">Service Times</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex justify-between">
+                            <span>Sunday Worship</span>
+                            <span>7:00 AM, 9:00 AM, 11:00 AM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Mid-week service</span>
+                            <span>Wed 5:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>House Fellowship</span>
+                            <span>Sat 5:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Convernant Hour</span>
+                            <span>6: 00 AM - daily</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LFC Teens Byazhin. All Rights Reserved.</p>
+                <div class="text-gray-500 text-sm flex items-center">
+                    <span>Created with prayer by </span>
+                    <a href="#" class="text-red-400 hover:text-red-300 ml-1 transition-colors">Profirm Web Services</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Audio Element -->
-    <audio id="christmasAudio" loop>
-        <source src="{% static 'audio/jingle-bells.mp3' %}" type="audio/mpeg">
-        <source src="{% static 'audio/christmas-music.mp3' %}" type="audio/mpeg">
+    <audio id="sermonAudio" loop>
+        <source src="{% static 'audio/bg_music (1).mp3' %}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Create snowflakes
-        function createSnowflakes() {
-            const snowContainer = document.createElement('div');
-            snowContainer.id = 'snowflakes';
-            document.body.appendChild(snowContainer);
-            
-            for (let i = 0; i < 20; i++) { // Reduced quantity
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.style.left = Math.random() * 100 + 'vw';
-                snowflake.style.width = Math.random() * 4 + 1 + 'px';
-                snowflake.style.height = snowflake.style.width;
-                snowflake.style.opacity = Math.random() * 0.5 + 0.3;
-                snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-                snowflake.style.animationDelay = Math.random() * 5 + 's';
-                snowflake.style.animationName = 'fall';
-                snowflake.style.animationTimingFunction = 'linear';
-                snowflake.style.animationIterationCount = 'infinite';
-                
-                // Add fall animation
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes fall {
-                        to {
-                            transform: translateY(100vh) rotate(${Math.random() * 360}deg);
-                        }
-                    }
-                `;
-                document.head.appendChild(style);
-                
-                snowContainer.appendChild(snowflake);
-            }
-        }
-
         // Hero Slider Functionality
         function heroSlider() {
             return {
@@ -981,28 +1474,6 @@
                             link: '{{slide.btn_link}}' 
                         },
                         {% endfor %}
-                    {% else %}
-                        { 
-                            bg: 'bg-gradient-to-r from-christmas-green to-christmas-red', 
-                            title: 'Christmas Party 2024', 
-                            subtitle: 'A Celebration of Joy, Love, and Giving', 
-                            buttonText: 'Explore Program',
-                            link: '#program'
-                        },
-                        { 
-                            bg: 'bg-gradient-to-r from-christmas-red to-christmas-gold', 
-                            title: 'Festive Fun Awaits', 
-                            subtitle: 'Join us for an unforgettable Christmas experience', 
-                            buttonText: 'View Gallery',
-                            link: '#gallery'
-                        },
-                        { 
-                            bg: 'bg-gradient-to-r from-christmas-gold to-christmas-green', 
-                            title: 'Spread Christmas Cheer', 
-                            subtitle: 'Music, Food, Gifts and Great Company', 
-                            buttonText: 'Get Tickets',
-                            link: '#tickets-section'
-                        }
                     {% endif %}
                 ],
                 nextSlide() {
@@ -1038,88 +1509,67 @@
             }
         }
 
-        // Random popup ads
-        function showRandomPopupAd() {
-            const popups = ['ticket', 'shiloh'];
-            const randomPopup = popups[Math.floor(Math.random() * popups.length)];
+        // Active section tracking
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
             
-            // Show popup every 45-90 seconds
-            const randomTime = Math.random() * 45000 + 45000;
+            let currentSection = 'home';
             
-            setTimeout(() => {
-                if (randomPopup === 'ticket') {
-                    Alpine.store('showTicketPopup', true);
-                } else {
-                    Alpine.store('showShilohPopup', true);
-                }
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
                 
-                // Schedule next popup
-                showRandomPopupAd();
-            }, randomTime);
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    currentSection = sectionId;
+                }
+            });
+            
+            Alpine.store('activeSection', currentSection);
         }
 
-        // Initialize everything
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            // Create snowflakes
-            createSnowflakes();
-            
             // Audio Controls
-            const audio = document.getElementById('christmasAudio');
+            const audio = document.getElementById('sermonAudio');
             const playPauseBtn = document.getElementById('playPause');
+            const muteBtn = document.getElementById('muteBtn');
             
-            // Set volume lower for background music
-            audio.volume = 0.3;
-            
-            // Auto-play background music with user interaction
-            let audioStarted = false;
-            const startAudio = () => {
-                if (!audioStarted) {
+            // Auto-play with user interaction
+            document.body.addEventListener('click', function() {
+                if (audio.paused) {
                     audio.play().catch(e => console.log('Auto-play prevented:', e));
-                    audioStarted = true;
-                    playPauseBtn.innerHTML = '<i class="fas fa-bell-slash"></i>';
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 }
-            };
-            
-            // Start audio on first click
-            document.addEventListener('click', startAudio, { once: true });
+            }, { once: true });
             
             playPauseBtn.addEventListener('click', function() {
                 if (audio.paused) {
                     audio.play();
-                    playPauseBtn.innerHTML = '<i class="fas fa-bell-slash"></i>';
-                    playPauseBtn.style.animation = 'ringBell 2s ease-in-out infinite';
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 } else {
                     audio.pause();
-                    playPauseBtn.innerHTML = '<i class="fas fa-bell"></i>';
-                    playPauseBtn.style.animation = 'none';
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
                 }
             });
             
-            // Start random popup ads
-            setTimeout(() => {
-                showRandomPopupAd();
-            }, 10000); // Start after 10 seconds
+            muteBtn.addEventListener('click', function() {
+                if (audio.muted) {
+                    audio.muted = false;
+                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                } else {
+                    audio.muted = true;
+                    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                }
+            });
             
+            // Update button when audio ends
+            audio.addEventListener('ended', function() {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            });
+
             // Active section tracking
-            function updateActiveSection() {
-                const sections = document.querySelectorAll('section[id]');
-                const navLinks = document.querySelectorAll('nav a[href^="#"]');
-                
-                let currentSection = 'home';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 100;
-                    const sectionHeight = section.clientHeight;
-                    const sectionId = section.getAttribute('id');
-                    
-                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                        currentSection = sectionId;
-                    }
-                });
-                
-                Alpine.store('activeSection', currentSection);
-            }
-            
             window.addEventListener('scroll', updateActiveSection);
             updateActiveSection(); // Initial call
         });
@@ -1127,114 +1577,117 @@
         // Alpine store for active section
         document.addEventListener('alpine:init', () => {
             Alpine.store('activeSection', 'home');
-            Alpine.store('showTicketPopup', false);
-            Alpine.store('showShilohPopup', false);
-            Alpine.store('showRandomPopup', false);
         });
     </script>
 
-    <!-- Keep your existing HTMX scripts and styles -->
-    <style>
-        .htmx-request {
-            opacity: 0.7;
-        }
-        
-        .htmx-indicator {
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-        
-        .htmx-request .htmx-indicator {
-            opacity: 1;
-        }
-        
-        .htmx-request.htmx-indicator {
-            opacity: 1;
-        }
-        
-        /* Smooth like animation */
-        .like-btn {
-            transition: all 0.3s ease;
-        }
-        
-        .like-btn:hover:not(:disabled) {
-            transform: scale(1.1);
-        }
-        
-        /* Heart beat animation when liked */
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.3); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        
-        .like-btn .fas.fa-heart {
-            animation: heartBeat 0.6s ease;
-        }
-        
-        /* Disabled state */
-        .like-btn:disabled {
-            cursor: default;
-            opacity: 1;
-        }
-    </style>
 
-    <script>
-        // Add some visual feedback for HTMX requests
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add loading states to HTMX buttons
-            document.body.addEventListener('htmx:beforeRequest', function(evt) {
-                const button = evt.target.querySelector('button') || evt.target;
-                if (button) {
-                    button.classList.add('htmx-request');
-                }
-            });
-            
-            document.body.addEventListener('htmx:afterRequest', function(evt) {
-                const button = evt.target.querySelector('button') || evt.target;
-                if (button) {
-                    button.classList.remove('htmx-request');
-                }
-            });
-            
-            // Handle HTMX errors gracefully
-            document.body.addEventListener('htmx:responseError', function(evt) {
-                console.error('HTMX Error:', evt.detail);
-                const target = evt.detail.target;
-                if (target) {
-                    target.innerHTML = '<span class="text-red-500">Error occurred. Please try again.</span>';
-                }
-            });
-        });
+<!-- Add some smooth animations for HTMX -->
+<style>
+    .htmx-request {
+        opacity: 0.7;
+    }
+    
+    .htmx-indicator {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    
+    .htmx-request .htmx-indicator {
+        opacity: 1;
+    }
+    
+    .htmx-request.htmx-indicator {
+        opacity: 1;
+    }
+</style>
 
-        // Simple like functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Handle like form submissions
-            document.body.addEventListener('submit', function(e) {
-                if (e.target.matches('form[hx-post]')) {
-                    e.preventDefault();
-                    
-                    const form = e.target;
-                    const button = form.querySelector('button[type="submit"]');
-                    
-                    if (button) {
-                        // Add loading state
-                        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-                        button.disabled = true;
-                    }
-                }
-            });
-        });
-        
-        // Initialize HTMX with CSRF token
-        document.addEventListener('htmx:configRequest', function(e) {
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
-            if (csrfToken) {
-                e.detail.headers['X-CSRFToken'] = csrfToken.value;
+<script>
+    // Add some visual feedback for HTMX requests
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add loading states to HTMX buttons
+        document.body.addEventListener('htmx:beforeRequest', function(evt) {
+            const button = evt.target.querySelector('button') || evt.target;
+            if (button) {
+                button.classList.add('htmx-request');
             }
         });
-    </script>
+        
+        document.body.addEventListener('htmx:afterRequest', function(evt) {
+            const button = evt.target.querySelector('button') || evt.target;
+            if (button) {
+                button.classList.remove('htmx-request');
+            }
+        });
+        
+        // Handle HTMX errors gracefully
+        document.body.addEventListener('htmx:responseError', function(evt) {
+            console.error('HTMX Error:', evt.detail);
+            const target = evt.detail.target;
+            if (target) {
+                target.innerHTML = '<span class="text-red-500">Error occurred. Please try again.</span>';
+            }
+        });
+    });
+</script>
+
+
+<script>
+    // Simple like functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle like form submissions
+        document.body.addEventListener('submit', function(e) {
+            if (e.target.matches('form[hx-post]')) {
+                e.preventDefault();
+                
+                const form = e.target;
+                const button = form.querySelector('button[type="submit"]');
+                
+                if (button) {
+                    // Add loading state
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    button.disabled = true;
+                }
+            }
+        });
+    });
+    
+    // Initialize HTMX with CSRF token
+    document.addEventListener('htmx:configRequest', function(e) {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+        if (csrfToken) {
+            e.detail.headers['X-CSRFToken'] = csrfToken.value;
+        }
+    });
+</script>
+
+<style>
+    /* Smooth like animation */
+    .like-btn {
+        transition: all 0.3s ease;
+    }
+    
+    .like-btn:hover:not(:disabled) {
+        transform: scale(1.1);
+    }
+    
+    /* Heart beat animation when liked */
+    @keyframes heartBeat {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.3); }
+        50% { transform: scale(1); }
+        75% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    
+    .like-btn .fas.fa-heart {
+        animation: heartBeat 0.6s ease;
+    }
+    
+    /* Disabled state */
+    .like-btn:disabled {
+        cursor: default;
+        opacity: 1;
+    }
+</style>
 </body>
 </html>
