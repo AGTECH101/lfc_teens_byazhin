@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LFC Teens Byazhin | Home</title>
+    <title>Christmas Party 2024 | Celebrate with Joy</title>
     <link rel="icon" href="{% static 'favicon.ico' %}" class="rounded-full">
     <script src="{% static 'tailwind.js' %}"></script>
     <script defer src="{% static 'alpine.js' %}"></script>
@@ -13,54 +13,187 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary-red: #B91C1C;
-            --dark-red: #7F1D1D;
-            --light-red: #FECACA;
-            --off-white: #FEF2F2;
+            --christmas-red: #B91C1C;
+            --christmas-green: #0A5C36;
+            --christmas-gold: #D4AF37;
+            --christmas-silver: #C0C0C0;
+            --snow-white: #FFF9F5;
         }
         
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--off-white);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--snow-white);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 90% 40%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px);
+            background-size: 50px 50px;
         }
         
         .heading-font {
-            font-family: 'Merriweather', serif;
+            font-family: 'Mountains of Christmas', cursive;
         }
         
-        .hero-slide {
-            transition: opacity 1s ease-in-out;
+        .script-font {
+            font-family: 'Dancing Script', cursive;
         }
         
-        .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Snow Animation */
+        .snowflake {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.8;
+            animation: fall linear infinite;
         }
         
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
         }
         
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
+        /* Christmas Lights Animation */
+        .christmas-lights {
+            position: relative;
+            height: 20px;
+            background: transparent;
+            overflow: hidden;
+        }
+        
+        .light {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: twinkle 1.5s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* Gift Box Animation */
+        .gift-box {
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .gift-box:hover {
+            transform: translateY(-10px) rotate(5deg);
+        }
+        
+        /* Bouncing Bell Animation */
+        @keyframes bellRing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            75% { transform: rotate(-15deg); }
+        }
+        
+        .bell-animation {
+            animation: bellRing 2s infinite;
+        }
+        
+        /* Popup Animations */
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
+        .popup-animation {
+            animation: slideInUp 0.5s ease-out;
+        }
+        
+        .popup-overlay {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        /* Confetti Effect */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+        
+        .confetti-animation {
+            animation: confettiFall 3s linear forwards;
+        }
+        
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Ticket Styling */
+        .ticket {
+            background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-gold) 100%);
+            border: 3px dashed var(--christmas-gold);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.3s ease;
+        }
+        
+        .ticket:hover {
+            transform: perspective(1000px) rotateY(0deg) scale(1.05);
+            box-shadow: 0 20px 40px rgba(185, 28, 28, 0.3);
+        }
+        
+        .ticket::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--snow-white);
+            border-radius: 50%;
+        }
+        
+        .ticket::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--snow-white);
+            border-radius: 50%;
+        }
+        
+        /* Loading Screen */
         .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--off-white);
+            background: linear-gradient(135deg, var(--christmas-green) 0%, var(--christmas-red) 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -69,14 +202,37 @@
             transition: opacity 0.5s ease-out;
         }
         
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--light-red);
-            border-top: 5px solid var(--primary-red);
+        .christmas-spinner {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+        
+        .christmas-spinner::before,
+        .christmas-spinner::after {
+            content: '';
+            position: absolute;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            animation: spin 2s linear infinite;
+        }
+        
+        .christmas-spinner::before {
+            width: 100%;
+            height: 100%;
+            border: 5px solid transparent;
+            border-top: 5px solid var(--christmas-red);
+            border-right: 5px solid var(--christmas-red);
+        }
+        
+        .christmas-spinner::after {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border: 5px solid transparent;
+            border-bottom: 5px solid var(--christmas-green);
+            border-left: 5px solid var(--christmas-green);
+            animation-direction: reverse;
         }
         
         @keyframes spin {
@@ -84,183 +240,143 @@
             100% { transform: rotate(360deg); }
         }
         
-        .side-nav {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
+        /* Card Hover Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
         
-        .side-nav.open {
-            transform: translateX(0);
+        .card-hover:hover {
+            transform: translateY(-10px);
+            border-color: var(--christmas-red);
+            box-shadow: 0 20px 40px rgba(185, 28, 28, 0.15);
         }
         
-        .swipe-area {
-            touch-action: pan-y;
+        /* Hero Section Backgrounds */
+        .hero-bg-1 {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'images/christmas-party-1.jpg' %}") center/cover;
         }
         
-        .audio-controls {
-            position: fixed;
-            bottom: 100px;
-            right: 10px;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 50px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
+        .hero-bg-2 {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'images/christmas-party-2.jpg' %}") center/cover;
+        }
+        
+        .hero-bg-3 {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'images/christmas-party-3.jpg' %}") center/cover;
+        }
+        
+        /* Countdown Timer */
+        .countdown-number {
+            background: linear-gradient(135deg, var(--christmas-red), var(--christmas-gold));
             color: white;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
         }
         
-        .whatsapp-float {
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Popup Styles */
+        .popup-ad {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 100;
-            background: #25D366;
-            border-radius: 50px;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: hidden;
+            border: 3px solid var(--christmas-red);
         }
         
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-        
-        .active-nav {
-            color: var(--primary-red);
-            border-bottom: 2px solid var(--primary-red);
-        }
-
-        {% if hero %}
-            {% for slide in hero %}
-                .hero-bg-{{forloop.counter}} {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{{slide.image.url}}") center/cover;
-        }
-        {% empty %}
-
-
-        {% endfor %}
-        {% endif %}
-
-        
-        .bible-img-1 {
-            background: url("{% static 'images/book.jpeg' %}") center/cover;
-        }
-        
-        .bible-img-2 {
-            background: url("{% static 'images/book.jpeg' %}") center/cover;
-        }
-        
-        .bible-img-3 {
-            background: url("{% static 'images/book.jpeg' %}") center/cover;
-        }
-
-        .testimony-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/persons (3).jpg' %}") center/cover;
-        }
-
-        .join-unit-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/hero_img (2).jpg' %}") center/cover;
-        }
-
-        .about-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/hero_img (1).jpg' %}") center/cover;
-        }
-
-        .counseling-bg {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/persons (1).jpg' %}") center/cover;
+        .popup-ad::before {
+            content: '🎄';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
         }
     </style>
 </head>
-<body class="bg-off-white text-gray-900 scroll-smooth" x-data="{ mobileMenuOpen: false, activeSection: 'home' }">
+<body class="bg-snow-white text-gray-900 scroll-smooth" x-data="{ mobileMenuOpen: false, activeSection: 'home', showTicketPopup: false, showShilohPopup: false }" @keydown.escape="showTicketPopup = false; showShilohPopup = false">
+    <!-- Snowflakes -->
+    <div id="snowflakes"></div>
+    
+    <!-- Christmas Lights Header -->
+    <div class="christmas-lights"></div>
+
     <!-- Loading Screen -->
-    <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 2000)" x-show="loading" class="loading-screen" x-cloak>
-        <div class="spinner"></div>
-        <h2 class="heading-font text-2xl text-red-900">LFC Teens Byazhin</h2>
-        <p class="mt-2 text-gray-700">Loading God's blessings...</p>
+    <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 2500)" x-show="loading" class="loading-screen" x-cloak>
+        <div class="christmas-spinner"></div>
+        <h2 class="heading-font text-4xl text-white mt-8">Christmas Party 2024</h2>
+        <p class="mt-4 text-white/80 script-font text-xl">Loading festive cheer...</p>
+        <div class="mt-6 flex space-x-4">
+            <div class="w-3 h-3 bg-red-500 rounded-full animate-bounce"></div>
+            <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            <div class="w-3 h-3 bg-gold-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+        </div>
     </div>
 
     <!-- Audio Controls -->
-    <div class="audio-controls">
-        <button id="playPause" class="w-8 h-8 flex items-center justify-center text-white">
-            <i class="fas fa-play"></i>
-        </button>
-        <button id="muteBtn" class="w-8 h-8 flex items-center justify-center text-white ml-2">
-            <i class="fas fa-volume-up"></i>
-        </button>
+    <div class="fixed bottom-100px right-10px z-100">
+        <div class="bg-gradient-to-r from-christmas-red to-christmas-gold rounded-full p-3 shadow-lg">
+            <button id="playPause" class="w-10 h-10 flex items-center justify-center text-white bell-animation">
+                <i class="fas fa-bell text-xl"></i>
+            </button>
+        </div>
     </div>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/2349013708170?text=Hello%20LFC%20Teens%20Byazhin%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
     <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="bg-gradient-to-r from-christmas-green to-christmas-red shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 bg-red-800 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-lg">
+                        <i class="fas fa-tree text-2xl text-christmas-green"></i>
                     </div>
-                    <span class="ml-3 heading-font text-xl font-semibold text-red-900">LFC Teens Byazhin</span>
+                    <span class="ml-3 heading-font text-2xl font-bold text-white">Christmas Party 2024</span>
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
-                    <a href="#" class="font-medium pb-1 transition-colors" :class="activeSection === 'home' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Home</a>
-                    <a href="#about-us-page" class="transition-colors pb-1" :class="activeSection === 'about' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">About Us</a>
-                    <a href="#testimonies-page" class="transition-colors pb-1" :class="activeSection === 'testimonies' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Testimonies</a>
-                    <a href="#announcement-page" class="transition-colors pb-1" :class="activeSection === 'announcements' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Announcements</a>
-                    <a href="#counseling-page" class="transition-colors pb-1" :class="activeSection === 'counseling' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Counseling</a>
-                    <a href="#join-unit-page" class="transition-colors pb-1" :class="activeSection === 'units' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Join a Unit</a>
-                    <a href="#contact-us" class="transition-colors pb-1" :class="activeSection === 'contact' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Contact Us</a>
+                    <a href="#" class="font-medium pb-1 transition-colors flex items-center" :class="activeSection === 'home' ? 'text-christmas-gold border-b-2 border-christmas-gold' : 'text-white/90 hover:text-christmas-gold'">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="#about" class="font-medium pb-1 transition-colors flex items-center" :class="activeSection === 'about' ? 'text-christmas-gold border-b-2 border-christmas-gold' : 'text-white/90 hover:text-christmas-gold'">
+                        <i class="fas fa-info-circle mr-2"></i>About
+                    </a>
+                    <a href="#tickets" class="font-medium pb-1 transition-colors flex items-center" :class="activeSection === 'tickets' ? 'text-christmas-gold border-b-2 border-christmas-gold' : 'text-white/90 hover:text-christmas-gold'">
+                        <i class="fas fa-ticket-alt mr-2"></i>Tickets
+                    </a>
+                    <a href="#program" class="font-medium pb-1 transition-colors flex items-center" :class="activeSection === 'program' ? 'text-christmas-gold border-b-2 border-christmas-gold' : 'text-white/90 hover:text-christmas-gold'">
+                        <i class="fas fa-calendar-alt mr-2"></i>Program
+                    </a>
+                    <a href="#contact" class="font-medium pb-1 transition-colors flex items-center" :class="activeSection === 'contact' ? 'text-christmas-gold border-b-2 border-christmas-gold' : 'text-white/90 hover:text-christmas-gold'">
+                        <i class="fas fa-phone mr-2"></i>Contact
+                    </a>
+                    <button @click="showTicketPopup = true" class="bg-christmas-gold text-christmas-green px-6 py-2 rounded-full font-bold hover:scale-105 transition-transform shadow-lg">
+                        <i class="fas fa-gift mr-2"></i>Get Ticket
+                    </button>
                 </div>
                 
-                <div class="md:hidden ">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-600 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
+                <div class="md:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Mobile Side Navigation -->
-    <div x-show="mobileMenuOpen" class="fixed inset-0 z-50 md:hidden" x-cloak>
-        <div class="absolute inset-0 bg-black bg-opacity-50" @click="mobileMenuOpen = false"></div>
-        <div class="side-nav absolute top-0 left-0 w-64 h-full bg-white shadow-lg" :class="{ 'open': mobileMenuOpen }">
-            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="w-8 h-8 bg-red-800 rounded-full flex items-center justify-center text-white font-bold">
-                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill alt="lfc-logo">
-                    </div>
-                    <span class="ml-2 heading-font font-semibold text-red-900">LFC Teens</span>
-                </div>
-                <button @click="mobileMenuOpen = false" class="text-gray-500">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="py-4">
-                <a href="#" class="block py-3 px-6 font-medium transition-colors" :class="activeSection === 'home' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Home</a>
-                <a href="#about-us-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'about' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">About Us</a>
-                <a href="#testimonies-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'testimonies' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Testimonies</a>
-                <a href="#announcement-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'announcements' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Announcements</a>
-                <a href="#counseling-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'counseling' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Counseling</a>
-                <a href="#join-unit-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'units' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Join a Unit</a>
-                <a href="#contact-us" class="block py-3 px-6 transition-colors" :class="activeSection === 'contact' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Contact Us</a>
-            </div>
-        </div>
-    </div>
-
     <!-- Hero Section -->
     <section class="relative h-screen overflow-hidden">
-        <div x-data="heroSlider()" class="h-full swipe-area" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
+        <div x-data="heroSlider()" class="h-full">
             <!-- Slides -->
             <template x-for="(slide, index) in slides" :key="index">
                 <div x-show="currentSlide === index" x-transition:enter="transition ease-out duration-1000" 
@@ -268,686 +384,295 @@
                      x-transition:leave="transition ease-in duration-1000" 
                      x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
                      class="absolute inset-0 flex items-center justify-center text-white" :class="slide.bg">
-                    <div class="text-center px-4 max-w-3xl fade-in">
-                        <h1 class="heading-font text-4xl md:text-6xl font-bold mb-4" x-text="slide.title"></h1>
-                        <p class="text-xl md:text-2xl mb-8" x-text="slide.subtitle"></p>
-                        <a :href="slide.link" class="inline-block bg-white text-red-700 px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-gray-100 transition-colors" x-text="slide.buttonText"></a>
+                    <div class="text-center px-4 max-w-4xl">
+                        <div class="mb-6">
+                            <i class="fas fa-star text-christmas-gold text-4xl animate-spin" style="animation-duration: 3s"></i>
+                            <i class="fas fa-star text-christmas-silver text-4xl mx-4 animate-pulse"></i>
+                            <i class="fas fa-star text-christmas-gold text-4xl animate-spin" style="animation-duration: 3s"></i>
+                        </div>
+                        <h1 class="heading-font text-5xl md:text-7xl font-bold mb-6" x-text="slide.title"></h1>
+                        <p class="text-2xl md:text-3xl mb-8 script-font" x-text="slide.subtitle"></p>
+                        <div class="flex flex-col md:flex-row gap-4 justify-center">
+                            <a :href="slide.link" class="inline-block bg-christmas-gold text-christmas-green px-10 py-4 rounded-full font-bold text-xl shadow-lg hover:scale-105 transition-transform transform" x-text="slide.buttonText"></a>
+                            <button @click="showTicketPopup = true" class="inline-block bg-white text-christmas-red px-10 py-4 rounded-full font-bold text-xl shadow-lg hover:scale-105 transition-transform transform">
+                                <i class="fas fa-gift mr-2"></i>Buy Ticket ₦4,000
+                            </button>
+                        </div>
                     </div>
                 </div>
             </template>
             
-            <!-- Slide Indicators -->
-            <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
-                <template x-for="(slide, index) in slides" :key="index">
-                    <button @click="currentSlide = index" class="w-3 h-3 rounded-full transition-colors" 
-                            :class="currentSlide === index ? 'bg-white' : 'bg-white/50'"></button>
-                </template>
+            <!-- Countdown Timer -->
+            <div class="absolute bottom-20 left-0 right-0">
+                <div class="container mx-auto px-4">
+                    <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-6 max-w-2xl mx-auto">
+                        <h3 class="text-white text-2xl mb-4 text-center heading-font">Party Starts In</h3>
+                        <div class="grid grid-cols-4 gap-4">
+                            <div class="text-center">
+                                <div class="countdown-number" x-data="{ days: 0 }" x-init="
+                                    setInterval(() => {
+                                        const targetDate = new Date('Dec 25, 2024 18:00:00').getTime();
+                                        const now = new Date().getTime();
+                                        const distance = targetDate - now;
+                                        $el.textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                    }, 1000)">
+                                    0
+                                </div>
+                                <p class="text-white mt-2">Days</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="countdown-number" x-data="{ hours: 0 }" x-init="
+                                    setInterval(() => {
+                                        const targetDate = new Date('Dec 25, 2024 18:00:00').getTime();
+                                        const now = new Date().getTime();
+                                        const distance = targetDate - now;
+                                        $el.textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                    }, 1000)">
+                                    0
+                                </div>
+                                <p class="text-white mt-2">Hours</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="countdown-number" x-data="{ minutes: 0 }" x-init="
+                                    setInterval(() => {
+                                        const targetDate = new Date('Dec 25, 2024 18:00:00').getTime();
+                                        const now = new Date().getTime();
+                                        const distance = targetDate - now;
+                                        $el.textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                    }, 1000)">
+                                    0
+                                </div>
+                                <p class="text-white mt-2">Minutes</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="countdown-number" x-data="{ seconds: 0 }" x-init="
+                                    setInterval(() => {
+                                        const targetDate = new Date('Dec 25, 2024 18:00:00').getTime();
+                                        const now = new Date().getTime();
+                                        const distance = targetDate - now;
+                                        $el.textContent = Math.floor((distance % (1000 * 60)) / 1000);
+                                    }, 1000)">
+                                    0
+                                </div>
+                                <p class="text-white mt-2">Seconds</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Navigation Arrows -->
-            <button @click="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button @click="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center">
-                <i class="fas fa-chevron-right"></i>
-            </button>
         </div>
     </section>
 
-    <!-- Pastors/Workers Section -->
-    <section class="py-16 bg-white">
+    <!-- Ticket Section -->
+    <section id="tickets" class="py-20 bg-gradient-to-b from-snow-white to-red-50">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Spiritual Leaders</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Meet the dedicated servants of God who guide our congregation with wisdom and compassion.</p>
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-4xl md:text-5xl font-bold text-christmas-red mb-4">Get Your Christmas Ticket</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Join us for an unforgettable Christmas celebration!</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% if leaders %}
-                    {% for leader in leaders %}
-                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
-                            <div class="h-64">
-                                <img src="{{leader.image.url}}" class="object-fill w-full h-full" alt="{{leader.name}}">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{leader.name}}</h3>
-                                <p class="text-gray-600 mb-4">{{leader.position}}</p>
-                                <p class="text-gray-700">{{leader.description}}</p>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <h2 class="text-2xl text-red-500">No leaders Available in the database</h2>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Bible Blog Section -->
-<!-- Bible Blog Section - Simple Like System -->
-<section id="bible-blog-page" class="py-16 bg-red-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Daily Bread</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Nourish your soul with these selected scriptures and reflections.</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% if bible_post %}
-                {% for post in bible_post %}
-                <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200 relative">
-                    <div class="h-48 overflow-hidden">
-                        <img src="{{post.image.url}}" class="object-cover w-full h-full object-center" alt="Bible post image">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="heading-font text-xl font-bold text-red-900 mb-4">{{post.scriptures}}</h3>
-                        <p class="text-gray-700 mb-16">{{post.message}}</p>
-
-                        <div class="flex justify-between absolute bottom-4 w-[88%] items-center mt-4 pt-2 border-t-2 border-gray-300">
-                            <!-- Simple Like System -->
-                            <div id="like-section-{{post.id}}">
-                                <form hx-post="{% url 'add_like' %}" 
-                                      hx-target="#like-section-{{post.id}}"
-                                      hx-swap="innerHTML"
-                                      class="m-0">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="post_id" value="{{post.id}}">
-                                    <button type="submit" class="like-btn text-gray-400 hover:text-green-700 transition-colors flex items-center space-x-1">
-                                        <i class="far fa-heart"></i>
-                                        <span>{{post.reviews}}</span>
-                                    </button>
-                                </form>
-                            </div>
-
-                            <!-- Timestamp -->
-                            <div class="text-gray-500 text-sm">
-                                <i class="far fa-clock"></i>
-                                <span>{{post.created_at|date:'M d, Y'}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% empty %}
-                    <h2 class="text-2xl text-red-500">No Posts Available in the database</h2>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-</section>
-
-    <!-- Important Announcements Section -->
-    <section id="announcement-page" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Church Announcements</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Stay informed about upcoming events, prayer needs, and important updates.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {% if announcement %}
-                    {% for item in announcement %}
-                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
-                            <div class="p-6 border-l-4 border-red-600">
-                                <div class="flex items-center mb-4">
-                                    {% if item.image %}
-                                    <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white">
-                                        <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="Announcement image">
-                                    </div>
-                                    {% else %}
-                                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-700">
-                                        <i class="fas fa-bullhorn"></i>
-                                    </div>
-                                    {% endif %}
-                                    <div class="ml-4">
-                                        <h3 class="heading-font text-xl font-bold text-red-900">{{item.topic}}</h3>
-                                        <p class="text-gray-600">{{item.date|date:'M d, Y'}}</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700">{{item.announcement}}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonies Page -->
-    <section id="testimonies-page" class="py-8">
-        <!-- Testimonies Hero Section -->
-        <section class="py-20 testimony-bg text-white">
-            <div class="container mx-auto px-4 text-center">
-                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Share Your Testimony</h1>
-                <p class="text-xl max-w-2xl mx-auto">Your story of God's faithfulness can inspire and encourage others in their walk with Christ.</p>
-            </div>
-        </section>
-
-        <!-- Testimonies Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Testimonies of Faith</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Hear how God is working in the lives of our congregation members.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                    {% if testimony %}
-                        {% for item in testimony %}
-                            <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
-                                <div class="flex items-center mb-4">
-                                    {% if item.image %}
-                                    <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white">
-                                        <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="{{item.testifier}}">
-                                    </div>
-                                    {% else %}
-                                    <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center text-white">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    {% endif %}
-                                    <div class="ml-4">
-                                        <h3 class="heading-font font-bold text-red-900">{{item.topic}}</h3>
-                                        <p class="text-gray-600 text-sm">{{item.date|date:'M d, Y'}}</p>
-                                    </div>
-                                </div>
-                                <p class="text-gray-700 italic">"{{item.testimony}}"</p>
-                                <p class="mt-4 text-red-700 font-medium">Testifier - <span class="text-green-500">{{item.testifier}}</span></p>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimony Submission Form -->
-        <section class="py-16 bg-red-50">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
-                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Share Your Story</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="ticket relative bg-white rounded-2xl overflow-hidden shadow-2xl p-8">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-christmas-green via-christmas-gold to-christmas-red"></div>
                     
-                    <form x-data="{
-                        testimonyForm: { name: '', title: '', testimony: '' },
-                        submitTestimony() {
-                            const message = `🙏 *TESTIMONY SUBMISSION - LFC Teens Byazhin* 🙏
-
-👤 *Name:* ${this.testimonyForm.name}
-📝 *Title:* ${this.testimonyForm.title}
-
-✨ *Testimony:*
-${this.testimonyForm.testimony}
-
-🕊️ *To God Be All The Glory!* 🕊️`;
-
-                            const whatsappNumber = '{{ contact_info.whatsapp_number|default:"2349013708170" }}';
-                            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
-                            
-                            this.testimonyForm = { name: '', title: '', testimony: '' };
-                            
-                            alert('Thank you for sharing your testimony! We will review it and may contact you for more details. God bless you!');
-                        }
-                    }" @submit.prevent="submitTestimony">
-                        <div class="mb-6">
-                            <label for="name" class="block text-gray-700 mb-2">Your Name</label>
-                            <input type="text" id="name" x-model="testimonyForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="title" class="block text-gray-700 mb-2">Testimony Title</label>
-                            <input type="text" id="title" x-model="testimonyForm.title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="testimony" class="block text-gray-700 mb-2">Your Testimony</label>
-                            <textarea id="testimony" x-model="testimonyForm.testimony" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share how God has worked in your life..." required></textarea>
-                        </div>
-                        
-                        <div class="text-center">
-                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Submit Testimony</button>
-                        </div>
-                    </form>
-                    
-                    <p class="text-gray-600 text-sm mt-6 text-center">
-                        By submitting your testimony, you agree that it may be shared on our website and social media to encourage others. We may contact you for more details.
-                    </p>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <!-- Counseling Section -->
-    <section id="counseling-page" class="py-8">
-        <!-- Counseling Hero Section -->
-        <section class="py-20 counseling-bg text-white">
-            <div class="container mx-auto px-4 text-center">
-                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Spiritual Counseling</h1>
-                <p class="text-xl max-w-2xl mx-auto">Find guidance, support, and prayer for life's challenges through our caring counselors.</p>
-            </div>
-        </section>
-
-        <!-- Counseling Form Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
-                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Request Counseling</h2>
-                    <p class="text-gray-600 text-center mb-8">Our trained counselors are here to provide biblical guidance and prayer support for whatever you're facing.</p>
-                    
-                    <form x-data="{
-                        counselingForm: { name: '', phone: '', counselor: '', issue: '', urgency: 'medium', details: '' },
-                        submitCounseling() {
-                            const counselorData = {
-                                {% for counselor in counselors %}
-                                    '{{ counselor.name }}': '{{ counselor.whatsapp_number|default:contact_info.whatsapp_number|default:"2349013708170" }}',
-                                {% endfor %}
-                            };
-                            
-                            const urgencyText = {
-                                'low': 'Low',
-                                'medium': 'Medium', 
-                                'high': 'High',
-                                'urgent': 'Urgent'
-                            };
-                            
-                            const message = `🕊️ *COUNSELING REQUEST - LFC Teens Byazhin* 🕊️
-
-👤 *Name:* ${this.counselingForm.name}
-📞 *Phone:* ${this.counselingForm.phone}
-🙏 *Preferred Counselor:* ${this.counselingForm.counselor}
-⚡ *Urgency Level:* ${urgencyText[this.counselingForm.urgency]}
-
-📋 *Issue Category:*
-• ${this.counselingForm.issue}
-
-💬 *Details:*
-${this.counselingForm.details}
-
-🕯️ *May God's wisdom guide our conversation* 🕯️`;
-
-                            const phoneNumber = counselorData[this.counselingForm.counselor] || '2349013708170';
-                            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-                            
-                            this.counselingForm = { name: '', phone: '', counselor: '', issue: '', urgency: 'medium', details: '' };
-                            
-                            alert('Your counseling request has been sent! The counselor will contact you soon. God bless you!');
-                        }
-                    }" @submit.prevent="submitCounseling">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label for="counseling-name" class="block text-gray-700 mb-2">Your Name</label>
-                                <input type="text" id="counseling-name" x-model="counselingForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                            </div>
-                            <div>
-                                <label for="counseling-phone" class="block text-gray-700 mb-2">Your Phone Number</label>
-                                <input type="tel" id="counseling-phone" x-model="counselingForm.phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label for="counselor" class="block text-gray-700 mb-2">Preferred Counselor</label>
-                                <select id="counselor" x-model="counselingForm.counselor" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                                    <option value="">Select a Counselor</option>
-                                    {% for counselor in counselors %}
-                                    <option value="{{ counselor.name }}">{{ counselor.name }} - {{ counselor.position }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div>
-                                <label for="urgency" class="block text-gray-700 mb-2">Urgency Level</label>
-                                <select id="urgency" x-model="counselingForm.urgency" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
-                                    <option value="low">Low - General guidance</option>
-                                    <option value="medium">Medium - Need support soon</option>
-                                    <option value="high">High - Need timely support</option>
-                                    <option value="urgent">Urgent - Need immediate attention</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="issue" class="block text-gray-700 mb-2">What would you like to discuss?</label>
-                            <select id="issue" x-model="counselingForm.issue" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                                <option value="">Select an issue category</option>
-                                <option value="Spiritual Growth & Questions">Spiritual Growth & Questions</option>
-                                <option value="Relationships & Family">Relationships & Family</option>
-                                <option value="Emotional Challenges">Emotional Challenges</option>
-                                <option value="Life Decisions & Direction">Life Decisions & Direction</option>
-                                <option value="Addiction & Recovery">Addiction & Recovery</option>
-                                <option value="Grief & Loss">Grief & Loss</option>
-                                <option value="Marriage & Dating">Marriage & Dating</option>
-                                <option value="Other Personal Challenge">Other Personal Challenge</option>
-                            </select>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="counseling-details" class="block text-gray-700 mb-2">Please share more details</label>
-                            <textarea id="counseling-details" x-model="counselingForm.details" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share what you're comfortable sharing about your situation..." required></textarea>
-                        </div>
-                        
-                        <div class="text-center">
-                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Request Counseling</button>
-                        </div>
-                    </form>
-                    
-                    <div class="mt-8 p-4 bg-red-50 rounded-lg border border-red-200">
-                        <h3 class="heading-font text-lg font-bold text-red-900 mb-2">Confidentiality Notice</h3>
-                        <p class="text-gray-600 text-sm">All counseling conversations are kept strictly confidential. Our counselors provide biblically-based guidance and prayer support. In cases requiring professional help, we may refer you to appropriate Christian professionals.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <!-- Join a Unit Page -->
-    <section id="join-unit-page" class="py-8">
-        <!-- Join a Unit Hero Section -->
-        <section class="py-20 join-unit-bg text-white">
-            <div class="container mx-auto px-4 text-center">
-                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Join a Ministry Unit</h1>
-                <p class="text-xl max-w-2xl mx-auto">Serve and grow with others in our church community. Find your place in God's work.</p>
-            </div>
-        </section>
-
-        <!-- Ministry Units Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Ministry Units</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Discover where your gifts and passions can be used to serve God and others.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                    {% if unit %}
-                    {% for item in unit %}
-                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
-                            <img src="{{item.image.url}}" class="w-full h-56 object-fill" alt="{{item.name}}">
-                            <div class="p-6">
-                                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
-                                <p class="text-gray-600 mb-4">{{item.duty}}</p>
-                                <p class="text-gray-700">{{item.description}}</p>
-                                <div class="mt-4">
-                                    <span class="text-red-700 font-medium">Leader: {{item.leader}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-        </section>
-
-        <!-- Join Unit Form -->
-        <section class="py-16 bg-red-50">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
-                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Join a Ministry Unit</h2>
-                    
-                    <form x-data="{
-                        unitForm: { name: '', phone: '', unit: '', experience: '', message: '' },
-                        submitUnitForm() {
-                            const unitLeaders = {
-                                {% for unit_item in unit %}
-                                    '{{ unit_item.name }}': '{{ unit_item.leader_whatsapp|default:contact_info.whatsapp_number|default:"2349013708170" }}',
-                                {% endfor %}
-                            };
-                            
-                            const message = `🎯 *MINISTRY UNIT APPLICATION - LFC Teens Byazhin* 🎯
-
-👤 *Name:* ${this.unitForm.name}
-📞 *Phone:* ${this.unitForm.phone}
-🏛️ *Desired Unit:* ${this.unitForm.unit}
-
-💪 *Experience & Skills:*
-• ${this.unitForm.experience}
-
-❤️ *Why Interested:*
-• ${this.unitForm.message}
-
-🙏 *May God Guide This Decision* 🙏`;
-
-                            const phoneNumber = unitLeaders[this.unitForm.unit] || '2349013708170';
-                            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-                            
-                            this.unitForm = { name: '', phone: '', unit: '', experience: '', message: '' };
-                            
-                            alert('Thank you for your interest in serving! The unit leader will contact you soon. God bless your willing heart!');
-                        }
-                    }" @submit.prevent="submitUnitForm">
-                        <div class="mb-6">
-                            <label for="name" class="block text-gray-700 mb-2">Your Name</label>
-                            <input type="text" id="name" x-model="unitForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                        </div>
-
-                        <div class="mb-6">
-                            <label for="phone" class="block text-gray-700 mb-2">Your Phone Number</label>
-                            <input type="tel" id="phone" x-model="unitForm.phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="unit" class="block text-gray-700 mb-2">Ministry Unit</label>
-                            <select id="unit" x-model="unitForm.unit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                                <option value="">Select a Unit</option>
-                                {% for unit_item in unit %}
-                                <option value="{{ unit_item.name }}">{{ unit_item.name }} - Led by {{ unit_item.leader }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="experience" class="block text-gray-700 mb-2">Relevant Experience/Skills</label>
-                            <textarea id="experience" x-model="unitForm.experience" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share any talents, skills, or experience God has given you..."></textarea>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="message" class="block text-gray-700 mb-2">Why are you interested in this unit?</label>
-                            <textarea id="message" x-model="unitForm.message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share how God is leading you to serve in this area..." required></textarea>
-                        </div>
-                        
-                        <div class="text-center">
-                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Submit Application</button>
-                        </div>
-                    </form>
-                    
-                    <p class="text-gray-600 text-sm mt-6 text-center">
-                        After submitting, the unit leader will contact you to discuss next steps and how you can get involved in God's work.
-                    </p>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <!-- About Us Page -->
-    <section id="about-us-page" class="py-8">
-        <!-- About Us Hero Section -->
-        <section class="py-20 about-bg text-white">
-            <div class="container mx-auto px-4 text-center">
-                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">About LFC Teens Byazhin</h1>
-                <p class="text-xl max-w-2xl mx-auto">A community growing in faith, hope, and love through Jesus Christ.</p>
-            </div>
-        </section>
-
-        <!-- Our Story Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto">
-                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-6 text-center">Our Story</h2>
-                    <div class="prose prose-lg max-w-none text-gray-700">
-                        <p class="mb-4">LFC Teens Byazhin is a sector of winners chapel which is dedicated to bringing Gods word to teenagers and preparing them for the future before time, Shearing the Good news of Christ to the world.</p>
-                        <p class="mb-4">What began as a small sunday school class has now grown into a vibrant community of teenagers dedicated to serving God and and the interest of His Kingdom. We've had diverse testimonies by the power of Christ.</p>
-                        <p class="mb-4">Our mission is to promote God's word among youths and teenagers and the world at large. We are aimed at raising teenagers in the fear of the Lord who love God passionately and serve others selflessly. </p>
-                        <p>We believe in the authority of Scripture, the power of prayer, and the importance of Divine Guidiance in the Christian walk.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Beliefs Section -->
-        <section class="py-16 bg-red-50">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Beliefs</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">The foundational truths that guide our church and ministries.</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {% if belief %}
-                    {% for item in belief %}
-                        <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
-                            {% if item.image %}
-                            <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white mb-4">
-                                <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="{{item.name}}">
-                            </div>
-                            {% else %}
-                            <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
-                                <i class="fas fa-cross"></i>
-                            </div>
-                            {% endif %}
-                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
-                            <p class="text-gray-700">{{item.detail}}</p>
-                        </div>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-        </section>
-
-        <!-- Service Times Section -->
-        <section id="contact-us" class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto bg-red-50 rounded-xl shadow-md p-8 border border-red-200">
-                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Service Times & Location</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div>
-                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Join Us for Worship</h3>
-                            <ul class="space-y-3 text-gray-700">
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Sunday Service</span>
-                                    <span>7:00 AM, <br> 9:00 AM, <br> 11:00 AM</span>
+                            <div class="mb-6">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-crown text-3xl text-christmas-gold mr-3"></i>
+                                    <h3 class="heading-font text-3xl font-bold text-christmas-green">VIP Christmas Pass</h3>
+                                </div>
+                                <p class="text-6xl font-bold text-christmas-red mb-2">₦4,000</p>
+                                <p class="text-gray-600 mb-6">One-time access to all festivities</p>
+                            </div>
+                            
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                    <span>Access to all party zones</span>
                                 </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Mid-week service</span>
-                                    <span>Wed 5:00 PM</span>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                    <span>Christmas dinner buffet</span>
                                 </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">House Fellowship</span>
-                                    <span>Sat 5:00 PM</span>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                    <span>Free gift pack</span>
                                 </li>
-                                <li class="flex justify-between">
-                                    <span class="font-medium">Convernant Hour</span>
-                                    <span>6:00 AM - Daily</span>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                    <span>Live music performances</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                    <span>Christmas photo booth</span>
                                 </li>
                             </ul>
                         </div>
                         
                         <div>
-                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Location</h3>
-                            <div class="text-gray-700 mb-4">
-                                <p class="flex items-start mb-2">
-                                    <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-700"></i>
-                                    <span>Behind Police Station, Byazhin, Abuja, Nigeria</span>
-                                </p>
-                                <p class="flex items-start mb-2">
-                                    <i class="fas fa-phone mt-1 mr-3 text-red-700"></i>
-                                    <span>+234 9013-708-170</span>
-                                </p>
-                                <p class="flex items-start">
-                                    <i class="fas fa-envelope mt-1 mr-3 text-red-700"></i>
-                                    <span>lfcteens@gmail.com</span>
+                            <div class="bg-gradient-to-br from-christmas-red/10 to-christmas-green/10 rounded-xl p-6 h-full">
+                                <h4 class="text-xl font-bold text-christmas-green mb-4">Buy Your Ticket</h4>
+                                <form @submit.prevent="$event.target.submit()" class="space-y-4">
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Full Name</label>
+                                        <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-christmas-red" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Phone Number</label>
+                                        <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-christmas-red" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 mb-2">Email Address</label>
+                                        <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-christmas-red" required>
+                                    </div>
+                                    <button type="submit" class="w-full bg-gradient-to-r from-christmas-red to-christmas-green text-white py-4 rounded-lg font-bold text-lg hover:scale-105 transition-transform">
+                                        <i class="fas fa-shopping-cart mr-2"></i>Buy Now - ₦4,000
+                                    </button>
+                                </form>
+                                <p class="text-sm text-gray-500 mt-4 text-center">
+                                    <i class="fas fa-lock mr-1"></i> Secure payment processed
                                 </p>
                             </div>
-                            <a href="https://wa.me/9013708170?text=Hello%20LFC%20Teens%20Byazhin%2C%20I%20would%20like%20to%20get%20help%20about%20your%20direction" target="_blank" class="inline-block bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-800 transition-colors">Get Directions</a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white pt-12 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center overflow-hidden text-white font-bold text-lg">
-                            <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-shield-alt text-christmas-green text-xl mr-2"></i>
+                                <span class="text-gray-700">100% Secure Payment</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-ticket-alt text-christmas-red text-xl mr-2"></i>
+                                <span class="text-gray-700">Instant E-Ticket</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-headset text-christmas-gold text-xl mr-2"></i>
+                                <span class="text-gray-700">24/7 Support</span>
+                            </div>
                         </div>
-                        <span class="ml-3 heading-font text-xl font-semibold">LFC Teens Byazhin</span>
                     </div>
-                    <p class="text-gray-400 mb-4">A community of teenagers growing in faith, hope, and love through Jesus Christ.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="heading-font text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="#about-us-page" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#testimonies-page" class="text-gray-400 hover:text-white transition-colors">Testimonies</a></li>
-                        <li><a href="#counseling-page" class="text-gray-400 hover:text-white transition-colors">Counseling</a></li>
-                        <li><a href="#join-unit-page" class="text-gray-400 hover:text-white transition-colors">Join a Unit</a></li>
-                        <li><a href="#contact-us" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="#announcement-page" class="text-gray-400 hover:text-white transition-colors">Announcements</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="heading-font text-lg font-bold mb-4">Contact Info</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-500"></i>
-                            <span>Behind Police Station, Byazhin, Abuja, Nigeria.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-phone mt-1 mr-3 text-red-500"></i>
-                            <span>+234 9013-708-170</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-envelope mt-1 mr-3 text-red-500"></i>
-                            <span>lfcteens@gmail.com</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="heading-font text-lg font-bold mb-4">Service Times</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li class="flex justify-between">
-                            <span>Sunday Worship</span>
-                            <span>7:00 AM, 9:00 AM, 11:00 AM</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Mid-week service</span>
-                            <span>Wed 5:00 PM</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>House Fellowship</span>
-                            <span>Sat 5:00 PM</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Convernant Hour</span>
-                            <span>6: 00 AM - daily</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LFC Teens Byazhin. All Rights Reserved.</p>
-                <div class="text-gray-500 text-sm flex items-center">
-                    <span>Created with prayer by </span>
-                    <a href="#" class="text-red-400 hover:text-red-300 ml-1 transition-colors">Profirm Web Services</a>
                 </div>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Popup Ads -->
+    <!-- Ticket Popup -->
+    <div x-show="showTicketPopup" x-transition class="fixed inset-0 z-[9999] popup-overlay">
+        <div class="absolute inset-0 bg-black/70" @click="showTicketPopup = false"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md popup-animation">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-2xl m-4">
+                <div class="bg-gradient-to-r from-christmas-red to-christmas-green p-4 text-white text-center relative">
+                    <button @click="showTicketPopup = false" class="absolute right-4 top-4 text-white hover:text-christmas-gold">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                    <h3 class="heading-font text-2xl">🎅 Christmas Special! 🎄</h3>
+                    <p class="text-sm mt-1">Limited tickets available!</p>
+                </div>
+                
+                <div class="p-6">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-gift text-5xl text-christmas-red mb-3"></i>
+                        <h4 class="text-xl font-bold text-christmas-green">Get Your Ticket Now!</h4>
+                        <p class="text-gray-600 mt-2">Join the biggest Christmas party of the year!</p>
+                    </div>
+                    
+                    <div class="text-center mb-6">
+                        <p class="text-4xl font-bold text-christmas-red">₦4,000</p>
+                        <p class="text-gray-500">Only</p>
+                    </div>
+                    
+                    <button @click="window.location.href='#tickets'" class="w-full bg-gradient-to-r from-christmas-green to-christmas-red text-white py-3 rounded-lg font-bold hover:scale-105 transition-transform">
+                        <i class="fas fa-ticket-alt mr-2"></i>Buy Ticket Now
+                    </button>
+                    
+                    <p class="text-center text-sm text-gray-500 mt-4">
+                        Limited offer! Prices may increase soon
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shiloh Preparation Popup -->
+    <div x-show="showShilohPopup" x-transition class="fixed inset-0 z-[9999] popup-overlay">
+        <div class="absolute inset-0 bg-black/70" @click="showShilohPopup = false"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md popup-animation">
+            <div class="bg-gradient-to-b from-christmas-green to-christmas-red rounded-2xl overflow-hidden shadow-2xl m-4">
+                <div class="bg-white/10 backdrop-blur-sm p-6 text-white">
+                    <button @click="showShilohPopup = false" class="absolute right-4 top-4 text-white hover:text-christmas-gold">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                    
+                    <div class="text-center mb-6">
+                        <i class="fas fa-pray text-5xl text-christmas-gold mb-3"></i>
+                        <h3 class="heading-font text-2xl">Prepare for Shiloh</h3>
+                        <p class="text-sm mt-1">7 Steps to Spiritual Preparation</p>
+                    </div>
+                    
+                    <div class="space-y-3 max-h-60 overflow-y-auto pr-2">
+                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
+                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                            <span>Pray daily for guidance and preparation</span>
+                        </div>
+                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
+                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                            <span>Fast regularly to strengthen your spirit</span>
+                        </div>
+                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
+                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                            <span>Study the Word of God daily</span>
+                        </div>
+                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
+                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">4</span>
+                            <span>Attend all preparatory meetings</span>
+                        </div>
+                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
+                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">5</span>
+                            <span>Invite friends and family to join</span>
+                        </div>
+                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
+                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">6</span>
+                            <span>Prepare your heart through worship</span>
+                        </div>
+                        <div class="flex items-start bg-white/10 p-3 rounded-lg">
+                            <span class="bg-christmas-gold text-christmas-green w-6 h-6 rounded-full flex items-center justify-center mr-3 flex-shrink-0">7</span>
+                            <span>Expect miracles and divine encounters</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-christmas-gold text-christmas-green py-3 rounded-lg font-bold mt-6 hover:scale-105 transition-transform">
+                        <i class="fas fa-book-bible mr-2"></i>Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Random Popup Ads (Will appear randomly) -->
+    <div id="randomPopup" class="popup-ad hidden">
+        <div class="bg-gradient-to-r from-christmas-red to-christmas-green p-4 text-white text-center">
+            <h4 class="font-bold">🎁 Christmas Special Offer!</h4>
+        </div>
+        <div class="p-4">
+            <div class="h-40 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
+                <i class="fas fa-image text-4xl text-gray-400"></i>
+            </div>
+            <p class="text-center text-gray-700 mb-3">Don't miss the Christmas party of the year!</p>
+            <button class="w-full bg-christmas-red text-white py-2 rounded-lg font-bold hover:bg-red-700">
+                Book Now - ₦4,000
+            </button>
+            <button onclick="closePopup()" class="w-full mt-2 text-gray-500 hover:text-gray-700">
+                Close
+            </button>
+        </div>
+    </div>
 
     <!-- Audio Element -->
-    <audio id="sermonAudio" loop>
-        <source src="{% static 'audio/bg_music (1).mp3' %}" type="audio/mpeg">
+    <audio id="christmasAudio" loop>
+        <source src="{% static 'audio/jingle-bells.mp3' %}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -956,233 +681,210 @@ ${this.counselingForm.details}
         function heroSlider() {
             return {
                 currentSlide: 0,
-                touchStartX: 0,
-                touchEndX: 0,
                 slides: [
-                    {% if hero %}
-                        {% for slide in hero %}
-                        { 
-                            bg: 'hero-bg-{{forloop.counter}}', 
-                            title: '{{slide.title}}', 
-                            subtitle: '{{slide.subtitle}}', 
-                            buttonText: '{{slide.btn_text}}', 
-                            link: '{{slide.btn_link}}' 
-                        },
-                        {% endfor %}
-                    {% endif %}
+                    { 
+                        bg: 'hero-bg-1', 
+                        title: 'Christmas Party 2024', 
+                        subtitle: 'A Celebration of Joy, Love, and Giving', 
+                        buttonText: 'Explore Program',
+                        link: '#program'
+                    },
+                    { 
+                        bg: 'hero-bg-2', 
+                        title: 'Festive Fun Awaits', 
+                        subtitle: 'Join us for an unforgettable Christmas experience', 
+                        buttonText: 'View Gallery',
+                        link: '#gallery'
+                    },
+                    { 
+                        bg: 'hero-bg-3', 
+                        title: 'Spread Christmas Cheer', 
+                        subtitle: 'Music, Food, Gifts and Great Company', 
+                        buttonText: 'Get Tickets',
+                        link: '#tickets'
+                    }
                 ],
                 nextSlide() {
                     this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                    this.createConfetti();
                 },
                 prevSlide() {
                     this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                    this.createConfetti();
                 },
-                handleTouchStart(event) {
-                    this.touchStartX = event.changedTouches[0].screenX;
-                },
-                handleTouchEnd(event) {
-                    this.touchEndX = event.changedTouches[0].screenX;
-                    this.handleSwipe();
-                },
-                handleSwipe() {
-                    const swipeThreshold = 50;
-                    const diff = this.touchStartX - this.touchEndX;
-                    
-                    if (Math.abs(diff) > swipeThreshold) {
-                        if (diff > 0) {
-                            this.nextSlide();
-                        } else {
-                            this.prevSlide();
-                        }
+                createConfetti() {
+                    for (let i = 0; i < 50; i++) {
+                        setTimeout(() => {
+                            const confetti = document.createElement('div');
+                            confetti.className = 'confetti confetti-animation';
+                            confetti.style.left = Math.random() * 100 + 'vw';
+                            confetti.style.backgroundColor = ['#B91C1C', '#0A5C36', '#D4AF37', '#C0C0C0'][Math.floor(Math.random() * 4)];
+                            confetti.style.width = Math.random() * 10 + 5 + 'px';
+                            confetti.style.height = confetti.style.width;
+                            document.getElementById('snowflakes').appendChild(confetti);
+                            
+                            setTimeout(() => confetti.remove(), 3000);
+                        }, i * 50);
                     }
                 },
                 init() {
+                    // Auto-rotate slides
                     setInterval(() => {
                         this.nextSlide();
-                    }, 6000);
+                    }, 8000);
+                    
+                    // Create Christmas lights
+                    this.createChristmasLights();
+                    
+                    // Create initial confetti
+                    this.createConfetti();
+                },
+                createChristmasLights() {
+                    const container = document.querySelector('.christmas-lights');
+                    if (!container) return;
+                    
+                    for (let i = 0; i < 20; i++) {
+                        const light = document.createElement('div');
+                        light.className = 'light';
+                        light.style.left = (i * 5) + '%';
+                        light.style.backgroundColor = ['#ff0000', '#00ff00', '#ffff00', '#ff00ff'][i % 4];
+                        light.style.animationDelay = (i * 0.2) + 's';
+                        container.appendChild(light);
+                    }
                 }
             }
         }
 
-        // Active section tracking
-        function updateActiveSection() {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('nav a[href^="#"]');
-            
-            let currentSection = 'home';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.clientHeight;
-                const sectionId = section.getAttribute('id');
-                
-                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-                    currentSection = sectionId;
-                }
-            });
-            
-            Alpine.store('activeSection', currentSection);
+        // Create Snowflakes
+        function createSnowflakes() {
+            const container = document.getElementById('snowflakes');
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.width = Math.random() * 5 + 2 + 'px';
+                snowflake.style.height = snowflake.style.width;
+                snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+                snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(snowflake);
+            }
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Audio Controls
-            const audio = document.getElementById('sermonAudio');
-            const playPauseBtn = document.getElementById('playPause');
-            const muteBtn = document.getElementById('muteBtn');
+        // Random Popup Ads
+        function showRandomPopup() {
+            const popup = document.getElementById('randomPopup');
+            const showShiloh = Math.random() > 0.5;
             
-            // Auto-play with user interaction
-            document.body.addEventListener('click', function() {
-                if (audio.paused) {
-                    audio.play().catch(e => console.log('Auto-play prevented:', e));
-                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                }
-            }, { once: true });
+            if (showShiloh) {
+                Alpine.store('showShilohPopup', true);
+            } else {
+                popup.classList.remove('hidden');
+                popup.style.bottom = '20px';
+                popup.style.right = '20px';
+                popup.classList.add('popup-animation');
+                
+                // Change popup position randomly
+                setTimeout(() => {
+                    const positions = ['20px', '80px', '140px'];
+                    popup.style.bottom = positions[Math.floor(Math.random() * positions.length)];
+                }, 3000);
+                
+                // Auto close after 8 seconds
+                setTimeout(() => {
+                    closePopup();
+                }, 8000);
+            }
+            
+            // Schedule next popup (between 30-90 seconds)
+            setTimeout(showRandomPopup, Math.random() * 60000 + 30000);
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('randomPopup');
+            popup.classList.add('hidden');
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create snowflakes
+            createSnowflakes();
+            
+            // Audio Controls
+            const audio = document.getElementById('christmasAudio');
+            const playPauseBtn = document.getElementById('playPause');
+            
+            // Auto-play background music
+            setTimeout(() => {
+                audio.play().catch(e => console.log('Auto-play prevented:', e));
+            }, 1000);
             
             playPauseBtn.addEventListener('click', function() {
                 if (audio.paused) {
                     audio.play();
-                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    playPauseBtn.classList.add('bell-animation');
                 } else {
                     audio.pause();
-                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    playPauseBtn.classList.remove('bell-animation');
                 }
             });
             
-            muteBtn.addEventListener('click', function() {
-                if (audio.muted) {
-                    audio.muted = false;
-                    muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-                } else {
-                    audio.muted = true;
-                    muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            // Random popup ads
+            setTimeout(showRandomPopup, 10000);
+            
+            // Random Shiloh popup
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    Alpine.store('showShilohPopup', true);
                 }
+            }, 120000);
+            
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
             });
             
-            // Update button when audio ends
-            audio.addEventListener('ended', function() {
-                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            // Add some festive cursor effects
+            document.addEventListener('mousemove', function(e) {
+                if (Math.random() > 0.95) {
+                    const sparkle = document.createElement('div');
+                    sparkle.style.position = 'fixed';
+                    sparkle.style.left = e.pageX + 'px';
+                    sparkle.style.top = e.pageY + 'px';
+                    sparkle.style.width = '10px';
+                    sparkle.style.height = '10px';
+                    sparkle.style.background = 'radial-gradient(circle, #D4AF37, transparent)';
+                    sparkle.style.borderRadius = '50%';
+                    sparkle.style.pointerEvents = 'none';
+                    sparkle.style.zIndex = '9999';
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 500);
+                }
             });
-
-            // Active section tracking
-            window.addEventListener('scroll', updateActiveSection);
-            updateActiveSection(); // Initial call
         });
 
-        // Alpine store for active section
+        // Alpine store for popups
         document.addEventListener('alpine:init', () => {
-            Alpine.store('activeSection', 'home');
+            Alpine.store('showTicketPopup', false);
+            Alpine.store('showShilohPopup', false);
         });
     </script>
-
-
-<!-- Add some smooth animations for HTMX -->
-<style>
-    .htmx-request {
-        opacity: 0.7;
-    }
-    
-    .htmx-indicator {
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
-    }
-    
-    .htmx-request .htmx-indicator {
-        opacity: 1;
-    }
-    
-    .htmx-request.htmx-indicator {
-        opacity: 1;
-    }
-</style>
-
-<script>
-    // Add some visual feedback for HTMX requests
-    document.addEventListener('DOMContentLoaded', function() {
-        // Add loading states to HTMX buttons
-        document.body.addEventListener('htmx:beforeRequest', function(evt) {
-            const button = evt.target.querySelector('button') || evt.target;
-            if (button) {
-                button.classList.add('htmx-request');
-            }
-        });
-        
-        document.body.addEventListener('htmx:afterRequest', function(evt) {
-            const button = evt.target.querySelector('button') || evt.target;
-            if (button) {
-                button.classList.remove('htmx-request');
-            }
-        });
-        
-        // Handle HTMX errors gracefully
-        document.body.addEventListener('htmx:responseError', function(evt) {
-            console.error('HTMX Error:', evt.detail);
-            const target = evt.detail.target;
-            if (target) {
-                target.innerHTML = '<span class="text-red-500">Error occurred. Please try again.</span>';
-            }
-        });
-    });
-</script>
-
-
-<script>
-    // Simple like functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        // Handle like form submissions
-        document.body.addEventListener('submit', function(e) {
-            if (e.target.matches('form[hx-post]')) {
-                e.preventDefault();
-                
-                const form = e.target;
-                const button = form.querySelector('button[type="submit"]');
-                
-                if (button) {
-                    // Add loading state
-                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-                    button.disabled = true;
-                }
-            }
-        });
-    });
-    
-    // Initialize HTMX with CSRF token
-    document.addEventListener('htmx:configRequest', function(e) {
-        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
-        if (csrfToken) {
-            e.detail.headers['X-CSRFToken'] = csrfToken.value;
-        }
-    });
-</script>
-
-<style>
-    /* Smooth like animation */
-    .like-btn {
-        transition: all 0.3s ease;
-    }
-    
-    .like-btn:hover:not(:disabled) {
-        transform: scale(1.1);
-    }
-    
-    /* Heart beat animation when liked */
-    @keyframes heartBeat {
-        0% { transform: scale(1); }
-        25% { transform: scale(1.3); }
-        50% { transform: scale(1); }
-        75% { transform: scale(1.2); }
-        100% { transform: scale(1); }
-    }
-    
-    .like-btn .fas.fa-heart {
-        animation: heartBeat 0.6s ease;
-    }
-    
-    /* Disabled state */
-    .like-btn:disabled {
-        cursor: default;
-        opacity: 1;
-    }
-</style>
 </body>
 </html>
