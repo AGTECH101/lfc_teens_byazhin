@@ -1,6 +1,6 @@
 """
 Django settings for project project.
-Optimized for Render.com deployment and SEO
+Optimized for both local development and Render.com deployment
 """
 
 from pathlib import Path
@@ -14,8 +14,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security settings
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-development-key-change-in-production')
 
-# FIX: Set DEBUG based on environment
-DEBUG = config('DEBUG', default=False, cast=bool)
+# IMPORTANT: Check if running on Render or locally
+IS_RENDER = os.environ.get('RENDER', False)
+IS_PRODUCTION = config('PRODUCTION', default=False, cast=bool)
+
+# Set DEBUG based on environment
+DEBUG = not IS_RENDER  # True locally, False on Render
+if os.environ.get('DEBUG', '').lower() in ['true', '1', 't']:
+    DEBUG = True
+
+print(f"DEBUG: {DEBUG}")
+print(f"IS_RENDER: {IS_RENDER}")
+print(f"IS_PRODUCTION: {IS_PRODUCTION}")
 
 # FIX: Improved ALLOWED_HOSTS configuration
 ALLOWED_HOSTS = [
@@ -31,15 +41,21 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# FIX: Consistent CSRF trusted origins with HTTPS
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://0.0.0.0:8000',
-    'https://localhost:8000',  # Added HTTPS for local development
-    'https://lfcteensbyazhin.onrender.com',
-    'https://*.onrender.com',
-]
+# FIX: CSRF trusted origins - only HTTPS in production
+CSRF_TRUSTED_ORIGINS = []
+if IS_RENDER or IS_PRODUCTION:
+    CSRF_TRUSTED_ORIGINS = [
+        'https://localhost:8000',
+        'https://lfcteensbyazhin.onrender.com',
+        'https://*.onrender.com',
+    ]
+else:
+    # Local development - allow HTTP
+    CSRF_TRUSTED_ORIGINS = [
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'http://0.0.0.0:8000',
+    ]
 
 # Application definition
 INSTALLED_APPS = [
@@ -51,7 +67,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',  # For SEO
     
-    # Cloudinary apps
+    # Cloudinary apps (optional)
     'cloudinary_storage',
     'cloudinary',
     
@@ -130,28 +146,37 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Media files configuration
 MEDIA_URL = '/media/'
 
-# Cloudinary configuration
+# Cloudinary configuration - optional for local development
 try:
     import cloudinary
     import cloudinary.uploader
     import cloudinary.api
     
     CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default='dkmk76rfw'),
-        'API_KEY': config('CLOUDINARY_API_KEY', default='192649688938628'),
-        'API_SECRET': config('CLOUDINARY_API_SECRET', default='7c92grhUwijRo5owpFKk7B62A_k'),
+        'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default=''),
+        'API_KEY': config('CLOUDINARY_API_KEY', default=''),
+        'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
     }
     
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    
-    # Configure Cloudinary
-    cloudinary.config(
-        cloud_name=config('CLOUDINARY_CLOUD_NAME', default='dkmk76rfw'),
-        api_key=config('CLOUDINARY_API_KEY', default='192649688938628'),
-        api_secret=config('CLOUDINARY_API_SECRET', default='7c92grhUwijRo5owpFKk7B62A_k'),
-        secure=True
-    )
-    
+    # Only use Cloudinary if credentials are provided
+    if (CLOUDINARY_STORAGE['CLOUD_NAME'] and 
+        CLOUDINARY_STORAGE['API_KEY'] and 
+        CLOUDINARY_STORAGE['API_SECRET']):
+        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+        
+        # Configure Cloudinary
+        cloudinary.config(
+            cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
+            api_key=CLOUDINARY_STORAGE['API_KEY'],
+            api_secret=CLOUDINARY_STORAGE['API_SECRET'],
+            secure=True
+        )
+        print("Cloudinary storage enabled")
+    else:
+        DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+        MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+        print("Using local file storage (Cloudinary credentials not found)")
+        
 except ImportError:
     print("Cloudinary not installed. Using local file storage.")
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
@@ -163,8 +188,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # WhiteNoise configuration for static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# FIX: Security settings - Proper HTTPS configuration
-if not DEBUG:
+# FIX: Security settings - Only enforce HTTPS in production
+if IS_RENDER or IS_PRODUCTION:
     # Production settings - Force HTTPS
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -176,16 +201,21 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-    print("PRODUCTION: HTTPS enforced")
+    print("PRODUCTION MODE: HTTPS and security headers enforced")
 else:
     # Development settings - Allow HTTP
     SECURE_SSL_REDIRECT = False
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
-    print("DEVELOPMENT: HTTP allowed")
-
+    X_FRAME_OPTIONS = 'SAMEORIGIN'
+    print("DEVELOPMENT MODE: HTTP allowed")
 
 # SEO Settings
 SITE_NAME = "LFC Teens Byazhin"
 SITE_DESCRIPTION = "A community of teenagers growing in faith, hope, and love through Jesus Christ. Join LFC Teens Byazhin for worship, fellowship, and spiritual growth."
 SITE_KEYWORDS = "LFC Teens, Byazhin, Christian teens, youth ministry, Abuja church, Winners Chapel, teenage fellowship, spiritual growth"
+
+# Add localhost to CSRF for development
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS.append('http://localhost:8000')
+    CSRF_TRUSTED_ORIGINS.append('http://127.0.0.1:8000')
