@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LFC Teens Byazhin | Merry Christmas</title>
+    <title>LFC Teens Byazhin | Home</title>
     <link rel="icon" href="{% static 'favicon.ico' %}" class="rounded-full">
     <script src="{% static 'tailwind.js' %}"></script>
     <script defer src="{% static 'alpine.js' %}"></script>
@@ -13,78 +13,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --christmas-red: #B91C1C;
-            --christmas-green: #166534;
-            --christmas-gold: #D97706;
-            --christmas-white: #FEF2F2;
-            --christmas-dark: #0C4A6E;
+            --primary-red: #B91C1C;
+            --dark-red: #7F1D1D;
+            --light-red: #FECACA;
+            --off-white: #FEF2F2;
         }
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--christmas-white);
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(185, 28, 28, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(22, 101, 52, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 50% 50%, rgba(217, 119, 6, 0.03) 0%, transparent 30%);
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .christmas-font {
-            font-family: 'Dancing Script', cursive;
+            background-color: var(--off-white);
         }
         
         .heading-font {
             font-family: 'Merriweather', serif;
-        }
-        
-        /* Christmas Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        @keyframes snowFall {
-            0% { transform: translateY(-100px) rotate(0deg); }
-            100% { transform: translateY(calc(100vh + 100px)) rotate(360deg); }
-        }
-        
-        .float-animation {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .twinkle {
-            animation: twinkle 2s ease-in-out infinite;
-        }
-        
-        .snowflake {
-            position: fixed;
-            background: white;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: snowFall linear forwards;
-            z-index: 9999;
         }
         
         .hero-slide {
@@ -115,7 +60,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--christmas-dark), var(--christmas-green));
+            background-color: var(--off-white);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -127,8 +72,8 @@
         .spinner {
             width: 50px;
             height: 50px;
-            border: 5px solid var(--christmas-gold);
-            border-top: 5px solid var(--christmas-red);
+            border: 5px solid var(--light-red);
+            border-top: 5px solid var(--primary-red);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 20px;
@@ -157,13 +102,12 @@
             bottom: 100px;
             right: 10px;
             z-index: 100;
-            background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 50px;
             padding: 10px;
             display: flex;
             align-items: center;
             color: white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         
         .whatsapp-float {
@@ -171,7 +115,7 @@
             bottom: 20px;
             right: 20px;
             z-index: 100;
-            background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
+            background: #25D366;
             border-radius: 50px;
             width: 60px;
             height: 60px;
@@ -180,240 +124,66 @@
             justify-content: center;
             color: white;
             font-size: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
         }
         
         .whatsapp-float:hover {
-            transform: scale(1.1) rotate(10deg);
+            transform: scale(1.1);
         }
         
         .active-nav {
-            color: var(--christmas-red);
-            border-bottom: 2px solid var(--christmas-gold);
-            position: relative;
-        }
-        
-        .active-nav::after {
-            content: "🎄";
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 12px;
-        }
-        
-        /* Christmas Header */
-        .christmas-header {
-            background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .christmas-header::before {
-            content: "✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            color: var(--christmas-gold);
-            font-size: 20px;
-            opacity: 0.3;
-        }
-        
-        .christmas-tree {
-            position: fixed;
-            bottom: 0;
-            left: 20px;
-            width: 100px;
-            height: 150px;
-            background: linear-gradient(to bottom, transparent 30%, var(--christmas-green) 30%);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            z-index: 998;
-            opacity: 0.2;
-        }
-        
-        .christmas-bell {
-            position: fixed;
-            top: 50px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: var(--christmas-gold);
-            border-radius: 50% 50% 0 0;
-            z-index: 998;
-            opacity: 0.2;
-            transform-origin: top center;
-            animation: bellSwing 3s ease-in-out infinite;
-        }
-        
-        @keyframes bellSwing {
-            0%, 100% { transform: rotate(-10deg); }
-            50% { transform: rotate(10deg); }
+            color: var(--primary-red);
+            border-bottom: 2px solid var(--primary-red);
         }
 
         {% if hero %}
             {% for slide in hero %}
                 .hero-bg-{{forloop.counter}} {
-                    background: linear-gradient(rgba(12, 74, 110, 0.7), rgba(22, 101, 52, 0.7)), url("{{slide.image.url}}") center/cover;
-                    position: relative;
-                    overflow: hidden;
-                }
-                
-                .hero-bg-{{forloop.counter}}::before {
-                    content: "❄";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    font-size: 40px;
-                    color: white;
-                    opacity: 0.1;
-                    display: flex;
-                    justify-content: space-around;
-                    align-items: flex-start;
-                    flex-wrap: wrap;
-                    pointer-events: none;
-                }
-            {% endfor %}
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{{slide.image.url}}") center/cover;
+        }
+        {% empty %}
+
+
+        {% endfor %}
         {% endif %}
+
         
+        .bible-img-1 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+        
+        .bible-img-2 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+        
+        .bible-img-3 {
+            background: url("{% static 'images/book.jpeg' %}") center/cover;
+        }
+
         .testimony-bg {
-            background: linear-gradient(rgba(12, 74, 110, 0.7), rgba(22, 101, 52, 0.7)), url("{% static 'images/persons (3).jpg' %}") center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/persons (3).jpg' %}") center/cover;
         }
 
         .join-unit-bg {
-            background: linear-gradient(rgba(12, 74, 110, 0.7), rgba(22, 101, 52, 0.7)), url("{% static 'images/hero_img (2).jpg' %}") center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/hero_img (2).jpg' %}") center/cover;
         }
 
         .about-bg {
-            background: linear-gradient(rgba(12, 74, 110, 0.7), rgba(22, 101, 52, 0.7)), url("{% static 'images/hero_img (1).jpg' %}") center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/hero_img (1).jpg' %}") center/cover;
         }
 
         .counseling-bg {
-            background: linear-gradient(rgba(12, 74, 110, 0.7), rgba(22, 101, 52, 0.7)), url("{% static 'images/persons (1).jpg' %}") center/cover;
-        }
-        
-        /* Christmas Button */
-        .christmas-btn {
-            background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .christmas-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(185, 28, 28, 0.3);
-        }
-        
-        .christmas-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .christmas-btn:hover::before {
-            left: 100%;
-        }
-        
-        /* Christmas Card */
-        .christmas-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid var(--christmas-gold);
-            position: relative;
-        }
-        
-        .christmas-card::before {
-            content: "🎄";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-        }
-        
-        .christmas-card::after {
-            content: "✦";
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            color: var(--christmas-red);
-            font-size: 16px;
-        }
-        
-        /* Gift Box Animation */
-        .gift-box {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
-            background: var(--christmas-red);
-            z-index: 998;
-            opacity: 0.1;
-            border-radius: 8px;
-            animation: float 4s ease-in-out infinite;
-        }
-        
-        .gift-box::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: var(--christmas-green);
-            border-radius: 8px 8px 0 0;
-        }
-        
-        .gift-box::after {
-            content: "🎁";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("{% static 'images/persons (1).jpg' %}") center/cover;
         }
     </style>
 </head>
-<body class="bg-christmas-white text-gray-900 scroll-smooth" x-data="{ mobileMenuOpen: false, activeSection: 'home' }">
-    <!-- Christmas Header Banner -->
-    <div class="christmas-header">
-        <div class="container mx-auto px-4">
-            <p class="christmas-font text-2xl twinkle">🎄 Merry Christmas from LFC Teens Byazhin! 🎄</p>
-            <p class="mt-1">Celebrating the Birth of Our Savior, Jesus Christ</p>
-        </div>
-    </div>
-    
-    <!-- Decorative Elements -->
-    <div class="christmas-tree"></div>
-    <div class="christmas-bell"></div>
-    <div class="gift-box"></div>
-
+<body class="bg-off-white text-gray-900 scroll-smooth" x-data="{ mobileMenuOpen: false, activeSection: 'home' }">
     <!-- Loading Screen -->
     <div x-data="{ loading: true }" x-init="setTimeout(() => loading = false, 2000)" x-show="loading" class="loading-screen" x-cloak>
         <div class="spinner"></div>
-        <h2 class="christmas-font text-3xl text-white mb-2">Merry Christmas!</h2>
-        <h3 class="heading-font text-xl text-christmas-gold mb-4">LFC Teens Byazhin</h3>
-        <p class="text-christmas-white">Loading Christmas blessings...</p>
+        <h2 class="heading-font text-2xl text-red-900">LFC Teens Byazhin</h2>
+        <p class="mt-2 text-gray-700">Loading God's blessings...</p>
     </div>
 
     <!-- Audio Controls -->
@@ -424,37 +194,36 @@
         <button id="muteBtn" class="w-8 h-8 flex items-center justify-center text-white ml-2">
             <i class="fas fa-volume-up"></i>
         </button>
-        <span class="ml-2 text-sm hidden md:inline">Christmas Carols</span>
     </div>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/2349013708170?text=Merry%20Christmas!%20🎄%20Hello%20LFC%20Teens%20Byazhin%2C%20I%20would%20like%20to%20know%20more%20about%20your%20Christmas%20services" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/2349013708170?text=Hello%20LFC%20Teens%20Byazhin%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b-4 border-christmas-gold">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 bg-gradient-to-br from-christmas-red to-christmas-green rounded-full flex items-center justify-center text-white font-bold text-xl overflow-hidden">
+                    <div class="w-10 h-10 bg-red-800 rounded-full flex items-center justify-center text-white font-bold text-xl">
                         <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
                     </div>
-                    <span class="ml-3 heading-font text-xl font-semibold text-christmas-red">LFC Teens <span class="christmas-font text-christmas-green">Christmas</span></span>
+                    <span class="ml-3 heading-font text-xl font-semibold text-red-900">LFC Teens Byazhin</span>
                 </div>
                 
                 <div class="hidden md:flex space-x-8">
-                    <a href="#" class="font-medium pb-1 transition-colors" :class="activeSection === 'home' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">Home 🏠</a>
-                    <a href="#about-us-page" class="transition-colors pb-1" :class="activeSection === 'about' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">About 🎅</a>
-                    <a href="#testimonies-page" class="transition-colors pb-1" :class="activeSection === 'testimonies' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">Testimonies ✨</a>
-                    <a href="#announcement-page" class="transition-colors pb-1" :class="activeSection === 'announcements' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">Events 🎄</a>
-                    <a href="#counseling-page" class="transition-colors pb-1" :class="activeSection === 'counseling' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">Prayer 🙏</a>
-                    <a href="#join-unit-page" class="transition-colors pb-1" :class="activeSection === 'units' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">Serve ❤️</a>
-                    <a href="#contact-us" class="transition-colors pb-1" :class="activeSection === 'contact' ? 'active-nav text-christmas-red' : 'text-gray-600 hover:text-christmas-red'">Contact 📞</a>
+                    <a href="#" class="font-medium pb-1 transition-colors" :class="activeSection === 'home' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Home</a>
+                    <a href="#about-us-page" class="transition-colors pb-1" :class="activeSection === 'about' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">About Us</a>
+                    <a href="#testimonies-page" class="transition-colors pb-1" :class="activeSection === 'testimonies' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Testimonies</a>
+                    <a href="#announcement-page" class="transition-colors pb-1" :class="activeSection === 'announcements' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Announcements</a>
+                    <a href="#counseling-page" class="transition-colors pb-1" :class="activeSection === 'counseling' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Counseling</a>
+                    <a href="#join-unit-page" class="transition-colors pb-1" :class="activeSection === 'units' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Join a Unit</a>
+                    <a href="#contact-us" class="transition-colors pb-1" :class="activeSection === 'contact' ? 'active-nav text-red-700' : 'text-gray-600 hover:text-red-700'">Contact Us</a>
                 </div>
                 
-                <div class="md:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-christmas-red focus:outline-none">
+                <div class="md:hidden ">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-600 focus:outline-none">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -464,27 +233,27 @@
 
     <!-- Mobile Side Navigation -->
     <div x-show="mobileMenuOpen" class="fixed inset-0 z-50 md:hidden" x-cloak>
-        <div class="absolute inset-0 bg-christmas-dark bg-opacity-70" @click="mobileMenuOpen = false"></div>
-        <div class="side-nav absolute top-0 left-0 w-64 h-full bg-white shadow-lg border-r-4 border-christmas-gold" :class="{ 'open': mobileMenuOpen }">
-            <div class="p-4 border-b border-christmas-gold flex justify-between items-center bg-gradient-to-r from-christmas-red to-christmas-green">
+        <div class="absolute inset-0 bg-black bg-opacity-50" @click="mobileMenuOpen = false"></div>
+        <div class="side-nav absolute top-0 left-0 w-64 h-full bg-white shadow-lg" :class="{ 'open': mobileMenuOpen }">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                 <div class="flex items-center">
-                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden">
-                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
+                    <div class="w-8 h-8 bg-red-800 rounded-full flex items-center justify-center text-white font-bold">
+                        <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill alt="lfc-logo">
                     </div>
-                    <span class="ml-2 heading-font font-semibold text-white">Merry Christmas!</span>
+                    <span class="ml-2 heading-font font-semibold text-red-900">LFC Teens</span>
                 </div>
-                <button @click="mobileMenuOpen = false" class="text-white">
+                <button @click="mobileMenuOpen = false" class="text-gray-500">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div class="py-4 bg-christmas-white">
-                <a href="#" class="block py-3 px-6 font-medium transition-colors border-l-4 border-transparent hover:border-christmas-red" :class="activeSection === 'home' ? 'text-christmas-red bg-red-50 border-christmas-red' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">🏠 Home</a>
-                <a href="#about-us-page" class="block py-3 px-6 transition-colors border-l-4 border-transparent hover:border-christmas-green" :class="activeSection === 'about' ? 'text-christmas-green bg-green-50 border-christmas-green' : 'text-gray-600 hover:text-christmas-green'" @click="mobileMenuOpen = false">🎅 About Us</a>
-                <a href="#testimonies-page" class="block py-3 px-6 transition-colors border-l-4 border-transparent hover:border-christmas-gold" :class="activeSection === 'testimonies' ? 'text-christmas-gold bg-yellow-50 border-christmas-gold' : 'text-gray-600 hover:text-christmas-gold'" @click="mobileMenuOpen = false">✨ Testimonies</a>
-                <a href="#announcement-page" class="block py-3 px-6 transition-colors border-l-4 border-transparent hover:border-christmas-red" :class="activeSection === 'announcements' ? 'text-christmas-red bg-red-50 border-christmas-red' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">🎄 Events</a>
-                <a href="#counseling-page" class="block py-3 px-6 transition-colors border-l-4 border-transparent hover:border-christmas-green" :class="activeSection === 'counseling' ? 'text-christmas-green bg-green-50 border-christmas-green' : 'text-gray-600 hover:text-christmas-green'" @click="mobileMenuOpen = false">🙏 Prayer</a>
-                <a href="#join-unit-page" class="block py-3 px-6 transition-colors border-l-4 border-transparent hover:border-christmas-gold" :class="activeSection === 'units' ? 'text-christmas-gold bg-yellow-50 border-christmas-gold' : 'text-gray-600 hover:text-christmas-gold'" @click="mobileMenuOpen = false">❤️ Serve</a>
-                <a href="#contact-us" class="block py-3 px-6 transition-colors border-l-4 border-transparent hover:border-christmas-red" :class="activeSection === 'contact' ? 'text-christmas-red bg-red-50 border-christmas-red' : 'text-gray-600 hover:text-christmas-red'" @click="mobileMenuOpen = false">📞 Contact</a>
+            <div class="py-4">
+                <a href="#" class="block py-3 px-6 font-medium transition-colors" :class="activeSection === 'home' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Home</a>
+                <a href="#about-us-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'about' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">About Us</a>
+                <a href="#testimonies-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'testimonies' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Testimonies</a>
+                <a href="#announcement-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'announcements' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Announcements</a>
+                <a href="#counseling-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'counseling' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Counseling</a>
+                <a href="#join-unit-page" class="block py-3 px-6 transition-colors" :class="activeSection === 'units' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Join a Unit</a>
+                <a href="#contact-us" class="block py-3 px-6 transition-colors" :class="activeSection === 'contact' ? 'text-red-700 bg-red-50' : 'text-gray-600 hover:text-red-700'" @click="mobileMenuOpen = false">Contact Us</a>
             </div>
         </div>
     </div>
@@ -492,7 +261,7 @@
     <!-- Hero Section -->
     <section class="relative h-screen overflow-hidden">
         <div x-data="heroSlider()" class="h-full swipe-area" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
-            <!-- Christmas Slides -->
+            <!-- Slides -->
             <template x-for="(slide, index) in slides" :key="index">
                 <div x-show="currentSlide === index" x-transition:enter="transition ease-out duration-1000" 
                      x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -500,13 +269,9 @@
                      x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
                      class="absolute inset-0 flex items-center justify-center text-white" :class="slide.bg">
                     <div class="text-center px-4 max-w-3xl fade-in">
-                        <h1 class="christmas-font text-5xl md:text-7xl font-bold mb-4" x-text="slide.title"></h1>
-                        <p class="text-2xl md:text-3xl mb-8 bg-black bg-opacity-30 p-4 rounded-lg inline-block" x-text="slide.subtitle"></p>
-                        <br>
-                        <a :href="slide.link" class="inline-block christmas-btn px-10 py-4 text-xl shadow-lg float-animation" x-text="slide.buttonText"></a>
-                        <div class="mt-8">
-                            <p class="text-lg">🎁 "For unto us a Child is born, unto us a Son is given" - Isaiah 9:6 🎁</p>
-                        </div>
+                        <h1 class="heading-font text-4xl md:text-6xl font-bold mb-4" x-text="slide.title"></h1>
+                        <p class="text-xl md:text-2xl mb-8" x-text="slide.subtitle"></p>
+                        <a :href="slide.link" class="inline-block bg-white text-red-700 px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-gray-100 transition-colors" x-text="slide.buttonText"></a>
                     </div>
                 </div>
             </template>
@@ -515,238 +280,130 @@
             <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-2">
                 <template x-for="(slide, index) in slides" :key="index">
                     <button @click="currentSlide = index" class="w-3 h-3 rounded-full transition-colors" 
-                            :class="currentSlide === index ? 'bg-christmas-gold' : 'bg-white/50'"></button>
+                            :class="currentSlide === index ? 'bg-white' : 'bg-white/50'"></button>
                 </template>
             </div>
             
             <!-- Navigation Arrows -->
-            <button @click="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-christmas-red rounded-full w-10 h-10 flex items-center justify-center hover:bg-christmas-green transition-colors">
+            <button @click="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <button @click="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-christmas-green rounded-full w-10 h-10 flex items-center justify-center hover:bg-christmas-red transition-colors">
+            <button @click="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-black/30 rounded-full w-10 h-10 flex items-center justify-center">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
     </section>
 
-    <!-- Christmas Message -->
-    <section class="py-16 bg-gradient-to-br from-christmas-red via-christmas-gold to-christmas-green">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto text-center text-white">
-                <h2 class="christmas-font text-4xl md:text-5xl font-bold mb-6">Merry Christmas, Beloved!</h2>
-                <div class="bg-white bg-opacity-20 rounded-xl p-8 backdrop-blur-sm">
-                    <p class="text-xl mb-6">"For there is born to you this day in the city of David a Savior, who is Christ the Lord." - Luke 2:11</p>
-                    <p class="text-lg mb-6">This Christmas season, we celebrate the greatest gift ever given - Jesus Christ! Join us as we remember His birth, rejoice in His love, and recommit to following Him.</p>
-                    <div class="flex flex-wrap justify-center gap-4 mt-8">
-                        <div class="bg-white text-christmas-red px-6 py-3 rounded-lg font-semibold">
-                            <i class="fas fa-calendar-alt mr-2"></i>Christmas Service: Dec 25, 7AM
-                        </div>
-                        <div class="bg-white text-christmas-green px-6 py-3 rounded-lg font-semibold">
-                            <i class="fas fa-gift mr-2"></i>Gift Exchange: Dec 24, 5PM
-                        </div>
-                        <div class="bg-white text-christmas-dark px-6 py-3 rounded-lg font-semibold">
-                            <i class="fas fa-carols mr-2"></i>Carol Night: Dec 22, 6PM
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pastors/Workers Section - Christmas Edition -->
-    <section class="py-16 bg-christmas-white">
+    <!-- Pastors/Workers Section -->
+    <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="christmas-font text-4xl md:text-5xl font-bold mb-4">
-                    <span class="text-christmas-red">Christmas</span> 
-                    <span class="text-christmas-green">Greetings</span> 
-                    <span class="text-christmas-gold">from</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Our spiritual leaders wish you a blessed Christmas season filled with God's peace and joy.</p>
-                <div class="mt-4">
-                    <span class="inline-block px-4 py-2 bg-christmas-red text-white rounded-full text-sm">🎅 Merry Christmas! 🎄</span>
-                </div>
+                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Spiritual Leaders</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Meet the dedicated servants of God who guide our congregation with wisdom and compassion.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% if leaders %}
                     {% for leader in leaders %}
-                        <div class="christmas-card card-hover">
-                            <div class="h-64 relative overflow-hidden">
-                                <img src="{{leader.image.url}}" class="object-cover w-full h-full" alt="{{leader.name}}">
-                                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-christmas-dark to-transparent"></div>
-                                <div class="absolute bottom-4 left-4 text-white">
-                                    <span class="px-3 py-1 bg-christmas-red rounded-full text-sm">🎄 Christmas Blessings</span>
-                                </div>
+                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                            <div class="h-64">
+                                <img src="{{leader.image.url}}" class="object-fill w-full h-full" alt="{{leader.name}}">
                             </div>
                             <div class="p-6">
-                                <h3 class="heading-font text-xl font-bold text-christmas-red mb-2">{{leader.name}}</h3>
-                                <p class="text-christmas-green mb-4">{{leader.position}}</p>
-                                <p class="text-gray-700 mb-4">{{leader.description}}</p>
-                                <div class="border-t border-christmas-gold pt-4">
-                                    <p class="text-christmas-dark italic">"May the joy of Christmas fill your heart and home this season!"</p>
-                                </div>
+                                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{leader.name}}</h3>
+                                <p class="text-gray-600 mb-4">{{leader.position}}</p>
+                                <p class="text-gray-700">{{leader.description}}</p>
                             </div>
                         </div>
                     {% empty %}
-                        <h2 class="text-2xl text-christmas-red">No leaders Available in the database</h2>
+                        <h2 class="text-2xl text-red-500">No leaders Available in the database</h2>
                     {% endfor %}
                 {% endif %}
             </div>
         </div>
     </section>
 
-    <!-- Bible Blog Section - Christmas Theme -->
-    <section id="bible-blog-page" class="py-16 bg-gradient-to-b from-christmas-white to-red-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="christmas-font text-4xl md:text-5xl font-bold mb-4">
-                    <span class="text-christmas-red">Christmas</span> 
-                    <span class="text-christmas-green">Reflections</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Special Christmas scriptures and reflections to nourish your soul this season.</p>
-                <div class="mt-6">
-                    <div class="inline-flex items-center space-x-2 bg-white px-6 py-3 rounded-full shadow">
-                        <i class="fas fa-star text-christmas-gold"></i>
-                        <span class="text-christmas-red font-semibold">Daily Christmas Devotionals</span>
-                        <i class="fas fa-star text-christmas-gold"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% if bible_post %}
-                    {% for post in bible_post %}
-                    <div class="christmas-card card-hover relative">
-                        <div class="h-48 overflow-hidden relative">
-                            <img src="{{post.image.url}}" class="object-cover w-full h-full object-center" alt="Bible post image">
-                            <div class="absolute inset-0 bg-gradient-to-t from-christmas-dark to-transparent"></div>
-                            <div class="absolute top-4 right-4">
-                                <span class="px-3 py-1 bg-christmas-green text-white rounded-full text-xs">🎁 Christmas Edition</span>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="heading-font text-xl font-bold text-christmas-red mb-4">{{post.scriptures}}</h3>
-                            <p class="text-gray-700 mb-16">{{post.message}}</p>
-
-                            <div class="flex justify-between absolute bottom-4 w-[88%] items-center mt-4 pt-2 border-t-2 border-christmas-gold">
-                                <!-- Simple Like System - Christmas Theme -->
-                                <div id="like-section-{{post.id}}">
-                                    <form hx-post="{% url 'add_like' %}" 
-                                          hx-target="#like-section-{{post.id}}"
-                                          hx-swap="innerHTML"
-                                          class="m-0">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="post_id" value="{{post.id}}">
-                                        <button type="submit" class="like-btn text-christmas-red hover:text-christmas-green transition-colors flex items-center space-x-1">
-                                            <i class="fas fa-heart"></i>
-                                            <span class="font-semibold">{{post.reviews}}</span>
-                                            <span class="text-xs text-gray-500 ml-1">Blessings</span>
-                                        </button>
-                                    </form>
-                                </div>
-
-                                <!-- Timestamp - Christmas Theme -->
-                                <div class="text-christmas-green text-sm">
-                                    <i class="fas fa-snowflake"></i>
-                                    <span>{{post.created_at|date:'M d, Y'}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% empty %}
-                        <h2 class="text-2xl text-christmas-red">No Posts Available in the database</h2>
-                    {% endfor %}
-                {% endif %}
-            </div>
-            
-            <!-- Christmas CTA -->
-            <div class="mt-16 text-center">
-                <div class="bg-gradient-to-r from-christmas-red to-christmas-green rounded-2xl p-8 text-white max-w-2xl mx-auto">
-                    <h3 class="christmas-font text-3xl mb-4">Share the Christmas Joy!</h3>
-                    <p class="mb-6">Invite friends and family to our Christmas celebrations. Let's fill our church with love and worship this season!</p>
-                    <a href="https://wa.me/2349013708170?text=Merry%20Christmas!%20🎄%20I%20want%20to%20invite%20you%20to%20LFC%20Teens%20Byazhin%20Christmas%20services!" 
-                       class="inline-block bg-white text-christmas-red px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-gray-100 transition-colors">
-                       <i class="fas fa-share-alt mr-2"></i>Invite Someone
-                    </a>
-                </div>
-            </div>
+    <!-- Bible Blog Section -->
+<!-- Bible Blog Section - Simple Like System -->
+<section id="bible-blog-page" class="py-16 bg-red-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Daily Bread</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Nourish your soul with these selected scriptures and reflections.</p>
         </div>
-    </section>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% if bible_post %}
+                {% for post in bible_post %}
+                <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200 relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="{{post.image.url}}" class="object-cover w-full h-full object-center" alt="Bible post image">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="heading-font text-xl font-bold text-red-900 mb-4">{{post.scriptures}}</h3>
+                        <p class="text-gray-700 mb-16">{{post.message}}</p>
 
-    <!-- Christmas Announcements -->
-    <section id="announcement-page" class="py-16 bg-christmas-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="christmas-font text-4xl md:text-5xl font-bold mb-4">
-                    <span class="text-christmas-red">Christmas</span> 
-                    <span class="text-christmas-green">Events</span> 
-                    <span class="text-christmas-gold">&</span> 
-                    <span class="text-christmas-red">Programs</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Join us for special Christmas celebrations and activities this season!</p>
-            </div>
-            
-            <!-- Special Christmas Announcement Card -->
-            <div class="max-w-4xl mx-auto mb-12">
-                <div class="bg-gradient-to-r from-christmas-red via-christmas-gold to-christmas-green rounded-2xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                    <div class="p-8 text-white text-center">
-                        <div class="flex justify-center mb-6">
-                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-christmas-red text-3xl">
-                                <i class="fas fa-star"></i>
+                        <div class="flex justify-between absolute bottom-4 w-[88%] items-center mt-4 pt-2 border-t-2 border-gray-300">
+                            <!-- Simple Like System -->
+                            <div id="like-section-{{post.id}}">
+                                <form hx-post="{% url 'add_like' %}" 
+                                      hx-target="#like-section-{{post.id}}"
+                                      hx-swap="innerHTML"
+                                      class="m-0">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{post.id}}">
+                                    <button type="submit" class="like-btn text-gray-400 hover:text-green-700 transition-colors flex items-center space-x-1">
+                                        <i class="far fa-heart"></i>
+                                        <span>{{post.reviews}}</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Timestamp -->
+                            <div class="text-gray-500 text-sm">
+                                <i class="far fa-clock"></i>
+                                <span>{{post.created_at|date:'M d, Y'}}</span>
                             </div>
                         </div>
-                        <h3 class="christmas-font text-3xl md:text-4xl mb-4">🎄 Christmas Day Service 🎄</h3>
-                        <p class="text-xl mb-6">Join us on December 25th for a special celebration of Jesus' birth!</p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                            <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                                <i class="fas fa-clock text-2xl mb-2"></i>
-                                <p class="font-bold">7:00 AM</p>
-                                <p>First Service</p>
-                            </div>
-                            <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                                <i class="fas fa-clock text-2xl mb-2"></i>
-                                <p class="font-bold">9:00 AM</p>
-                                <p>Second Service</p>
-                            </div>
-                            <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                                <i class="fas fa-clock text-2xl mb-2"></i>
-                                <p class="font-bold">11:00 AM</p>
-                                <p>Third Service</p>
-                            </div>
-                        </div>
-                        <p class="text-lg italic">"Special Christmas gift exchange and fellowship after service!"</p>
                     </div>
                 </div>
+                {% empty %}
+                    <h2 class="text-2xl text-red-500">No Posts Available in the database</h2>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+    <!-- Important Announcements Section -->
+    <section id="announcement-page" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Church Announcements</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Stay informed about upcoming events, prayer needs, and important updates.</p>
             </div>
             
-            <!-- Regular Announcements -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {% if announcement %}
                     {% for item in announcement %}
-                        <div class="christmas-card card-hover">
-                            <div class="p-6 border-l-4 border-christmas-green">
+                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-gray-200">
+                            <div class="p-6 border-l-4 border-red-600">
                                 <div class="flex items-center mb-4">
                                     {% if item.image %}
-                                    <div class="w-12 h-12 bg-christmas-red overflow-hidden rounded-full flex items-center justify-center text-white border-2 border-christmas-gold">
+                                    <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white">
                                         <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="Announcement image">
                                     </div>
                                     {% else %}
-                                    <div class="w-12 h-12 bg-christmas-green rounded-full flex items-center justify-center text-white border-2 border-christmas-gold">
-                                        <i class="fas fa-gift"></i>
+                                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-700">
+                                        <i class="fas fa-bullhorn"></i>
                                     </div>
                                     {% endif %}
                                     <div class="ml-4">
-                                        <h3 class="heading-font text-xl font-bold text-christmas-red">{{item.topic}}</h3>
-                                        <p class="text-christmas-green"><i class="fas fa-calendar-day mr-1"></i>{{item.date|date:'M d, Y'}}</p>
+                                        <h3 class="heading-font text-xl font-bold text-red-900">{{item.topic}}</h3>
+                                        <p class="text-gray-600">{{item.date|date:'M d, Y'}}</p>
                                     </div>
                                 </div>
                                 <p class="text-gray-700">{{item.announcement}}</p>
-                                <div class="mt-4 pt-4 border-t border-christmas-gold">
-                                    <span class="inline-block px-3 py-1 bg-christmas-red text-white rounded-full text-sm">
-                                        <i class="fas fa-snowflake mr-1"></i>Christmas Event
-                                    </span>
-                                </div>
                             </div>
                         </div>
                     {% endfor %}
@@ -755,120 +412,467 @@
         </div>
     </section>
 
-    <!-- Christmas Testimonies -->
-    <section id="testimonies-page" class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="christmas-font text-4xl md:text-5xl font-bold mb-4">
-                    <span class="text-christmas-red">Christmas</span> 
-                    <span class="text-christmas-green">Miracles</span> 
-                    <span class="text-christmas-gold">&</span> 
-                    <span class="text-christmas-red">Testimonies</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">God's faithfulness shines even brighter during the Christmas season!</p>
+    <!-- Testimonies Page -->
+    <section id="testimonies-page" class="py-8">
+        <!-- Testimonies Hero Section -->
+        <section class="py-20 testimony-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Share Your Testimony</h1>
+                <p class="text-xl max-w-2xl mx-auto">Your story of God's faithfulness can inspire and encourage others in their walk with Christ.</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                {% if testimony %}
-                    {% for item in testimony %}
-                        <div class="christmas-card card-hover">
-                            <div class="p-6">
+        </section>
+
+        <!-- Testimonies Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Testimonies of Faith</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Hear how God is working in the lives of our congregation members.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    {% if testimony %}
+                        {% for item in testimony %}
+                            <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
                                 <div class="flex items-center mb-4">
                                     {% if item.image %}
-                                    <div class="w-12 h-12 bg-christmas-red overflow-hidden rounded-full flex items-center justify-center text-white border-2 border-christmas-gold">
+                                    <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white">
                                         <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="{{item.testifier}}">
                                     </div>
                                     {% else %}
-                                    <div class="w-10 h-10 bg-gradient-to-br from-christmas-red to-christmas-green rounded-full flex items-center justify-center text-white">
+                                    <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center text-white">
                                         <i class="fas fa-user"></i>
                                     </div>
                                     {% endif %}
                                     <div class="ml-4">
-                                        <h3 class="heading-font font-bold text-christmas-red">{{item.topic}}</h3>
-                                        <p class="text-christmas-green text-sm"><i class="fas fa-gift mr-1"></i>{{item.date|date:'M d, Y'}}</p>
+                                        <h3 class="heading-font font-bold text-red-900">{{item.topic}}</h3>
+                                        <p class="text-gray-600 text-sm">{{item.date|date:'M d, Y'}}</p>
                                     </div>
                                 </div>
-                                <p class="text-gray-700 italic mb-6">"{{item.testimony}}"</p>
-                                <div class="flex justify-between items-center pt-4 border-t border-christmas-gold">
-                                    <p class="text-christmas-green font-medium">🎁 Testifier: <span class="font-bold">{{item.testifier}}</span></p>
-                                    <span class="text-christmas-red text-sm">Christmas Blessing</span>
+                                <p class="text-gray-700 italic">"{{item.testimony}}"</p>
+                                <p class="mt-4 text-red-700 font-medium">Testifier - <span class="text-green-500">{{item.testifier}}</span></p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimony Submission Form -->
+        <section class="py-16 bg-red-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Share Your Story</h2>
+                    
+                    <form x-data="{
+                        testimonyForm: { name: '', title: '', testimony: '' },
+                        submitTestimony() {
+                            const message = `🙏 *TESTIMONY SUBMISSION - LFC Teens Byazhin* 🙏
+
+👤 *Name:* ${this.testimonyForm.name}
+📝 *Title:* ${this.testimonyForm.title}
+
+✨ *Testimony:*
+${this.testimonyForm.testimony}
+
+🕊️ *To God Be All The Glory!* 🕊️`;
+
+                            const whatsappNumber = '{{ contact_info.whatsapp_number|default:"2349013708170" }}';
+                            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                            
+                            this.testimonyForm = { name: '', title: '', testimony: '' };
+                            
+                            alert('Thank you for sharing your testimony! We will review it and may contact you for more details. God bless you!');
+                        }
+                    }" @submit.prevent="submitTestimony">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="name" x-model="testimonyForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="title" class="block text-gray-700 mb-2">Testimony Title</label>
+                            <input type="text" id="title" x-model="testimonyForm.title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="testimony" class="block text-gray-700 mb-2">Your Testimony</label>
+                            <textarea id="testimony" x-model="testimonyForm.testimony" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share how God has worked in your life..." required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Submit Testimony</button>
+                        </div>
+                    </form>
+                    
+                    <p class="text-gray-600 text-sm mt-6 text-center">
+                        By submitting your testimony, you agree that it may be shared on our website and social media to encourage others. We may contact you for more details.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Counseling Section -->
+    <section id="counseling-page" class="py-8">
+        <!-- Counseling Hero Section -->
+        <section class="py-20 counseling-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Spiritual Counseling</h1>
+                <p class="text-xl max-w-2xl mx-auto">Find guidance, support, and prayer for life's challenges through our caring counselors.</p>
+            </div>
+        </section>
+
+        <!-- Counseling Form Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Request Counseling</h2>
+                    <p class="text-gray-600 text-center mb-8">Our trained counselors are here to provide biblical guidance and prayer support for whatever you're facing.</p>
+                    
+                    <form x-data="{
+                        counselingForm: { name: '', phone: '', counselor: '', issue: '', urgency: 'medium', details: '' },
+                        submitCounseling() {
+                            const counselorData = {
+                                {% for counselor in counselors %}
+                                    '{{ counselor.name }}': '{{ counselor.whatsapp_number|default:contact_info.whatsapp_number|default:"2349013708170" }}',
+                                {% endfor %}
+                            };
+                            
+                            const urgencyText = {
+                                'low': 'Low',
+                                'medium': 'Medium', 
+                                'high': 'High',
+                                'urgent': 'Urgent'
+                            };
+                            
+                            const message = `🕊️ *COUNSELING REQUEST - LFC Teens Byazhin* 🕊️
+
+👤 *Name:* ${this.counselingForm.name}
+📞 *Phone:* ${this.counselingForm.phone}
+🙏 *Preferred Counselor:* ${this.counselingForm.counselor}
+⚡ *Urgency Level:* ${urgencyText[this.counselingForm.urgency]}
+
+📋 *Issue Category:*
+• ${this.counselingForm.issue}
+
+💬 *Details:*
+${this.counselingForm.details}
+
+🕯️ *May God's wisdom guide our conversation* 🕯️`;
+
+                            const phoneNumber = counselorData[this.counselingForm.counselor] || '2349013708170';
+                            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                            
+                            this.counselingForm = { name: '', phone: '', counselor: '', issue: '', urgency: 'medium', details: '' };
+                            
+                            alert('Your counseling request has been sent! The counselor will contact you soon. God bless you!');
+                        }
+                    }" @submit.prevent="submitCounseling">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="counseling-name" class="block text-gray-700 mb-2">Your Name</label>
+                                <input type="text" id="counseling-name" x-model="counselingForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                            </div>
+                            <div>
+                                <label for="counseling-phone" class="block text-gray-700 mb-2">Your Phone Number</label>
+                                <input type="tel" id="counseling-phone" x-model="counselingForm.phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="counselor" class="block text-gray-700 mb-2">Preferred Counselor</label>
+                                <select id="counselor" x-model="counselingForm.counselor" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                    <option value="">Select a Counselor</option>
+                                    {% for counselor in counselors %}
+                                    <option value="{{ counselor.name }}">{{ counselor.name }} - {{ counselor.position }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div>
+                                <label for="urgency" class="block text-gray-700 mb-2">Urgency Level</label>
+                                <select id="urgency" x-model="counselingForm.urgency" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                                    <option value="low">Low - General guidance</option>
+                                    <option value="medium">Medium - Need support soon</option>
+                                    <option value="high">High - Need timely support</option>
+                                    <option value="urgent">Urgent - Need immediate attention</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="issue" class="block text-gray-700 mb-2">What would you like to discuss?</label>
+                            <select id="issue" x-model="counselingForm.issue" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                <option value="">Select an issue category</option>
+                                <option value="Spiritual Growth & Questions">Spiritual Growth & Questions</option>
+                                <option value="Relationships & Family">Relationships & Family</option>
+                                <option value="Emotional Challenges">Emotional Challenges</option>
+                                <option value="Life Decisions & Direction">Life Decisions & Direction</option>
+                                <option value="Addiction & Recovery">Addiction & Recovery</option>
+                                <option value="Grief & Loss">Grief & Loss</option>
+                                <option value="Marriage & Dating">Marriage & Dating</option>
+                                <option value="Other Personal Challenge">Other Personal Challenge</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="counseling-details" class="block text-gray-700 mb-2">Please share more details</label>
+                            <textarea id="counseling-details" x-model="counselingForm.details" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share what you're comfortable sharing about your situation..." required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Request Counseling</button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-8 p-4 bg-red-50 rounded-lg border border-red-200">
+                        <h3 class="heading-font text-lg font-bold text-red-900 mb-2">Confidentiality Notice</h3>
+                        <p class="text-gray-600 text-sm">All counseling conversations are kept strictly confidential. Our counselors provide biblically-based guidance and prayer support. In cases requiring professional help, we may refer you to appropriate Christian professionals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Join a Unit Page -->
+    <section id="join-unit-page" class="py-8">
+        <!-- Join a Unit Hero Section -->
+        <section class="py-20 join-unit-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">Join a Ministry Unit</h1>
+                <p class="text-xl max-w-2xl mx-auto">Serve and grow with others in our church community. Find your place in God's work.</p>
+            </div>
+        </section>
+
+        <!-- Ministry Units Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Ministry Units</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Discover where your gifts and passions can be used to serve God and others.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    {% if unit %}
+                    {% for item in unit %}
+                        <div class="bg-neutral-100 rounded-xl shadow-md overflow-hidden card-hover border border-red-200">
+                            <img src="{{item.image.url}}" class="w-full h-56 object-fill" alt="{{item.name}}">
+                            <div class="p-6">
+                                <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
+                                <p class="text-gray-600 mb-4">{{item.duty}}</p>
+                                <p class="text-gray-700">{{item.description}}</p>
+                                <div class="mt-4">
+                                    <span class="text-red-700 font-medium">Leader: {{item.leader}}</span>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
-                {% endif %}
+                    {% endif %}
+                </div>
             </div>
-            
-            <!-- Share Your Christmas Testimony -->
-            <div class="max-w-3xl mx-auto bg-gradient-to-r from-christmas-red to-christmas-green rounded-2xl p-8 text-white">
-                <h3 class="christmas-font text-3xl text-center mb-6">Share Your Christmas Miracle</h3>
-                <p class="text-center mb-8">Has God done something special for you this Christmas season? Share your testimony to encourage others!</p>
+        </section>
+
+        <!-- Join Unit Form -->
+        <section class="py-16 bg-red-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Join a Ministry Unit</h2>
+                    
+                    <form x-data="{
+                        unitForm: { name: '', phone: '', unit: '', experience: '', message: '' },
+                        submitUnitForm() {
+                            const unitLeaders = {
+                                {% for unit_item in unit %}
+                                    '{{ unit_item.name }}': '{{ unit_item.leader_whatsapp|default:contact_info.whatsapp_number|default:"2349013708170" }}',
+                                {% endfor %}
+                            };
+                            
+                            const message = `🎯 *MINISTRY UNIT APPLICATION - LFC Teens Byazhin* 🎯
+
+👤 *Name:* ${this.unitForm.name}
+📞 *Phone:* ${this.unitForm.phone}
+🏛️ *Desired Unit:* ${this.unitForm.unit}
+
+💪 *Experience & Skills:*
+• ${this.unitForm.experience}
+
+❤️ *Why Interested:*
+• ${this.unitForm.message}
+
+🙏 *May God Guide This Decision* 🙏`;
+
+                            const phoneNumber = unitLeaders[this.unitForm.unit] || '2349013708170';
+                            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                            
+                            this.unitForm = { name: '', phone: '', unit: '', experience: '', message: '' };
+                            
+                            alert('Thank you for your interest in serving! The unit leader will contact you soon. God bless your willing heart!');
+                        }
+                    }" @submit.prevent="submitUnitForm">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                            <input type="text" id="name" x-model="unitForm.name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="phone" class="block text-gray-700 mb-2">Your Phone Number</label>
+                            <input type="tel" id="phone" x-model="unitForm.phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="unit" class="block text-gray-700 mb-2">Ministry Unit</label>
+                            <select id="unit" x-model="unitForm.unit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                                <option value="">Select a Unit</option>
+                                {% for unit_item in unit %}
+                                <option value="{{ unit_item.name }}">{{ unit_item.name }} - Led by {{ unit_item.leader }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="experience" class="block text-gray-700 mb-2">Relevant Experience/Skills</label>
+                            <textarea id="experience" x-model="unitForm.experience" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share any talents, skills, or experience God has given you..."></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 mb-2">Why are you interested in this unit?</label>
+                            <textarea id="message" x-model="unitForm.message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Share how God is leading you to serve in this area..." required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="bg-red-700 text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-red-800 transition-colors">Submit Application</button>
+                        </div>
+                    </form>
+                    
+                    <p class="text-gray-600 text-sm mt-6 text-center">
+                        After submitting, the unit leader will contact you to discuss next steps and how you can get involved in God's work.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Us Page -->
+    <section id="about-us-page" class="py-8">
+        <!-- About Us Hero Section -->
+        <section class="py-20 about-bg text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold mb-4">About LFC Teens Byazhin</h1>
+                <p class="text-xl max-w-2xl mx-auto">A community growing in faith, hope, and love through Jesus Christ.</p>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-6 text-center">Our Story</h2>
+                    <div class="prose prose-lg max-w-none text-gray-700">
+                        <p class="mb-4">LFC Teens Byazhin is a sector of winners chapel which is dedicated to bringing Gods word to teenagers and preparing them for the future before time, Shearing the Good news of Christ to the world.</p>
+                        <p class="mb-4">What began as a small sunday school class has now grown into a vibrant community of teenagers dedicated to serving God and and the interest of His Kingdom. We've had diverse testimonies by the power of Christ.</p>
+                        <p class="mb-4">Our mission is to promote God's word among youths and teenagers and the world at large. We are aimed at raising teenagers in the fear of the Lord who love God passionately and serve others selflessly. </p>
+                        <p>We believe in the authority of Scripture, the power of prayer, and the importance of Divine Guidiance in the Christian walk.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Beliefs Section -->
+        <section class="py-16 bg-red-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="heading-font text-3xl md:text-4xl font-bold text-red-900 mb-4">Our Beliefs</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">The foundational truths that guide our church and ministries.</p>
+                </div>
                 
-                <form x-data="{
-                    testimonyForm: { name: '', title: '', testimony: '' },
-                    submitTestimony() {
-                        const message = `🎄 *CHRISTMAS TESTIMONY - LFC Teens Byazhin* 🎄
-
-👤 *Name:* ${this.testimonyForm.name}
-🎁 *Title:* ${this.testimonyForm.title}
-
-✨ *Christmas Miracle Testimony:*
-${this.testimonyForm.testimony}
-
-🌟 *Glory to God in the Highest!* 🌟
-🎅 *Merry Christmas!* 🎅`;
-
-                        const whatsappNumber = '{{ contact_info.whatsapp_number|default:"2349013708170" }}';
-                        window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
-                        
-                        this.testimonyForm = { name: '', title: '', testimony: '' };
-                        
-                        alert('Thank you for sharing your Christmas testimony! May God continue to bless you abundantly. Merry Christmas!');
-                    }
-                }" @submit.prevent="submitTestimony" class="space-y-6">
-                    <div>
-                        <label for="name" class="block mb-2">Your Name</label>
-                        <input type="text" id="name" x-model="testimonyForm.name" 
-                               class="w-full px-4 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white placeholder-white placeholder-opacity-70" 
-                               placeholder="Enter your name" required>
-                    </div>
-                    
-                    <div>
-                        <label for="title" class="block mb-2">Testimony Title</label>
-                        <input type="text" id="title" x-model="testimonyForm.title" 
-                               class="w-full px-4 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white placeholder-white placeholder-opacity-70" 
-                               placeholder="e.g., My Christmas Miracle" required>
-                    </div>
-                    
-                    <div>
-                        <label for="testimony" class="block mb-2">Your Testimony</label>
-                        <textarea id="testimony" x-model="testimonyForm.testimony" rows="4" 
-                               class="w-full px-4 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:ring-2 focus:ring-white placeholder-white placeholder-opacity-70" 
-                               placeholder="Share how God blessed you this Christmas season..." required></textarea>
-                    </div>
-                    
-                    <div class="text-center">
-                        <button type="submit" class="bg-white text-christmas-red px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-gray-100 transition-colors">
-                            <i class="fas fa-share mr-2"></i>Share Christmas Testimony
-                        </button>
-                    </div>
-                </form>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% if belief %}
+                    {% for item in belief %}
+                        <div class="bg-neutral-100 rounded-xl shadow-md p-6 card-hover border border-red-200">
+                            {% if item.image %}
+                            <div class="w-12 h-12 bg-red-700 overflow-hidden rounded-full flex items-center justify-center text-white mb-4">
+                                <img src="{{item.image.url}}" class="w-12 h-12 object-fill" alt="{{item.name}}">
+                            </div>
+                            {% else %}
+                            <div class="w-12 h-12 bg-red-700 rounded-full flex items-center justify-center text-white mb-4">
+                                <i class="fas fa-cross"></i>
+                            </div>
+                            {% endif %}
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-2">{{item.name}}</h3>
+                            <p class="text-gray-700">{{item.detail}}</p>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Service Times Section -->
+        <section id="contact-us" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto bg-red-50 rounded-xl shadow-md p-8 border border-red-200">
+                    <h2 class="heading-font text-3xl font-bold text-red-900 mb-6 text-center">Service Times & Location</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Join Us for Worship</h3>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Sunday Service</span>
+                                    <span>7:00 AM, <br> 9:00 AM, <br> 11:00 AM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Mid-week service</span>
+                                    <span>Wed 5:00 PM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">House Fellowship</span>
+                                    <span>Sat 5:00 PM</span>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="font-medium">Convernant Hour</span>
+                                    <span>6:00 AM - Daily</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="heading-font text-xl font-bold text-red-900 mb-4">Location</h3>
+                            <div class="text-gray-700 mb-4">
+                                <p class="flex items-start mb-2">
+                                    <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-700"></i>
+                                    <span>Behind Police Station, Byazhin, Abuja, Nigeria</span>
+                                </p>
+                                <p class="flex items-start mb-2">
+                                    <i class="fas fa-phone mt-1 mr-3 text-red-700"></i>
+                                    <span>+234 9013-708-170</span>
+                                </p>
+                                <p class="flex items-start">
+                                    <i class="fas fa-envelope mt-1 mr-3 text-red-700"></i>
+                                    <span>lfcteens@gmail.com</span>
+                                </p>
+                            </div>
+                            <a href="https://wa.me/9013708170?text=Hello%20LFC%20Teens%20Byazhin%2C%20I%20would%20like%20to%20get%20help%20about%20your%20direction" target="_blank" class="inline-block bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-800 transition-colors">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-christmas-dark text-white pt-12 pb-8">
+    <footer class="bg-gray-900 text-white pt-12 pb-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-br from-christmas-red to-christmas-green rounded-full flex items-center justify-center overflow-hidden">
+                        <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center overflow-hidden text-white font-bold text-lg">
                             <img src="{% static 'lfc_logo.jpeg' %}" class="rounded-full object-fill" alt="lfc-logo">
                         </div>
-                        <span class="ml-3 christmas-font text-xl">LFC Teens Christmas</span>
+                        <span class="ml-3 heading-font text-xl font-semibold">LFC Teens Byazhin</span>
                     </div>
-                    <p class="text-gray-300 mb-4">Celebrating the birth of our Savior, Jesus Christ. May your Christmas be filled with His love and peace.</p>
+                    <p class="text-gray-400 mb-4">A community of teenagers growing in faith, hope, and love through Jesus Christ.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
@@ -878,76 +882,77 @@ ${this.testimonyForm.testimony}
                 </div>
                 
                 <div>
-                    <h3 class="heading-font text-lg font-bold mb-4">Christmas Services</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li class="flex justify-between">
-                            <span>Christmas Eve</span>
-                            <span>Dec 24, 5PM</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Christmas Day</span>
-                            <span>Dec 25, 7AM</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>Carol Night</span>
-                            <span>Dec 22, 6PM</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>New Year Service</span>
-                            <span>Dec 31, 10PM</span>
-                        </li>
+                    <h3 class="heading-font text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about-us-page" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#testimonies-page" class="text-gray-400 hover:text-white transition-colors">Testimonies</a></li>
+                        <li><a href="#counseling-page" class="text-gray-400 hover:text-white transition-colors">Counseling</a></li>
+                        <li><a href="#join-unit-page" class="text-gray-400 hover:text-white transition-colors">Join a Unit</a></li>
+                        <li><a href="#contact-us" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#announcement-page" class="text-gray-400 hover:text-white transition-colors">Announcements</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="heading-font text-lg font-bold mb-4">Contact Info</h3>
-                    <ul class="space-y-2 text-gray-300">
+                    <ul class="space-y-2 text-gray-400">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-christmas-gold"></i>
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-red-500"></i>
                             <span>Behind Police Station, Byazhin, Abuja, Nigeria.</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-phone mt-1 mr-3 text-christmas-gold"></i>
+                            <i class="fas fa-phone mt-1 mr-3 text-red-500"></i>
                             <span>+234 9013-708-170</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-envelope mt-1 mr-3 text-christmas-gold"></i>
+                            <i class="fas fa-envelope mt-1 mr-3 text-red-500"></i>
                             <span>lfcteens@gmail.com</span>
                         </li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="heading-font text-lg font-bold mb-4">Christmas Blessing</h3>
-                    <div class="bg-gradient-to-r from-christmas-red to-christmas-green p-4 rounded-lg">
-                        <p class="text-center italic">"May the joy of the angels, the eagerness of the shepherds, the perseverance of the wise men, the obedience of Joseph and Mary, and the peace of the Christ child be yours this Christmas."</p>
-                    </div>
+                    <h3 class="heading-font text-lg font-bold mb-4">Service Times</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex justify-between">
+                            <span>Sunday Worship</span>
+                            <span>7:00 AM, 9:00 AM, 11:00 AM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Mid-week service</span>
+                            <span>Wed 5:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>House Fellowship</span>
+                            <span>Sat 5:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Convernant Hour</span>
+                            <span>6: 00 AM - daily</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
             
             <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LFC Teens Byazhin. Wishing You a Blessed Christmas!</p>
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 LFC Teens Byazhin. All Rights Reserved.</p>
                 <div class="text-gray-500 text-sm flex items-center">
-                    <span>Christmas greetings from </span>
-                    <a href="#" class="text-christmas-gold hover:text-yellow-300 ml-1 transition-colors">Profirm Web Services</a>
+                    <span>Created with prayer by </span>
+                    <a href="#" class="text-red-400 hover:text-red-300 ml-1 transition-colors">Profirm Web Services</a>
                 </div>
-            </div>
-            
-            <div class="mt-8 text-center">
-                <p class="christmas-font text-2xl text-christmas-gold">🎄 Merry Christmas & Happy New Year! 🎄</p>
-                <p class="text-gray-400 mt-2">"Glory to God in the highest, and on earth peace, goodwill toward men!" - Luke 2:14</p>
             </div>
         </div>
     </footer>
 
     <!-- Audio Element -->
     <audio id="sermonAudio" loop>
-        <source src="{% static 'audio/christmas_carols.mp3' %}" type="audio/mpeg">
+        <source src="{% static 'audio/bg_music (1).mp3' %}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Hero Slider Functionality - Christmas Theme
+        // Hero Slider Functionality
         function heroSlider() {
             return {
                 currentSlide: 0,
@@ -958,28 +963,13 @@ ${this.testimonyForm.testimony}
                         {% for slide in hero %}
                         { 
                             bg: 'hero-bg-{{forloop.counter}}', 
-                            title: '🎄 {{slide.title}} 🎄', 
+                            title: '{{slide.title}}', 
                             subtitle: '{{slide.subtitle}}', 
-                            buttonText: '🎁 ' + '{{slide.btn_text}}' + ' 🎁', 
+                            buttonText: '{{slide.btn_text}}', 
                             link: '{{slide.btn_link}}' 
                         },
                         {% endfor %}
                     {% endif %}
-                    // Fallback Christmas slides
-                    {
-                        bg: 'bg-gradient-to-br from-christmas-red to-christmas-green',
-                        title: 'Merry Christmas!',
-                        subtitle: 'Celebrating the birth of our Savior Jesus Christ',
-                        buttonText: '🎄 Join Christmas Service 🎄',
-                        link: '#announcement-page'
-                    },
-                    {
-                        bg: 'bg-gradient-to-br from-christmas-green to-christmas-dark',
-                        title: 'Christmas Joy',
-                        subtitle: 'Peace on earth and goodwill to all',
-                        buttonText: '✨ Share Your Testimony ✨',
-                        link: '#testimonies-page'
-                    }
                 ],
                 nextSlide() {
                     this.currentSlide = (this.currentSlide + 1) % this.slides.length;
@@ -1009,41 +999,9 @@ ${this.testimonyForm.testimony}
                 init() {
                     setInterval(() => {
                         this.nextSlide();
-                    }, 5000);
+                    }, 6000);
                 }
             }
-        }
-
-        // Create snowflakes
-        function createSnowflakes() {
-            const snowflakeCount = 50;
-            for (let i = 0; i < snowflakeCount; i++) {
-                createSnowflake();
-            }
-        }
-
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            
-            const size = Math.random() * 10 + 5;
-            const startX = Math.random() * window.innerWidth;
-            const duration = Math.random() * 10 + 10;
-            const opacity = Math.random() * 0.5 + 0.3;
-            
-            snowflake.style.width = `${size}px`;
-            snowflake.style.height = `${size}px`;
-            snowflake.style.left = `${startX}px`;
-            snowflake.style.opacity = opacity;
-            snowflake.style.animationDuration = `${duration}s`;
-            snowflake.style.animationDelay = `${Math.random() * 5}s`;
-            
-            document.body.appendChild(snowflake);
-            
-            // Remove snowflake after animation completes
-            setTimeout(() => {
-                snowflake.remove();
-            }, duration * 1000);
         }
 
         // Active section tracking
@@ -1068,10 +1026,6 @@ ${this.testimonyForm.testimony}
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            // Start snow animation
-            createSnowflakes();
-            setInterval(createSnowflake, 500);
-            
             // Audio Controls
             const audio = document.getElementById('sermonAudio');
             const playPauseBtn = document.getElementById('playPause');
@@ -1082,7 +1036,6 @@ ${this.testimonyForm.testimony}
                 if (audio.paused) {
                     audio.play().catch(e => console.log('Auto-play prevented:', e));
                     playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    playPauseBtn.innerHTML += '<span class="ml-2 text-sm hidden md:inline">Christmas Carols</span>';
                 }
             }, { once: true });
             
@@ -1114,58 +1067,6 @@ ${this.testimonyForm.testimony}
             // Active section tracking
             window.addEventListener('scroll', updateActiveSection);
             updateActiveSection(); // Initial call
-            
-            // Add Christmas confetti on click
-            document.body.addEventListener('click', function(e) {
-                if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
-                    createConfetti(e.clientX, e.clientY);
-                }
-            });
-            
-            // Create confetti effect
-            function createConfetti(x, y) {
-                const colors = ['#B91C1C', '#166534', '#D97706', '#0C4A6E', '#FFFFFF'];
-                for (let i = 0; i < 20; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.style.position = 'fixed';
-                    confetti.style.width = '10px';
-                    confetti.style.height = '10px';
-                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.borderRadius = '50%';
-                    confetti.style.left = `${x}px`;
-                    confetti.style.top = `${y}px`;
-                    confetti.style.pointerEvents = 'none';
-                    confetti.style.zIndex = '9999';
-                    
-                    const angle = Math.random() * Math.PI * 2;
-                    const velocity = 2 + Math.random() * 2;
-                    const vx = Math.cos(angle) * velocity;
-                    const vy = Math.sin(angle) * velocity;
-                    
-                    document.body.appendChild(confetti);
-                    
-                    let posX = x;
-                    let posY = y;
-                    
-                    function animate() {
-                        posX += vx;
-                        posY += vy;
-                        vy += 0.1; // gravity
-                        
-                        confetti.style.left = `${posX}px`;
-                        confetti.style.top = `${posY}px`;
-                        confetti.style.opacity = 1 - (posY - y) / 200;
-                        
-                        if (posY < window.innerHeight + 100) {
-                            requestAnimationFrame(animate);
-                        } else {
-                            confetti.remove();
-                        }
-                    }
-                    
-                    animate();
-                }
-            }
         });
 
         // Alpine store for active section
@@ -1173,5 +1074,115 @@ ${this.testimonyForm.testimony}
             Alpine.store('activeSection', 'home');
         });
     </script>
+
+
+<!-- Add some smooth animations for HTMX -->
+<style>
+    .htmx-request {
+        opacity: 0.7;
+    }
+    
+    .htmx-indicator {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    
+    .htmx-request .htmx-indicator {
+        opacity: 1;
+    }
+    
+    .htmx-request.htmx-indicator {
+        opacity: 1;
+    }
+</style>
+
+<script>
+    // Add some visual feedback for HTMX requests
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add loading states to HTMX buttons
+        document.body.addEventListener('htmx:beforeRequest', function(evt) {
+            const button = evt.target.querySelector('button') || evt.target;
+            if (button) {
+                button.classList.add('htmx-request');
+            }
+        });
+        
+        document.body.addEventListener('htmx:afterRequest', function(evt) {
+            const button = evt.target.querySelector('button') || evt.target;
+            if (button) {
+                button.classList.remove('htmx-request');
+            }
+        });
+        
+        // Handle HTMX errors gracefully
+        document.body.addEventListener('htmx:responseError', function(evt) {
+            console.error('HTMX Error:', evt.detail);
+            const target = evt.detail.target;
+            if (target) {
+                target.innerHTML = '<span class="text-red-500">Error occurred. Please try again.</span>';
+            }
+        });
+    });
+</script>
+
+
+<script>
+    // Simple like functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle like form submissions
+        document.body.addEventListener('submit', function(e) {
+            if (e.target.matches('form[hx-post]')) {
+                e.preventDefault();
+                
+                const form = e.target;
+                const button = form.querySelector('button[type="submit"]');
+                
+                if (button) {
+                    // Add loading state
+                    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    button.disabled = true;
+                }
+            }
+        });
+    });
+    
+    // Initialize HTMX with CSRF token
+    document.addEventListener('htmx:configRequest', function(e) {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]');
+        if (csrfToken) {
+            e.detail.headers['X-CSRFToken'] = csrfToken.value;
+        }
+    });
+</script>
+
+<style>
+    /* Smooth like animation */
+    .like-btn {
+        transition: all 0.3s ease;
+    }
+    
+    .like-btn:hover:not(:disabled) {
+        transform: scale(1.1);
+    }
+    
+    /* Heart beat animation when liked */
+    @keyframes heartBeat {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.3); }
+        50% { transform: scale(1); }
+        75% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    
+    .like-btn .fas.fa-heart {
+        animation: heartBeat 0.6s ease;
+    }
+    
+    /* Disabled state */
+    .like-btn:disabled {
+        cursor: default;
+        opacity: 1;
+    }
+</style>
 </body>
 </html>

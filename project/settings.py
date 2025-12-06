@@ -6,21 +6,41 @@ Optimized for both local development and Render.com deployment
 from pathlib import Path
 import os
 import sys
-from decouple import config
+
+# Try to import decouple.config, but fall back to os.environ if python-decouple isn't installed.
+try:
+    from decouple import config
+except Exception:
+    # minimal drop-in replacement for the few uses below
+    def config(key, default=None, cast=None):
+        val = os.environ.get(key, default)
+        if cast and callable(cast):
+            try:
+                return cast(val)
+            except Exception:
+                return default
+        return val
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Ensure MEDIA_ROOT always defined (prevents UnboundLocalError later)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Security settings
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-development-key-change-in-production')
 
 # IMPORTANT: Check if running on Render or locally
-IS_RENDER = os.environ.get('RENDER', False)
+# Normalize environment flags to booleans robustly
+RENDER_ENV = os.environ.get('RENDER', '')
+IS_RENDER = str(RENDER_ENV).lower() in ['1', 'true', 't', 'yes']
+
 IS_PRODUCTION = config('PRODUCTION', default=False, cast=bool)
 
-# Set DEBUG based on environment
-DEBUG = not IS_RENDER  # True locally, False on Render
-if os.environ.get('DEBUG', '').lower() in ['true', '1', 't']:
+# Set DEBUG based on environment (explicit DEBUG env var overrides)
+DEBUG = not IS_RENDER
+env_debug = os.environ.get('DEBUG', '')
+if str(env_debug).lower() in ['true', '1', 't', 'yes']:
     DEBUG = True
 
 print(f"DEBUG: {DEBUG}")
@@ -41,16 +61,15 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# FIX: CSRF trusted origins - only HTTPS in production
+# CSRF trusted origins: use HTTPS in production; allow HTTP locally.
 CSRF_TRUSTED_ORIGINS = []
 if IS_RENDER or IS_PRODUCTION:
+    # In production we expect HTTPS origins. Keep these explicit.
     CSRF_TRUSTED_ORIGINS = [
-        'https://localhost:8000',
         'https://lfcteensbyazhin.onrender.com',
-        'https://*.onrender.com',
     ]
 else:
-    # Local development - allow HTTP
+    # Local development - allow HTTP on common dev ports.
     CSRF_TRUSTED_ORIGINS = [
         'http://localhost:8000',
         'http://127.0.0.1:8000',
@@ -66,18 +85,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',  # For SEO
-    
+
     # Cloudinary apps (optional)
     'cloudinary_storage',
     'cloudinary',
-    
+
     # Your app
     'app',
 ]
 
-MIDDLEWARE = [
+# Optionally include WhiteNoise middleware only if available
+_middleware = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+]
+try:
+    import whitenoise  # type: ignore
+    _middleware.append('whitenoise.middleware.WhiteNoiseMiddleware')
+    whitenoise_available = True
+except Exception:
+    whitenoise_available = False
+
+_middleware += [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,6 +113,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MIDDLEWARE = _middleware
 
 ROOT_URLCONF = 'project.urls'
 
@@ -134,7 +164,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Africa/Lagos'  # Changed to Nigeria timezone
+TIME_ZONE = 'Africa/Lagos'
 USE_I18N = True
 USE_TZ = True
 
@@ -148,22 +178,22 @@ MEDIA_URL = '/media/'
 
 # Cloudinary configuration - optional for local development
 try:
-    import cloudinary
-    import cloudinary.uploader
-    import cloudinary.api
-    
+    import cloudinary  # type: ignore
+    import cloudinary.uploader  # type: ignore
+    import cloudinary.api  # type: ignore
+
     CLOUDINARY_STORAGE = {
         'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default=''),
         'API_KEY': config('CLOUDINARY_API_KEY', default=''),
         'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
     }
-    
+
     # Only use Cloudinary if credentials are provided
-    if (CLOUDINARY_STORAGE['CLOUD_NAME'] and 
-        CLOUDINARY_STORAGE['API_KEY'] and 
-        CLOUDINARY_STORAGE['API_SECRET']):
+    if (CLOUDINARY_STORAGE['CLOUD_NAME'] and
+            CLOUDINARY_STORAGE['API_KEY'] and
+            CLOUDINARY_STORAGE['API_SECRET']):
         DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-        
+
         # Configure Cloudinary
         cloudinary.config(
             cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
@@ -176,17 +206,20 @@ try:
         DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
         MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
         print("Using local file storage (Cloudinary credentials not found)")
-        
-except ImportError:
-    print("Cloudinary not installed. Using local file storage.")
+
+except Exception:
+    print("Cloudinary not installed or not configured. Using local file storage.")
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# WhiteNoise configuration for static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# WhiteNoise configuration for static files (only set if whitenoise is available)
+if whitenoise_available:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # FIX: Security settings - Only enforce HTTPS in production
 if IS_RENDER or IS_PRODUCTION:
@@ -215,7 +248,8 @@ SITE_NAME = "LFC Teens Byazhin"
 SITE_DESCRIPTION = "A community of teenagers growing in faith, hope, and love through Jesus Christ. Join LFC Teens Byazhin for worship, fellowship, and spiritual growth."
 SITE_KEYWORDS = "LFC Teens, Byazhin, Christian teens, youth ministry, Abuja church, Winners Chapel, teenage fellowship, spiritual growth"
 
-# Add localhost to CSRF for development
+# Add localhost to CSRF for development (dedupe)
 if DEBUG:
-    CSRF_TRUSTED_ORIGINS.append('http://localhost:8000')
-    CSRF_TRUSTED_ORIGINS.append('http://127.0.0.1:8000')
+    for origin in ('http://localhost:8000', 'http://127.0.0.1:8000'):
+        if origin not in CSRF_TRUSTED_ORIGINS:
+            CSRF_TRUSTED_ORIGINS.append(origin)
